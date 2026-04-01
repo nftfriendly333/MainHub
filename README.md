@@ -1800,16 +1800,6 @@
         <li>Firebase Realtime Database powering a live global leaderboard and guild system</li>
         <li>Block mechanic, critical hits, floating damage numbers, and shockwave animations</li>
       </ul>
-      <div class="ai-controls">
-        <span class="ai-controls-label">✦ AI Features</span>
-        <div class="ai-btn-row">
-          <button class="ai-btn" onclick="generateReview('arena')">⭐ Generate Player Review</button>
-        </div>
-        <div class="ai-output" id="arena-output">
-          <div class="ai-output-label" id="arena-output-label">AI · Generated</div>
-          <div id="arena-output-text"></div>
-        </div>
-      </div>
       <div class="user-review-form">
         <span class="user-review-label">★ Leave a Review</span>
         <div class="star-picker" id="arena-stars" onclick="setRating('arena', event)">
@@ -1861,16 +1851,6 @@
           <li>Batch distribution automation with 0.002 $ETH burn per transaction</li>
           <li>Shared ledger synced every 3 seconds across all sessions</li>
         </ul>
-        <div class="ai-controls">
-          <span class="ai-controls-label">✦ AI Features</span>
-          <div class="ai-btn-row">
-            <button class="ai-btn" onclick="generateReview('sow')">⭐ Generate User Review</button>
-          </div>
-          <div class="ai-output" id="sow-output">
-            <div class="ai-output-label" id="sow-output-label">AI · Generated</div>
-            <div id="sow-output-text"></div>
-          </div>
-        </div>
         <div class="user-review-form">
           <span class="user-review-label">★ Leave a Review</span>
           <div class="star-picker" id="sow-stars" onclick="setRating('sow', event)">
@@ -1921,16 +1901,6 @@
           <li>Long/short positions with stop-loss and take-profit orders</li>
           <li>History tab: win rate bar, P&L breakdown, and per-trade log</li>
         </ul>
-        <div class="ai-controls">
-          <span class="ai-controls-label">✦ AI Features</span>
-          <div class="ai-btn-row">
-            <button class="ai-btn" onclick="generateReview('trade')">⭐ Generate Trader Review</button>
-          </div>
-          <div class="ai-output" id="trade-output">
-            <div class="ai-output-label" id="trade-output-label">AI · Generated</div>
-            <div id="trade-output-text"></div>
-          </div>
-        </div>
         <div class="user-review-form">
           <span class="user-review-label">★ Leave a Review</span>
           <div class="star-picker" id="trade-stars" onclick="setRating('trade', event)">
