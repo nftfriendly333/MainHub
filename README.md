@@ -27,22 +27,22 @@
   }
 
   /* ── HEADER ── */
-  header { position: relative; padding: 90px 40px 70px; text-align: center; overflow: hidden; }
+  header { position: relative; padding: 56px 20px 44px; text-align: center; overflow: hidden; }
   header::before {
-    content: ''; position: absolute; width: 700px; height: 700px; border-radius: 50%;
+    content: ''; position: absolute; width: 400px; height: 400px; border-radius: 50%;
     background: radial-gradient(circle, rgba(127,170,255,0.07) 0%, transparent 70%);
-    top: -200px; left: 50%; transform: translateX(-50%); pointer-events: none;
+    top: -120px; left: 50%; transform: translateX(-50%); pointer-events: none;
   }
   .eyebrow { font-size: 0.85rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--accent2); margin-bottom: 20px; opacity: 0; animation: fadeUp 0.8s 0.1s ease forwards; }
-  h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 7vw, 5.2rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 24px; opacity: 0; animation: fadeUp 0.8s 0.25s ease forwards; }
+  h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 9vw, 5.2rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 24px; opacity: 0; animation: fadeUp 0.8s 0.25s ease forwards; }
   h1 em { font-style: italic; color: var(--accent1); }
-  .subtitle { max-width: 540px; margin: 0 auto 50px; font-size: 1rem; line-height: 1.8; color: var(--muted); opacity: 0; animation: fadeUp 0.8s 0.4s ease forwards; }
+  .subtitle { max-width: 100%; margin: 0 auto 36px; font-size: 0.9rem; line-height: 1.8; color: var(--muted); opacity: 0; animation: fadeUp 0.8s 0.4s ease forwards; }
   .tag-line { display: inline-flex; align-items: center; gap: 10px; border: 1px solid var(--border); border-radius: 999px; padding: 8px 18px; font-size: 0.82rem; letter-spacing: 0.1em; color: var(--muted); opacity: 0; animation: fadeUp 0.8s 0.55s ease forwards; }
   .tag-line span { width: 6px; height: 6px; border-radius: 50%; background: var(--accent2); animation: pulse 2s infinite; }
 
   /* ── AI BANNER ── */
   .ai-banner {
-    margin: 0 32px;
+    margin: 0 16px;
     border: 1px solid rgba(127,170,255,0.2);
     border-radius: 14px;
     background: linear-gradient(135deg, rgba(127,170,255,0.05), rgba(200,169,110,0.04));
@@ -59,17 +59,17 @@
   .ai-banner-text strong { color: var(--accent2); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; }
   .ai-banner-text p { font-size: 0.72rem; color: var(--muted); margin-top: 3px; line-height: 1.5; }
 
-  .divider { width: 100%; height: 1px; background: linear-gradient(to right, transparent, var(--border) 20%, var(--border) 80%, transparent); margin: 50px 0 70px; }
+  .divider { width: 100%; height: 1px; background: linear-gradient(to right, transparent, var(--border) 20%, var(--border) 80%, transparent); margin: 36px 0 48px; }
 
   /* ── MAIN ── */
-  main { max-width: 1100px; margin: 0 auto; padding: 0 32px 140px; }
+  main { max-width: 1100px; margin: 0 auto; padding: 0 16px 100px; }
   .section-label { font-size: 0.78rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); margin-bottom: 40px; opacity: 0; animation: fadeUp 0.7s 0.6s ease forwards; }
 
   /* ── CARDS ── */
-  .card-featured { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--border); border-radius: 20px; overflow: hidden; background: var(--card); margin-bottom: 28px; opacity: 0; animation: fadeUp 0.8s 0.75s ease forwards; transition: border-color 0.3s, box-shadow 0.3s; }
+  .card-featured { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: 18px; overflow: hidden; background: var(--card); margin-bottom: 20px; opacity: 0; animation: fadeUp 0.8s 0.75s ease forwards; transition: border-color 0.3s, box-shadow 0.3s; }
   .card-featured:hover { border-color: rgba(224,108,108,0.3); box-shadow: 0 0 60px var(--glow3); }
 
-  .card-visual { position: relative; min-height: 400px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .card-visual { position: relative; min-height: 220px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
   .vis-arena { background: linear-gradient(135deg, #1a0808, #0f0505); }
   .vis-arena::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(220,60,60,0.22) 0%, transparent 65%); }
   .vis-sow { background: linear-gradient(135deg, #0c0d08, #080a05); }
@@ -103,7 +103,7 @@
   .trade-bar { width: 10px; border-radius: 2px 2px 0 0; background: var(--accent2); animation: barGrow 3s ease-in-out infinite alternate; }
   .trade-bar:nth-child(1){height:60%}.trade-bar:nth-child(2){height:90%;animation-delay:.2s}.trade-bar:nth-child(3){height:45%;animation-delay:.4s}.trade-bar:nth-child(4){height:75%;animation-delay:.6s}.trade-bar:nth-child(5){height:55%;animation-delay:.8s}
 
-  .card-content { padding: 44px; display: flex; flex-direction: column; justify-content: center; }
+  .card-content { padding: 24px 20px; display: flex; flex-direction: column; }
   .card-number { font-size: 0.78rem; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 14px; }
   .card-title { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 700; line-height: 1.2; margin-bottom: 14px; }
   .card-desc { font-size: 0.92rem; line-height: 1.9; color: var(--muted); margin-bottom: 22px; }
@@ -303,11 +303,11 @@
   .review-item-text { font-size: 0.86rem; color: var(--muted); line-height: 1.65; }
 
   /* ── SMALL CARDS GRID ── */
-  .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .cards-grid { display: flex; flex-direction: column; gap: 20px; }
   .card-small { border: 1px solid var(--border); border-radius: 20px; overflow: hidden; background: var(--card); opacity: 0; transition: border-color 0.3s, box-shadow 0.3s; }
   .card-small:nth-child(1) { animation: fadeUp 0.8s 0.9s ease forwards; }
   .card-small:nth-child(2) { animation: fadeUp 0.8s 1.05s ease forwards; }
-  .card-small .card-visual { min-height: 220px; }
+  .card-small .card-visual { min-height: 180px; }
   .card-small .card-content { padding: 30px; }
   .card-small .card-title { font-size: 1.45rem; }
   .card-small:nth-child(1):hover { border-color: rgba(200,169,110,0.25); box-shadow: 0 0 40px rgba(200,169,110,0.1); }
@@ -316,9 +316,9 @@
   /* ── FLOATING CHAT ── */
   #chat-toggle {
     position: fixed;
-    bottom: 28px; right: 28px;
+    bottom: 20px; right: 16px;
     height: 52px;
-    padding: 0 20px 0 16px;
+    padding: 0 16px 0 12px;
     border-radius: 999px;
     background: linear-gradient(135deg, #1a1a2e, #1e1e3a);
     border: 1px solid rgba(127,170,255,0.35);
@@ -375,9 +375,10 @@
 
   #chat-panel {
     position: fixed;
-    bottom: 96px; right: 28px;
-    width: 340px;
-    max-height: 480px;
+    bottom: 84px; right: 16px;
+    width: calc(100vw - 32px);
+    max-width: 380px;
+    max-height: 70vh;
     background: #12121c;
     border: 1px solid rgba(127,170,255,0.2);
     border-radius: 18px;
@@ -407,6 +408,7 @@
   .chat-messages {
     flex: 1;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     padding: 14px;
     display: flex;
     flex-direction: column;
@@ -473,7 +475,7 @@
   #chat-send:disabled { opacity: 0.4; cursor: not-allowed; }
 
   /* ── FOOTER ── */
-  footer { border-top: 1px solid var(--border); padding: 40px; text-align: center; }
+  footer { border-top: 1px solid var(--border); padding: 32px 20px; text-align: center; }
   .footer-inner { max-width: 600px; margin: 0 auto; }
   .footer-badge { display: inline-flex; align-items: center; gap: 10px; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.05em; margin-bottom: 16px; }
   .claude-mark { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.95rem; color: var(--accent1); }
@@ -493,7 +495,7 @@
     max-width: 1100px;
     margin: 0 auto 0;
     position: relative;
-    height: 352px;
+    height: 260px;
     overflow: hidden;
     opacity: 0;
     animation: fadeUp 1s 0.1s ease forwards;
@@ -1015,13 +1017,13 @@
   .manifesto {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 0 32px 20px;
+    padding: 0 16px 20px;
   }
   .manifesto-inner {
     border: 1px solid rgba(200,169,110,0.15);
-    border-radius: 24px;
+    border-radius: 18px;
     background: linear-gradient(135deg, rgba(200,169,110,0.04) 0%, rgba(10,10,15,0) 60%);
-    padding: 56px 64px;
+    padding: 32px 22px;
     position: relative;
     overflow: hidden;
   }
@@ -1102,17 +1104,75 @@
     line-height: 1.5;
   }
 
-  @media(max-width: 768px) {
-    .manifesto-inner { padding: 36px 28px; }
-    .manifesto-stats { grid-template-columns: 1fr; gap: 28px; }
+  /* ── API KEY SETUP ── */
+  #api-key-setup { display: flex; flex-direction: column; height: 100%; }
+  #chat-main { display: none; flex-direction: column; height: 100%; }
+  .key-setup-body {
+    flex: 1; padding: 20px 18px 24px;
+    display: flex; flex-direction: column; gap: 14px;
+    overflow-y: auto;
   }
+  .key-setup-intro {
+    font-size: 0.76rem; color: var(--muted); line-height: 1.65;
+  }
+  .key-setup-field { display: flex; flex-direction: column; gap: 6px; }
+  .key-setup-label { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); opacity: 0.7; }
+  #api-key-input {
+    font-family: 'DM Mono', monospace; font-size: 0.76rem;
+    background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+    border-radius: 8px; padding: 11px 14px; color: var(--text); outline: none;
+    min-height: 44px; width: 100%; box-sizing: border-box;
+    transition: border-color 0.2s;
+  }
+  #api-key-input:focus { border-color: rgba(127,170,255,0.4); }
+  #key-setup-btn {
+    font-family: 'DM Mono', monospace; font-size: 0.76rem; letter-spacing: 0.06em;
+    padding: 12px 18px; border-radius: 8px;
+    border: 1px solid rgba(127,170,255,0.4);
+    background: rgba(127,170,255,0.1); color: var(--accent2);
+    cursor: pointer; transition: all 0.2s; min-height: 44px;
+  }
+  #key-setup-btn:hover { background: rgba(127,170,255,0.18); border-color: rgba(127,170,255,0.7); }
+  .key-setup-link {
+    font-size: 0.68rem; color: var(--muted); text-decoration: none;
+    text-align: center; opacity: 0.6; transition: opacity 0.2s;
+  }
+  .key-setup-link:hover { opacity: 1; color: var(--accent2); }
+  .key-reset-btn {
+    background: transparent; border: none; cursor: pointer;
+    font-size: 0.85rem; opacity: 0.5; padding: 4px; transition: opacity 0.2s;
+    flex-shrink: 0;
+  }
+  .key-reset-btn:hover { opacity: 1; }
 
 
-    header{padding:50px 24px 40px}
-    main{padding:0 20px 120px}
-    .card-content{padding:28px 24px}
-    #chat-panel{width:calc(100vw - 40px);right:20px}
-    .knight-stage{height:320px}
+  @media(min-width: 600px) {
+    header { padding: 70px 32px 56px; }
+    .subtitle { max-width: 480px; }
+    main { padding: 0 24px 120px; }
+    .card-visual { min-height: 280px; }
+    .card-content { padding: 32px 28px; }
+    .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .manifesto-inner { padding: 44px 40px; }
+    .ai-banner { margin: 0 24px; }
+    .manifesto { padding: 0 24px 20px; }
+  }
+  /* ── RESPONSIVE UPGRADES — desktop ── */
+  @media(min-width: 900px) {
+    header { padding: 90px 40px 70px; }
+    .subtitle { max-width: 540px; font-size: 1rem; }
+    main { padding: 0 32px 140px; }
+    .card-featured { display: grid; grid-template-columns: 1fr 1fr; }
+    .card-visual { min-height: 400px; }
+    .card-content { padding: 44px; }
+    .card-small .card-visual { min-height: 220px; }
+    .card-small .card-content { padding: 30px; }
+    .manifesto-inner { padding: 56px 64px; }
+    .manifesto { padding: 0 32px 20px; }
+    .ai-banner { margin: 0 32px; }
+    #chat-panel { width: 340px; max-height: 480px; right: 28px; bottom: 96px; }
+    #chat-toggle { bottom: 28px; right: 28px; }
+    .knight-stage { height: 352px; }
   }
 </style>
 </head>
@@ -1126,7 +1186,7 @@
 </header>
 
 <!-- KNIGHT CINEMATIC -->
-<div style="max-width:1100px;margin:40px auto 60px;padding:0 32px;position:relative;">
+<div style="max-width:1100px;margin:32px auto 48px;padding:0 16px;position:relative;">
   <div class="knight-stage">
 
     <!-- SCENE TRACK -->
@@ -1915,22 +1975,46 @@
 </button>
 
 <div id="chat-panel">
-  <div class="chat-header">
-    <div class="chat-header-dot"></div>
-    <div>
-      <div class="chat-header-title">App Assistant</div>
-      <div class="chat-header-sub">Ask anything about Iron Arena, Reap What You Sow, or Trade Together</div>
+  <!-- API KEY SETUP — shown when no key is set -->
+  <div id="api-key-setup">
+    <div class="chat-header">
+      <div class="chat-header-dot"></div>
+      <div>
+        <div class="chat-header-title">App Assistant</div>
+        <div class="chat-header-sub">Enter your Anthropic API key to get started</div>
+      </div>
+    </div>
+    <div class="key-setup-body">
+      <p class="key-setup-intro">This assistant runs entirely in your browser. Your API key is never stored — it lives in memory for this session only.</p>
+      <div class="key-setup-field">
+        <label class="key-setup-label">Anthropic API Key</label>
+        <input type="password" id="api-key-input" placeholder="sk-ant-..." autocomplete="off" spellcheck="false"/>
+      </div>
+      <button id="key-setup-btn" onclick="saveApiKey()">Connect Assistant</button>
+      <a class="key-setup-link" href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">Get an API key →</a>
     </div>
   </div>
-  <div class="chat-messages" id="chat-messages">
-    <div class="msg ai">
-      <div class="msg-label">Assistant</div>
-      Hey! I know all three apps on this page in detail. Ask me anything — how Iron Arena's combat works, how the $PvE drip system operates, or how to trade on Trade Together.
+
+  <!-- CHAT UI — shown after key is set -->
+  <div id="chat-main" style="display:none;flex-direction:column;height:100%">
+    <div class="chat-header">
+      <div class="chat-header-dot"></div>
+      <div style="flex:1">
+        <div class="chat-header-title">App Assistant</div>
+        <div class="chat-header-sub">Ask anything about Iron Arena, Reap What You Sow, or Trade Together</div>
+      </div>
+      <button class="key-reset-btn" onclick="resetApiKey()" title="Change API key">🔑</button>
     </div>
-  </div>
-  <div class="chat-input-row">
-    <textarea id="chat-input" placeholder="Ask about any app…" rows="1" onkeydown="chatKeydown(event)"></textarea>
-    <button id="chat-send" onclick="sendChat()">Send</button>
+    <div class="chat-messages" id="chat-messages">
+      <div class="msg ai">
+        <div class="msg-label">Assistant</div>
+        Hey! I know all three apps on this page in detail. Ask me anything — how Iron Arena's combat works, how the $PvE drip system operates, or how to trade on Trade Together.
+      </div>
+    </div>
+    <div class="chat-input-row">
+      <textarea id="chat-input" placeholder="Ask about any app…" rows="1" onkeydown="chatKeydown(event)"></textarea>
+      <button id="chat-send" onclick="sendChat()">Send</button>
+    </div>
   </div>
 </div>
 
@@ -1967,12 +2051,67 @@ TRADE TOGETHER: ${APP_DATA.trade.description}
 Answer questions concisely and helpfully. Be friendly but brief — this is a chat widget, so 2-4 sentences is ideal unless the user asks for detail. You can compare apps, explain mechanics, or give recommendations.`;
 
 // ─────────────────────────────────────────────
+// AUTO-DETECT CLAUDE ENVIRONMENT
+// ─────────────────────────────────────────────
+(async () => {
+  try {
+    // Try a minimal call — if it works, we're in Claude's environment (key injected)
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'anthropic-version': '2023-06-01' },
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1, messages: [{ role: 'user', content: 'hi' }] })
+    });
+    if (res.ok || res.status === 400) {
+      // 400 means the request was understood — key is valid in this env
+      _apiKey = '__env__'; // sentinel — key not needed
+      document.getElementById('api-key-setup').style.display = 'none';
+      document.getElementById('chat-main').style.display = 'flex';
+    }
+  } catch(e) {
+    // Not in Claude env — show key setup as normal
+  }
+})();
+
+// ─────────────────────────────────────────────
+// API KEY MANAGEMENT
+// ─────────────────────────────────────────────
+let _apiKey = '';
+
+function saveApiKey() {
+  const val = document.getElementById('api-key-input').value.trim();
+  if (!val.startsWith('sk-ant-') && !val.startsWith('sk-')) {
+    document.getElementById('api-key-input').style.borderColor = 'rgba(224,108,108,0.6)';
+    return;
+  }
+  _apiKey = val;
+  document.getElementById('api-key-setup').style.display = 'none';
+  document.getElementById('chat-main').style.display = 'flex';
+  document.getElementById('chat-input').focus();
+}
+
+function resetApiKey() {
+  _apiKey = '';
+  document.getElementById('api-key-input').value = '';
+  document.getElementById('api-key-setup').style.display = 'flex';
+  document.getElementById('chat-main').style.display = 'none';
+}
+
+// Allow Enter key in API key input
+document.getElementById('api-key-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') saveApiKey();
+});
+
+// ─────────────────────────────────────────────
 // CLAUDE API CALL
 // ─────────────────────────────────────────────
 async function callClaude(messages, system) {
+  const headers = { 'Content-Type': 'application/json', 'anthropic-version': '2023-06-01' };
+  // Use user-provided key if set (and not the env sentinel)
+  if (_apiKey && _apiKey !== '__env__') headers['x-api-key'] = _apiKey;
+
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers,
     body: JSON.stringify({
       model: 'claude-sonnet-4-20250514',
       max_tokens: 1000,
@@ -1980,6 +2119,10 @@ async function callClaude(messages, system) {
       messages
     })
   });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error?.message || `API error ${res.status}`);
+  }
   const data = await res.json();
   return data.content?.map(b => b.text || '').join('') || '';
 }
@@ -1993,6 +2136,16 @@ async function generateReview(appKey) {
   const textEl   = document.getElementById(`${appKey}-output-text`);
   const labelEl  = document.getElementById(`${appKey}-output-label`);
   const btn      = event.target;
+
+  if (!_apiKey) {
+    chatOpen = true;
+    document.getElementById('chat-panel').classList.add('open');
+    const lbl = document.querySelector('.chat-toggle-label');
+    const ico = document.querySelector('.chat-toggle-icon');
+    if (lbl) { lbl.textContent = 'Close Chat'; ico.textContent = '✕'; }
+    document.getElementById('api-key-input')?.focus();
+    return;
+  }
 
   btn.disabled = true;
   btn.innerHTML = '<span class="spin">⟳</span> Generating…';
