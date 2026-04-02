@@ -194,6 +194,27 @@
   }
   .pitch-select:focus { border-color: rgba(200,169,110,0.4); }
 
+  /* ── LAUNCH BUTTON ── */
+  .launch-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    padding: 11px 22px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.2s;
+    margin-bottom: 24px;
+  }
+  .launch-btn.red  { border: 1px solid rgba(224,108,108,0.45); background: rgba(224,108,108,0.08); color: var(--accent3); }
+  .launch-btn.red:hover  { background: rgba(224,108,108,0.16); border-color: rgba(224,108,108,0.7); }
+  .launch-btn.gold { border: 1px solid rgba(200,169,110,0.45); background: rgba(200,169,110,0.08); color: var(--accent1); }
+  .launch-btn.gold:hover { background: rgba(200,169,110,0.16); border-color: rgba(200,169,110,0.7); }
+  .launch-btn.blue { border: 1px solid rgba(127,170,255,0.45); background: rgba(127,170,255,0.08); color: var(--accent2); }
+  .launch-btn.blue:hover { background: rgba(127,170,255,0.16); border-color: rgba(127,170,255,0.7); }
+
   /* ── USER REVIEW FORM ── */
   .user-review-form {
     border-top: 1px solid var(--border);
@@ -312,167 +333,6 @@
   .card-small .card-title { font-size: 1.45rem; }
   .card-small:nth-child(1):hover { border-color: rgba(200,169,110,0.25); box-shadow: 0 0 40px rgba(200,169,110,0.1); }
   .card-small:nth-child(2):hover { border-color: rgba(127,170,255,0.25); box-shadow: 0 0 40px var(--glow2); }
-
-  /* ── FLOATING CHAT ── */
-  #chat-toggle {
-    position: fixed;
-    bottom: 20px; right: 16px;
-    height: 52px;
-    padding: 0 16px 0 12px;
-    border-radius: 999px;
-    background: linear-gradient(135deg, #1a1a2e, #1e1e3a);
-    border: 1px solid rgba(127,170,255,0.35);
-    color: var(--text);
-    font-family: 'DM Mono', monospace;
-    font-size: 0.78rem;
-    letter-spacing: 0.05em;
-    cursor: pointer;
-    display: flex; align-items: center; gap: 10px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.5), 0 0 24px rgba(127,170,255,0.12);
-    transition: all 0.2s;
-    z-index: 1000;
-    animation: chatBounce 3s ease-in-out infinite;
-    white-space: nowrap;
-  }
-  #chat-toggle:hover {
-    border-color: rgba(127,170,255,0.7);
-    box-shadow: 0 4px 30px rgba(0,0,0,0.6), 0 0 36px rgba(127,170,255,0.25);
-    transform: scale(1.04) translateY(-1px);
-    animation: none;
-  }
-  .chat-toggle-icon {
-    font-size: 1.15rem;
-    line-height: 1;
-  }
-  .chat-toggle-text {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1px;
-  }
-  .chat-toggle-label {
-    font-size: 0.72rem;
-    color: var(--text);
-    letter-spacing: 0.04em;
-  }
-  .chat-toggle-sub {
-    font-size: 0.58rem;
-    color: var(--accent2);
-    opacity: 0.8;
-    letter-spacing: 0.06em;
-  }
-  .chat-toggle-dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: var(--accent2);
-    flex-shrink: 0;
-    animation: pulse 2s infinite;
-  }
-  @keyframes chatBounce {
-    0%,100% { transform: translateY(0); }
-    50%     { transform: translateY(-5px); }
-  }
-
-  #chat-panel {
-    position: fixed;
-    bottom: 84px; right: 16px;
-    width: calc(100vw - 32px);
-    max-width: 380px;
-    max-height: 70vh;
-    background: #12121c;
-    border: 1px solid rgba(127,170,255,0.2);
-    border-radius: 18px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.7), 0 0 40px rgba(127,170,255,0.08);
-    z-index: 999;
-    overflow: hidden;
-    transform: translateY(20px) scale(0.95);
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-  #chat-panel.open { transform: translateY(0) scale(1); opacity: 1; pointer-events: all; }
-
-  .chat-header {
-    padding: 16px 18px;
-    border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; gap: 10px;
-    background: rgba(127,170,255,0.04);
-    flex-shrink: 0;
-  }
-  .chat-header-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent2); animation: pulse 2s infinite; flex-shrink: 0; }
-  .chat-header-title { font-size: 0.72rem; letter-spacing: 0.08em; color: var(--text); }
-  .chat-header-sub { font-size: 0.6rem; color: var(--muted); margin-top: 1px; }
-
-  .chat-messages {
-    flex: 1;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    padding: 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    min-height: 0;
-  }
-  .chat-messages::-webkit-scrollbar { width: 3px; }
-  .chat-messages::-webkit-scrollbar-track { background: transparent; }
-  .chat-messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-
-  .msg {
-    max-width: 88%;
-    padding: 9px 13px;
-    border-radius: 12px;
-    font-size: 0.72rem;
-    line-height: 1.6;
-    animation: fadeUp 0.3s ease;
-  }
-  .msg.user { background: rgba(127,170,255,0.12); border: 1px solid rgba(127,170,255,0.2); color: var(--text); align-self: flex-end; border-radius: 12px 12px 2px 12px; }
-  .msg.ai   { background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--muted); align-self: flex-start; border-radius: 12px 12px 12px 2px; }
-  .msg.ai .msg-label { font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent2); margin-bottom: 4px; opacity: 0.7; }
-
-  .typing-dots { display: flex; gap: 4px; padding: 4px 2px; }
-  .typing-dots span { width: 5px; height: 5px; border-radius: 50%; background: var(--muted); animation: typingBounce 1.2s infinite; }
-  .typing-dots span:nth-child(2){animation-delay:.2s}.typing-dots span:nth-child(3){animation-delay:.4s}
-
-  .chat-input-row {
-    padding: 12px 14px;
-    border-top: 1px solid var(--border);
-    display: flex;
-    gap: 8px;
-    flex-shrink: 0;
-  }
-  #chat-input {
-    flex: 1;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 8px 12px;
-    color: var(--text);
-    outline: none;
-    resize: none;
-    min-height: 36px;
-    max-height: 100px;
-    line-height: 1.5;
-  }
-  #chat-input:focus { border-color: rgba(127,170,255,0.3); }
-  #chat-send {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    padding: 8px 14px;
-    border-radius: 8px;
-    border: 1px solid rgba(127,170,255,0.3);
-    background: rgba(127,170,255,0.08);
-    color: var(--accent2);
-    cursor: pointer;
-    transition: all 0.2s;
-    white-space: nowrap;
-    align-self: flex-end;
-  }
-  #chat-send:hover { background: rgba(127,170,255,0.15); }
-  #chat-send:disabled { opacity: 0.4; cursor: not-allowed; }
 
   /* ── FOOTER ── */
   footer { border-top: 1px solid var(--border); padding: 32px 20px; text-align: center; }
@@ -1104,46 +964,6 @@
     line-height: 1.5;
   }
 
-  /* ── API KEY SETUP ── */
-  #api-key-setup { display: flex; flex-direction: column; height: 100%; }
-  #chat-main { display: none; flex-direction: column; height: 100%; }
-  .key-setup-body {
-    flex: 1; padding: 20px 18px 24px;
-    display: flex; flex-direction: column; gap: 14px;
-    overflow-y: auto;
-  }
-  .key-setup-intro {
-    font-size: 0.76rem; color: var(--muted); line-height: 1.65;
-  }
-  .key-setup-field { display: flex; flex-direction: column; gap: 6px; }
-  .key-setup-label { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); opacity: 0.7; }
-  #api-key-input {
-    font-family: 'DM Mono', monospace; font-size: 0.76rem;
-    background: rgba(255,255,255,0.04); border: 1px solid var(--border);
-    border-radius: 8px; padding: 11px 14px; color: var(--text); outline: none;
-    min-height: 44px; width: 100%; box-sizing: border-box;
-    transition: border-color 0.2s;
-  }
-  #api-key-input:focus { border-color: rgba(127,170,255,0.4); }
-  #key-setup-btn {
-    font-family: 'DM Mono', monospace; font-size: 0.76rem; letter-spacing: 0.06em;
-    padding: 12px 18px; border-radius: 8px;
-    border: 1px solid rgba(127,170,255,0.4);
-    background: rgba(127,170,255,0.1); color: var(--accent2);
-    cursor: pointer; transition: all 0.2s; min-height: 44px;
-  }
-  #key-setup-btn:hover { background: rgba(127,170,255,0.18); border-color: rgba(127,170,255,0.7); }
-  .key-setup-link {
-    font-size: 0.68rem; color: var(--muted); text-decoration: none;
-    text-align: center; opacity: 0.6; transition: opacity 0.2s;
-  }
-  .key-setup-link:hover { opacity: 1; color: var(--accent2); }
-  .key-reset-btn {
-    background: transparent; border: none; cursor: pointer;
-    font-size: 0.85rem; opacity: 0.5; padding: 4px; transition: opacity 0.2s;
-    flex-shrink: 0;
-  }
-  .key-reset-btn:hover { opacity: 1; }
 
 
   @media(min-width: 600px) {
@@ -1170,8 +990,6 @@
     .manifesto-inner { padding: 56px 64px; }
     .manifesto { padding: 0 32px 20px; }
     .ai-banner { margin: 0 32px; }
-    #chat-panel { width: 340px; max-height: 480px; right: 28px; bottom: 96px; }
-    #chat-toggle { bottom: 28px; right: 28px; }
     .knight-stage { height: 352px; }
   }
 </style>
@@ -1752,10 +1570,6 @@
     </div>
     <div class="manifesto-stats">
       <div class="manifesto-stat">
-        <span class="ms-num">90%+</span>
-        <span class="ms-label">Memecoins fail to graduate launchpads</span>
-      </div>
-      <div class="manifesto-stat">
         <span class="ms-num">∞</span>
         <span class="ms-label">Room at the table for your team</span>
       </div>
@@ -1800,6 +1614,7 @@
         <li>Firebase Realtime Database powering a live global leaderboard and guild system</li>
         <li>Block mechanic, critical hits, floating damage numbers, and shockwave animations</li>
       </ul>
+      <a class="launch-btn red" href="https://nftfriendly333.github.io/mobileskillgame2/" target="_blank" rel="noopener">▶ Play Iron Arena</a>
       <div class="user-review-form">
         <span class="user-review-label">★ Leave a Review</span>
         <div class="star-picker" id="arena-stars" onclick="setRating('arena', event)">
@@ -1846,11 +1661,12 @@
           <span class="tag">Shared Ledger</span>
         </div>
         <ul class="features gold">
-          <li>Wallet Registry: named wallets start with 100 $PvE, balances visible to all</li>
+          <li>Wallet Registry: named wallets start with 1000 $PvE, balances visible to all</li>
           <li>Weekly +$0.01 $ETH drip per wallet every Tuesday — enough to take part in hundreds of transactions per week</li>
-          <li>Batch distribution automation with 0.002 $ETH burn per transaction</li>
+          <li>Batch distribution automation — up to 333 separate transactions</li>
           <li>Shared ledger synced every 3 seconds across all sessions</li>
         </ul>
+        <a class="launch-btn gold" href="https://nftfriendly333.github.io/reapwhatyousow/" target="_blank" rel="noopener">▶ Open Reap What You Sow</a>
         <div class="user-review-form">
           <span class="user-review-label">★ Leave a Review</span>
           <div class="star-picker" id="sow-stars" onclick="setRating('sow', event)">
@@ -1901,6 +1717,7 @@
           <li>Long/short positions with stop-loss and take-profit orders</li>
           <li>History tab: win rate bar, P&L breakdown, and per-trade log</li>
         </ul>
+        <a class="launch-btn blue" href="https://nftfriendly333.github.io/tradingtogether/" target="_blank" rel="noopener">▶ Open Trade Together</a>
         <div class="user-review-form">
           <span class="user-review-label">★ Leave a Review</span>
           <div class="star-picker" id="trade-stars" onclick="setRating('trade', event)">
@@ -1934,59 +1751,7 @@
   </div>
 </footer>
 
-<!-- FLOATING CHAT -->
-<button id="chat-toggle" onclick="toggleChat()" title="Ask questions about the apps">
-  <span class="chat-toggle-dot"></span>
-  <span class="chat-toggle-icon">💬</span>
-  <span class="chat-toggle-text">
-    <span class="chat-toggle-label">Ask About the Apps</span>
-    <span class="chat-toggle-sub">AI Assistant · Live</span>
-  </span>
-</button>
 
-<div id="chat-panel">
-  <!-- API KEY SETUP — shown when no key is set -->
-  <div id="api-key-setup">
-    <div class="chat-header">
-      <div class="chat-header-dot"></div>
-      <div>
-        <div class="chat-header-title">App Assistant</div>
-        <div class="chat-header-sub">Enter your Anthropic API key to get started</div>
-      </div>
-    </div>
-    <div class="key-setup-body">
-      <p class="key-setup-intro">This assistant runs entirely in your browser. Your API key is never stored — it lives in memory for this session only.</p>
-      <div class="key-setup-field">
-        <label class="key-setup-label">Anthropic API Key</label>
-        <input type="password" id="api-key-input" placeholder="sk-ant-..." autocomplete="off" spellcheck="false"/>
-      </div>
-      <button id="key-setup-btn" onclick="saveApiKey()">Connect Assistant</button>
-      <a class="key-setup-link" href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">Get an API key →</a>
-    </div>
-  </div>
-
-  <!-- CHAT UI — shown after key is set -->
-  <div id="chat-main" style="display:none;flex-direction:column;height:100%">
-    <div class="chat-header">
-      <div class="chat-header-dot"></div>
-      <div style="flex:1">
-        <div class="chat-header-title">App Assistant</div>
-        <div class="chat-header-sub">Ask anything about Iron Arena, Reap What You Sow, or Trade Together</div>
-      </div>
-      <button class="key-reset-btn" onclick="resetApiKey()" title="Change API key">🔑</button>
-    </div>
-    <div class="chat-messages" id="chat-messages">
-      <div class="msg ai">
-        <div class="msg-label">Assistant</div>
-        Hey! I know all three apps on this page in detail. Ask me anything — how Iron Arena's combat works, how the $PvE drip system operates, or how to trade on Trade Together.
-      </div>
-    </div>
-    <div class="chat-input-row">
-      <textarea id="chat-input" placeholder="Ask about any app…" rows="1" onkeydown="chatKeydown(event)"></textarea>
-      <button id="chat-send" onclick="sendChat()">Send</button>
-    </div>
-  </div>
-</div>
 
 <script>
 // ─────────────────────────────────────────────
@@ -2001,7 +1766,7 @@ const APP_DATA = {
   sow: {
     name: 'Reap What You Sow',
     type: '$PvE Token Economy Simulator',
-    description: `Reap What You Sow is a browser-based $PvE token economy simulator. Users register wallets — each starting with 100 $PvE — which are visible on a shared public ledger. A weekly $ETH drip of +$0.01 $ETH per wallet fires every Tuesday, with a live countdown timer — enough to participate in hundreds of transactions per week. Sending tokens costs 0.002 $ETH per transaction (burned). The Automation tab lets users set batch distribution rules to send $PvE across multiple wallets in one action. The Ledger tab logs every Send and Auto transaction with timestamps and block numbers, synced every 3 seconds across all sessions via polling.`
+    description: `Reap What You Sow is a browser-based $PvE token economy simulator. Users register wallets — each starting with 1000 $PvE — which are visible on a shared public ledger. A weekly $ETH drip of +$0.01 $ETH per wallet fires every Tuesday, with a live countdown timer — enough to participate in hundreds of transactions per week. Sending tokens costs 0.002 $ETH per transaction (burned). The Automation tab lets users set batch distribution rules to send $PvE across multiple wallets in one action. The Ledger tab logs every Send and Auto transaction with timestamps and block numbers, synced every 3 seconds across all sessions via polling.`
   },
   trade: {
     name: 'Trade Together',
@@ -2010,74 +1775,14 @@ const APP_DATA = {
   }
 };
 
-const SYSTEM_PROMPT = `You are a knowledgeable assistant for a showcase website featuring three browser apps built with Claude. Here is the detailed info about each app:
-
-IRON ARENA: ${APP_DATA.arena.description}
-
-REAP WHAT YOU SOW: ${APP_DATA.sow.description}
-
-TRADE TOGETHER: ${APP_DATA.trade.description}
-
-Answer questions concisely and helpfully. Be friendly but brief — this is a chat widget, so 2-4 sentences is ideal unless the user asks for detail. You can compare apps, explain mechanics, or give recommendations.`;
-
-// ─────────────────────────────────────────────
-// AUTO-DETECT CLAUDE ENVIRONMENT
-// ─────────────────────────────────────────────
-(async () => {
-  try {
-    // Try a minimal call — if it works, we're in Claude's environment (key injected)
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'anthropic-version': '2023-06-01' },
-      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1, messages: [{ role: 'user', content: 'hi' }] })
-    });
-    if (res.ok || res.status === 400) {
-      // 400 means the request was understood — key is valid in this env
-      _apiKey = '__env__'; // sentinel — key not needed
-      document.getElementById('api-key-setup').style.display = 'none';
-      document.getElementById('chat-main').style.display = 'flex';
-    }
-  } catch(e) {
-    // Not in Claude env — show key setup as normal
-  }
-})();
-
-// ─────────────────────────────────────────────
-// API KEY MANAGEMENT
-// ─────────────────────────────────────────────
-let _apiKey = '';
-
-function saveApiKey() {
-  const val = document.getElementById('api-key-input').value.trim();
-  if (!val.startsWith('sk-ant-') && !val.startsWith('sk-')) {
-    document.getElementById('api-key-input').style.borderColor = 'rgba(224,108,108,0.6)';
-    return;
-  }
-  _apiKey = val;
-  document.getElementById('api-key-setup').style.display = 'none';
-  document.getElementById('chat-main').style.display = 'flex';
-  document.getElementById('chat-input').focus();
-}
-
-function resetApiKey() {
-  _apiKey = '';
-  document.getElementById('api-key-input').value = '';
-  document.getElementById('api-key-setup').style.display = 'flex';
-  document.getElementById('chat-main').style.display = 'none';
-}
-
-// Allow Enter key in API key input
-document.getElementById('api-key-input').addEventListener('keydown', e => {
-  if (e.key === 'Enter') saveApiKey();
-});
 
 // ─────────────────────────────────────────────
 // CLAUDE API CALL
 // ─────────────────────────────────────────────
+let _apiKey = '__env__';
+
 async function callClaude(messages, system) {
   const headers = { 'Content-Type': 'application/json', 'anthropic-version': '2023-06-01' };
-  // Use user-provided key if set (and not the env sentinel)
-  if (_apiKey && _apiKey !== '__env__') headers['x-api-key'] = _apiKey;
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -2108,14 +1813,10 @@ async function generateReview(appKey) {
   const btn      = event.target;
 
   if (!_apiKey) {
-    chatOpen = true;
-    document.getElementById('chat-panel').classList.add('open');
-    const lbl = document.querySelector('.chat-toggle-label');
-    const ico = document.querySelector('.chat-toggle-icon');
-    if (lbl) { lbl.textContent = 'Close Chat'; ico.textContent = '✕'; }
-    document.getElementById('api-key-input')?.focus();
+    alert('AI features unavailable.');
     return;
   }
+
 
   btn.disabled = true;
   btn.innerHTML = '<span class="spin">⟳</span> Generating…';
@@ -2144,80 +1845,6 @@ Format: Start with the star rating on its own line, then the review. Sign it wit
   btn.innerHTML = '⭐ Generate Player Review';
 }
 
-// ─────────────────────────────────────────────
-// CHAT
-// ─────────────────────────────────────────────
-let chatHistory = [];
-let chatOpen    = false;
-
-function toggleChat() {
-  chatOpen = !chatOpen;
-  document.getElementById('chat-panel').classList.toggle('open', chatOpen);
-  const lbl = document.querySelector('.chat-toggle-label');
-  const ico = document.querySelector('.chat-toggle-icon');
-  if (chatOpen) { lbl.textContent = 'Close Chat'; ico.textContent = '✕'; }
-  else          { lbl.textContent = 'Ask About the Apps'; ico.textContent = '💬'; }
-  if (chatOpen) document.getElementById('chat-input').focus();
-}
-
-function chatKeydown(e) {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat(); }
-}
-
-function addMsg(role, html) {
-  const msgs = document.getElementById('chat-messages');
-  const div  = document.createElement('div');
-  div.className = `msg ${role}`;
-  if (role === 'ai') div.innerHTML = `<div class="msg-label">Assistant</div>${html}`;
-  else               div.textContent = html;
-  msgs.appendChild(div);
-  msgs.scrollTop = msgs.scrollHeight;
-  return div;
-}
-
-function addTyping() {
-  const msgs = document.getElementById('chat-messages');
-  const div  = document.createElement('div');
-  div.className = 'msg ai';
-  div.id = 'typing-indicator';
-  div.innerHTML = '<div class="msg-label">Assistant</div><div class="typing-dots"><span></span><span></span><span></span></div>';
-  msgs.appendChild(div);
-  msgs.scrollTop = msgs.scrollHeight;
-}
-
-async function sendChat() {
-  const input = document.getElementById('chat-input');
-  const send  = document.getElementById('chat-send');
-  const text  = input.value.trim();
-  if (!text || send.disabled) return;
-
-  input.value = '';
-  input.style.height = 'auto';
-  addMsg('user', text);
-  chatHistory.push({ role: 'user', content: text });
-
-  send.disabled = true;
-  addTyping();
-
-  try {
-    const result = await callClaude(chatHistory, SYSTEM_PROMPT);
-    document.getElementById('typing-indicator')?.remove();
-    addMsg('ai', result.replace(/\n/g, '<br>'));
-    chatHistory.push({ role: 'assistant', content: result });
-  } catch(e) {
-    document.getElementById('typing-indicator')?.remove();
-    addMsg('ai', 'Sorry, something went wrong. Try again.');
-  }
-
-  send.disabled = false;
-  input.focus();
-}
-
-// Auto-resize textarea
-document.getElementById('chat-input').addEventListener('input', function() {
-  this.style.height = 'auto';
-  this.style.height = Math.min(this.scrollHeight, 100) + 'px';
-});
 
 // ─────────────────────────────────────────────
 // USER REVIEW SYSTEM — persistent shared storage
