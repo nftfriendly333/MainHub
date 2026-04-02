@@ -1000,7 +1000,7 @@
   <p class="eyebrow">App Showcase · Three Experiences</p>
   <h1>Fight. Trade.<br><em>Give Back.</em></h1>
   <p class="subtitle">Three browser apps — a wave-based RPG, a token economy simulator, and a fantasy trading game. Generate live reviews and ask questions about any app.</p>
-  <div class="tag-line"><span></span> Live AI · Interactive Showcase</div>
+
 </header>
 
 <!-- KNIGHT CINEMATIC -->
@@ -1745,9 +1745,9 @@
   <div class="footer-inner">
     <div class="footer-badge">
       <span style="width:6px;height:6px;border-radius:50%;background:var(--accent2);animation:pulse 2s infinite;display:inline-block;"></span>
-      <span>Three Apps · Live AI Features · No Install Required</span>
+      <span>Three Apps · No Install Required</span>
     </div>
-    <p>Each app ships as a fully self-contained HTML file. AI features on this page run live — no backend required.</p>
+    <p>Each app ships as a fully self-contained HTML file.</p>
   </div>
 </footer>
 
