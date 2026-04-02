@@ -2,1997 +2,950 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>App Showcase</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<title>REAP WHAT YOU SOW — $PvE</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0a0a0f;
-    --card: #15151e;
-    --border: rgba(255,255,255,0.07);
-    --text: #e8e6f0;
-    --muted: #6b6880;
-    --accent1: #c8a96e;
-    --accent2: #7faaff;
-    --accent3: #e06c6c;
-    --glow3: rgba(224,108,108,0.15);
-    --glow2: rgba(127,170,255,0.15);
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--bg); color: var(--text); font-family: 'DM Mono', monospace; min-height: 100vh; overflow-x: hidden; }
-
-  body::before {
-    content: ''; position: fixed; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none; z-index: 9999; opacity: 0.4;
-  }
-
-  /* ── HEADER ── */
-  header { position: relative; padding: 56px 20px 44px; text-align: center; overflow: hidden; }
-  header::before {
-    content: ''; position: absolute; width: 400px; height: 400px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(127,170,255,0.07) 0%, transparent 70%);
-    top: -120px; left: 50%; transform: translateX(-50%); pointer-events: none;
-  }
-  .eyebrow { font-size: 0.85rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--accent2); margin-bottom: 20px; opacity: 0; animation: fadeUp 0.8s 0.1s ease forwards; }
-  h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 9vw, 5.2rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 24px; opacity: 0; animation: fadeUp 0.8s 0.25s ease forwards; }
-  h1 em { font-style: italic; color: var(--accent1); }
-  .subtitle { max-width: 100%; margin: 0 auto 36px; font-size: 0.9rem; line-height: 1.8; color: var(--muted); opacity: 0; animation: fadeUp 0.8s 0.4s ease forwards; }
-  .tag-line { display: inline-flex; align-items: center; gap: 10px; border: 1px solid var(--border); border-radius: 999px; padding: 8px 18px; font-size: 0.82rem; letter-spacing: 0.1em; color: var(--muted); opacity: 0; animation: fadeUp 0.8s 0.55s ease forwards; }
-  .tag-line span { width: 6px; height: 6px; border-radius: 50%; background: var(--accent2); animation: pulse 2s infinite; }
-
-  /* ── AI BANNER ── */
-  .ai-banner {
-    margin: 0 16px;
-    border: 1px solid rgba(127,170,255,0.2);
-    border-radius: 14px;
-    background: linear-gradient(135deg, rgba(127,170,255,0.05), rgba(200,169,110,0.04));
-    padding: 18px 28px;
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.7s ease forwards;
-    flex-wrap: wrap;
-  }
-  .ai-banner-icon { font-size: 1.6rem; flex-shrink: 0; }
-  .ai-banner-text { flex: 1; min-width: 200px; }
-  .ai-banner-text strong { color: var(--accent2); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; }
-  .ai-banner-text p { font-size: 0.72rem; color: var(--muted); margin-top: 3px; line-height: 1.5; }
-
-  .divider { width: 100%; height: 1px; background: linear-gradient(to right, transparent, var(--border) 20%, var(--border) 80%, transparent); margin: 36px 0 48px; }
-
-  /* ── MAIN ── */
-  main { max-width: 1100px; margin: 0 auto; padding: 0 16px 100px; }
-  .section-label { font-size: 0.78rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); margin-bottom: 40px; opacity: 0; animation: fadeUp 0.7s 0.6s ease forwards; }
-
-  /* ── CARDS ── */
-  .card-featured { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: 18px; overflow: hidden; background: var(--card); margin-bottom: 20px; opacity: 0; animation: fadeUp 0.8s 0.75s ease forwards; transition: border-color 0.3s, box-shadow 0.3s; }
-  .card-featured:hover { border-color: rgba(224,108,108,0.3); box-shadow: 0 0 60px var(--glow3); }
-
-  .card-visual { position: relative; min-height: 220px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-  .vis-arena { background: linear-gradient(135deg, #1a0808, #0f0505); }
-  .vis-arena::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(220,60,60,0.22) 0%, transparent 65%); }
-  .vis-sow { background: linear-gradient(135deg, #0c0d08, #080a05); }
-  .vis-sow::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(200,169,110,0.18) 0%, transparent 65%); }
-  .vis-trade { background: linear-gradient(135deg, #080d1a, #060a12); }
-  .vis-trade::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(100,150,255,0.18) 0%, transparent 65%); }
-
-  .arena-icon, .sow-icon, .trade-icon { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 18px; }
-  .arena-glyph { font-size: 5rem; filter: drop-shadow(0 0 24px rgba(255,80,80,0.6)); animation: float 5.25s ease-in-out infinite; }
-  .sow-glyph   { font-size: 5rem; filter: drop-shadow(0 0 20px rgba(200,169,110,0.6)); animation: float 7.5s ease-in-out infinite; }
-  .trade-glyph { font-size: 5rem; filter: drop-shadow(0 0 20px rgba(127,170,255,0.5)); animation: float 7.5s ease-in-out infinite; }
-
-  .enemy-row { display: flex; gap: 12px; opacity: 0.75; }
-  .enemy-chip { font-size: 1.4rem; padding: 6px 10px; border: 1px solid rgba(224,108,108,0.3); border-radius: 8px; background: rgba(224,108,108,0.08); animation: float 6s ease-in-out infinite; }
-  .enemy-chip:nth-child(2){animation-delay:.5s}.enemy-chip:nth-child(3){animation-delay:1s}.enemy-chip:nth-child(4){animation-delay:1.5s}
-  .arena-ring { width: 80px; height: 80px; border-radius: 50%; border: 2px solid rgba(224,108,108,0.4); position: relative; animation: spin 12s linear infinite; opacity: 0.6; }
-  .arena-ring::before { content: ''; position: absolute; width: 10px; height: 10px; background: var(--accent3); border-radius: 50%; top: -5px; left: 50%; transform: translateX(-50%); box-shadow: 0 0 10px var(--accent3); }
-  .arena-ring2 { position: absolute; width: 50px; height: 50px; border-radius: 50%; border: 1px solid rgba(224,108,108,0.2); top: 50%; left: 50%; transform: translate(-50%,-50%); animation: spin 7.5s linear infinite reverse; }
-
-  .sow-hud { display: flex; flex-direction: column; gap: 8px; font-size: 0.6rem; letter-spacing: 0.08em; opacity: 0.8; width: 130px; }
-  .sow-row { display: flex; align-items: center; gap: 8px; }
-  .sow-label { color: var(--accent1); min-width: 50px; }
-  .sow-bar-bg { flex: 1; height: 4px; background: rgba(200,169,110,0.1); border-radius: 2px; overflow: hidden; }
-  .sow-bar-fill { height: 100%; background: var(--accent1); border-radius: 2px; animation: barGrow 4.5s ease-in-out infinite alternate; }
-  .sow-bar-fill.purple { background: #c084fc; animation-delay: 0.5s; }
-
-  .trade-items { display: flex; gap: 10px; opacity: 0.75; }
-  .trade-chip { font-size: 1.2rem; padding: 5px 9px; border: 1px solid rgba(127,170,255,0.3); border-radius: 8px; background: rgba(127,170,255,0.07); animation: float 6s ease-in-out infinite; }
-  .trade-chip:nth-child(2){animation-delay:.4s}.trade-chip:nth-child(3){animation-delay:.8s}.trade-chip:nth-child(4){animation-delay:1.2s}.trade-chip:nth-child(5){animation-delay:1.6s}
-  .trade-bars { display: flex; align-items: flex-end; gap: 5px; height: 36px; opacity: 0.5; }
-  .trade-bar { width: 10px; border-radius: 2px 2px 0 0; background: var(--accent2); animation: barGrow 3s ease-in-out infinite alternate; }
-  .trade-bar:nth-child(1){height:60%}.trade-bar:nth-child(2){height:90%;animation-delay:.2s}.trade-bar:nth-child(3){height:45%;animation-delay:.4s}.trade-bar:nth-child(4){height:75%;animation-delay:.6s}.trade-bar:nth-child(5){height:55%;animation-delay:.8s}
-
-  .card-content { padding: 24px 20px; display: flex; flex-direction: column; }
-  .card-number { font-size: 0.78rem; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 14px; }
-  .card-title { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 700; line-height: 1.2; margin-bottom: 14px; }
-  .card-desc { font-size: 0.92rem; line-height: 1.9; color: var(--muted); margin-bottom: 22px; }
-  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-  .tag { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 11px; border-radius: 999px; border: 1px solid var(--border); color: var(--muted); }
-  .tag.red  { color: var(--accent3); border-color: rgba(224,108,108,0.3); }
-  .tag.gold { color: var(--accent1); border-color: rgba(200,169,110,0.3); }
-  .tag.blue { color: var(--accent2); border-color: rgba(127,170,255,0.3); }
-
-  .features { list-style: none; display: flex; flex-direction: column; gap: 9px; margin-bottom: 28px; }
-  .features li { font-size: 0.88rem; color: var(--muted); padding-left: 18px; position: relative; line-height: 1.6; }
-  .features li::before { content: '→'; position: absolute; left: 0; font-size: 0.85rem; }
-  .features.red  li::before { color: var(--accent3); }
-  .features.gold li::before { color: var(--accent1); }
-  .features.blue li::before { color: var(--accent2); }
-
-  /* ── AI CONTROLS ── */
-  .ai-controls {
-    border-top: 1px solid var(--border);
-    padding-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .ai-controls-label {
-    font-size: 0.58rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--muted);
-    opacity: 0.6;
-  }
-  .ai-btn-row { display: flex; gap: 8px; flex-wrap: wrap; }
-
-  .ai-btn {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.08em;
-    padding: 7px 14px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--muted);
-    cursor: pointer;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .ai-btn:hover { border-color: rgba(127,170,255,0.4); color: var(--accent2); background: rgba(127,170,255,0.05); }
-  .ai-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-  .ai-btn .spin { display: inline-block; animation: spin 0.8s linear infinite; }
-
-  /* AI Output Box */
-  .ai-output {
-    background: rgba(127,170,255,0.04);
-    border: 1px solid rgba(127,170,255,0.15);
-    border-radius: 10px;
-    padding: 14px 16px;
-    font-size: 0.88rem;
-    line-height: 1.75;
-    color: var(--text);
-    display: none;
-    position: relative;
-    animation: fadeUp 0.4s ease;
-  }
-  .ai-output.visible { display: block; }
-  .ai-output-label {
-    font-size: 0.55rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--accent2);
-    margin-bottom: 8px;
-    opacity: 0.7;
-  }
-
-  /* Pitch style selector */
-  .pitch-row { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
-  .pitch-select {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.63rem;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid var(--border);
-    color: var(--text);
-    border-radius: 6px;
-    padding: 6px 10px;
-    cursor: pointer;
-    outline: none;
-  }
-  .pitch-select:focus { border-color: rgba(200,169,110,0.4); }
-
-  /* ── LAUNCH BUTTON ── */
-  .launch-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
-    padding: 11px 22px;
-    border-radius: 10px;
-    text-decoration: none;
-    transition: all 0.2s;
-    margin-bottom: 24px;
-  }
-  .launch-btn.red  { border: 1px solid rgba(224,108,108,0.45); background: rgba(224,108,108,0.08); color: var(--accent3); }
-  .launch-btn.red:hover  { background: rgba(224,108,108,0.16); border-color: rgba(224,108,108,0.7); }
-  .launch-btn.gold { border: 1px solid rgba(200,169,110,0.45); background: rgba(200,169,110,0.08); color: var(--accent1); }
-  .launch-btn.gold:hover { background: rgba(200,169,110,0.16); border-color: rgba(200,169,110,0.7); }
-  .launch-btn.blue { border: 1px solid rgba(127,170,255,0.45); background: rgba(127,170,255,0.08); color: var(--accent2); }
-  .launch-btn.blue:hover { background: rgba(127,170,255,0.16); border-color: rgba(127,170,255,0.7); }
-
-  /* ── USER REVIEW FORM ── */
-  .user-review-form {
-    border-top: 1px solid var(--border);
-    padding-top: 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .user-review-label {
-    font-size: 0.58rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--muted);
-    opacity: 0.6;
-  }
-  /* Star picker */
-  .star-picker {
-    display: flex;
-    gap: 6px;
-    align-items: center;
-  }
-  .star-picker span {
-    font-size: 1.3rem;
-    cursor: pointer;
-    transition: transform 0.15s, filter 0.15s;
-    filter: grayscale(1) opacity(0.35);
-    line-height: 1;
-    user-select: none;
-  }
-  .star-picker span:hover,
-  .star-picker span.active {
-    filter: grayscale(0) opacity(1);
-    transform: scale(1.2);
-  }
-  .star-rating-label {
-    font-size: 0.6rem;
-    color: var(--muted);
-    letter-spacing: 0.05em;
-    margin-left: 4px;
-  }
-  /* Review textarea */
-  .review-textarea {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.85rem;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 10px 12px;
-    color: var(--text);
-    resize: none;
-    outline: none;
-    line-height: 1.6;
-    transition: border-color 0.2s;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  .review-textarea::placeholder { color: var(--muted); opacity: 0.5; }
-  .review-textarea:focus { border-color: rgba(200,169,110,0.35); }
-  /* Submit row */
-  .review-submit-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-  }
-  .review-char-count {
-    font-size: 0.58rem;
-    color: var(--muted);
-    opacity: 0.5;
-  }
-  .review-submit-btn {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.08em;
-    padding: 8px 16px;
-    border-radius: 8px;
-    border: 1px solid rgba(200,169,110,0.35);
-    background: rgba(200,169,110,0.07);
-    color: var(--accent1);
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .review-submit-btn:hover { background: rgba(200,169,110,0.14); border-color: rgba(200,169,110,0.6); }
-  .review-submit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-  /* Submitted reviews list */
-  .reviews-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 4px;
-  }
-  .review-item {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 12px 14px;
-    animation: fadeUp 0.4s ease;
-  }
-  .review-item-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 6px;
-  }
-  .review-item-stars { font-size: 1rem; line-height: 1; }
-  .review-item-name { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.08em; }
-  .review-item-text { font-size: 0.86rem; color: var(--muted); line-height: 1.65; }
-
-  /* ── SMALL CARDS GRID ── */
-  .cards-grid { display: flex; flex-direction: column; gap: 20px; }
-  .card-small { border: 1px solid var(--border); border-radius: 20px; overflow: hidden; background: var(--card); opacity: 0; transition: border-color 0.3s, box-shadow 0.3s; }
-  .card-small:nth-child(1) { animation: fadeUp 0.8s 0.9s ease forwards; }
-  .card-small:nth-child(2) { animation: fadeUp 0.8s 1.05s ease forwards; }
-  .card-small .card-visual { min-height: 180px; }
-  .card-small .card-content { padding: 30px; }
-  .card-small .card-title { font-size: 1.45rem; }
-  .card-small:nth-child(1):hover { border-color: rgba(200,169,110,0.25); box-shadow: 0 0 40px rgba(200,169,110,0.1); }
-  .card-small:nth-child(2):hover { border-color: rgba(127,170,255,0.25); box-shadow: 0 0 40px var(--glow2); }
-
-  /* ── FOOTER ── */
-  footer { border-top: 1px solid var(--border); padding: 32px 20px; text-align: center; }
-  .footer-inner { max-width: 600px; margin: 0 auto; }
-  .footer-badge { display: inline-flex; align-items: center; gap: 10px; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.05em; margin-bottom: 16px; }
-  .claude-mark { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.95rem; color: var(--accent1); }
-  footer p { font-size: 0.7rem; color: var(--muted); line-height: 1.8; opacity: 0.6; }
-
-  /* ── KEYFRAMES ── */
-  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)} }
-  @keyframes float { 0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)} }
-  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)} }
-  @keyframes barGrow { from{transform:scaleY(.5)}to{transform:scaleY(1)} }
-  @keyframes spin { from{transform:rotate(0deg)}to{transform:rotate(360deg)} }
-  @keyframes typingBounce { 0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)} }
-
-  /* ── KNIGHT CINEMATIC ── */
-  .knight-stage {
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto 0;
-    position: relative;
-    height: 260px;
-    overflow: hidden;
-    opacity: 0;
-    animation: fadeUp 1s 0.1s ease forwards;
-  }
-
-  /* Scene panels slide — 54s total, one scene per 18s */
-  .scene-track {
-    display: flex;
-    width: 300%;
-    height: 100%;
-    animation: sceneSlide 54s steps(1,end) infinite;
-  }
-  @keyframes sceneSlide {
-    0%,33.3%   { transform: translateX(0); }
-    33.4%,66.6%{ transform: translateX(-33.333%); }
-    66.7%,99.9%{ transform: translateX(-66.666%); }
-    100%       { transform: translateX(0); }
-  }
-
-  .scene {
-    width: 33.333%;
-    height: 100%;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  /* Scene backgrounds */
-  .scene-battle   { background: radial-gradient(ellipse at 50% 80%, #1a0505 0%, #0a0308 60%, #060206 100%); }
-  .scene-trade    { background: radial-gradient(ellipse at 50% 80%, #050a1a 0%, #030810 60%, #020508 100%); }
-  .scene-give     { background: radial-gradient(ellipse at 50% 80%, #081208 0%, #050d05 60%, #030803 100%); }
-
-  /* Scene label */
-  .scene-label {
-    position: absolute;
-    bottom: 18px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.6rem;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.25);
-    white-space: nowrap;
-  }
-
-  /* Scene dots / indicators */
-  .scene-dots {
-    position: absolute;
-    bottom: -28px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 8px;
-    z-index: 10;
-  }
-  .scene-dot {
-    width: 5px; height: 5px;
-    border-radius: 50%;
-    background: var(--border);
-    transition: background 0.3s;
-  }
-  /* Active dot animation synced to scene */
-  .scene-dot:nth-child(1) { animation: dotActive1 54s ease-in-out infinite; }
-  .scene-dot:nth-child(2) { animation: dotActive2 54s ease-in-out infinite; }
-  .scene-dot:nth-child(3) { animation: dotActive3 54s ease-in-out infinite; }
-  @keyframes dotActive1 { 0%,33%{background:var(--accent3)} 34%,100%{background:var(--border)} }
-  @keyframes dotActive2 { 0%,33%{background:var(--border)} 34%,66%{background:var(--accent2)} 67%,100%{background:var(--border)} }
-  @keyframes dotActive3 { 0%,66%{background:var(--border)} 67%,99%{background:#5cb85c} 100%{background:var(--border)} }
-
-  /* ── SVG KNIGHT BASE ── */
-  .knight-svg {
-    overflow: visible;
-    width: 100%;
-    height: 100%;
-    transform: scale(1.1);
-    transform-origin: center center;
-  }
-
-  /* ══════════════════════════════════════
-     SCENE 1: TURN-BASED — 18s full cycle
-     0–1.5s  : Both stand idle, tension
-     1.5–3s  : KNIGHT winds up (sword raises)
-     3–4s    : KNIGHT lunges + STRIKES
-     4–5s    : Impact flash, sparks, CRIT burst
-     5–6s    : Enemy recoils, HP drains, dmg floats
-     6–7.5s  : Knight retreats to stance
-     7.5–9s  : Pause — enemy's turn banner
-     9–10.5s : ENEMY rages + winds up
-     10.5–12s: ENEMY STRIKES knight
-     12–13s  : Counter flash, knight staggers, HP drops
-     13–14s  : Knight dmg number floats
-     14–16s  : Both recover
-     16–18s  : XP flash, reset
-     ══════════════════════════════════════ */
-
-  .scene-battle { animation: arenaPulse 18s ease-in-out infinite; }
-  @keyframes arenaPulse {
-    0%,22%    { background: radial-gradient(ellipse at 50% 80%, #1a0505 0%, #0a0308 60%, #060206 100%); }
-    25%,30%   { background: radial-gradient(ellipse at 50% 80%, #3a0808 0%, #200508 60%, #0a0205 100%); }
-    32%,58%   { background: radial-gradient(ellipse at 50% 80%, #1a0505 0%, #0a0308 60%, #060206 100%); }
-    60%,68%   { background: radial-gradient(ellipse at 50% 80%, #280606 0%, #180305 60%, #090205 100%); }
-    70%,100%  { background: radial-gradient(ellipse at 50% 80%, #1a0505 0%, #0a0308 60%, #060206 100%); }
-  }
-
-  .battle-ground { animation: groundFight 18s ease-in-out infinite; }
-  @keyframes groundFight {
-    0%,8%   { opacity:.3; }
-    22%,33% { opacity:.9; }
-    38%,55% { opacity:.4; }
-    60%,72% { opacity:.9; }
-    78%,100%{ opacity:.3; }
-  }
-
-  /* ── KNIGHT body — fast lunge, fast stagger ── */
-  .knight-body {
-    animation: knightFight 18s cubic-bezier(0.1,0.9,0.2,1) infinite;
-    transform-origin: 104px 158px;
-  }
-  @keyframes knightFight {
-    0%    { transform: translateX(0)     rotate(0deg);   }
-    8%    { transform: translateX(0)     rotate(0deg);   }
-    11%   { transform: translateX(5px)   rotate(2deg);   }   /* lean */
-    14%   { transform: translateX(34px)  rotate(6deg);   }   /* LUNGE — snap */
-    23%   { transform: translateX(34px)  rotate(6deg);   }   /* hold */
-    28%   { transform: translateX(0)     rotate(0deg);   }   /* retreat — snap */
-    50%   { transform: translateX(0)     rotate(0deg);   }
-    54%   { transform: translateX(-3px)  rotate(-2deg);  }   /* brace */
-    58%   { transform: translateX(-24px) rotate(-12deg); }   /* STAGGER — snap */
-    66%   { transform: translateX(-24px) rotate(-12deg); }   /* hold */
-    75%   { transform: translateX(0)     rotate(0deg);   }   /* recover */
-    100%  { transform: translateX(0)     rotate(0deg);   }
-  }
-
-  /* ── SWORD — snap wind-up and slash ── */
-  .knight-sword-arm {
-    transform-origin: 131px 108px;
-    animation: swordFight 18s cubic-bezier(0.1,0.9,0.2,1) infinite;
-  }
-  @keyframes swordFight {
-    0%    { transform: rotate(-15deg); }
-    8%    { transform: rotate(-15deg); }
-    11%   { transform: rotate(-52deg); }   /* wind up — fast */
-    14%   { transform: rotate(48deg);  }   /* SLASH — snap */
-    23%   { transform: rotate(48deg);  }   /* hold */
-    30%   { transform: rotate(-15deg); }   /* return */
-    100%  { transform: rotate(-15deg); }
-  }
-
-  .sword-glow { animation: swordGlowFight 18s ease-in-out infinite; }
-  @keyframes swordGlowFight {
-    0%,10%   { opacity: 0.2; }
-    13%,26%  { opacity: 1.0; }
-    32%,100% { opacity: 0.2; }
-  }
-
-  /* ── ENEMY — snap recoil + fast strike ── */
-  .enemy-body {
-    animation: enemyFight 18s cubic-bezier(0.1,0.9,0.2,1) infinite;
-    transform-origin: 232px 155px;
-  }
-  @keyframes enemyFight {
-    0%    { transform: translateX(0)     rotate(0deg)    scaleX(1);    }
-    16%   { transform: translateX(0)     rotate(0deg)    scaleX(1);    }
-    18%   { transform: translateX(24px)  rotate(15deg)   scaleX(0.85); } /* RECOIL — snap */
-    26%   { transform: translateX(12px)  rotate(6deg)    scaleX(0.92); }
-    34%   { transform: translateX(0)     rotate(0deg)    scaleX(1);    }
-    50%   { transform: translateX(0)     rotate(0deg)    scaleX(1.1);  } /* RAGE */
-    55%   { transform: translateX(0)     rotate(0deg)    scaleX(1.14); }
-    57%   { transform: translateX(-8px)  rotate(-3deg)   scaleX(1.12); } /* wind up */
-    60%   { transform: translateX(-40px) rotate(-10deg)  scaleX(1.15); } /* STRIKE — snap */
-    67%   { transform: translateX(-40px) rotate(-10deg)  scaleX(1.12); } /* hold */
-    76%   { transform: translateX(0)     rotate(0deg)    scaleX(1);    } /* return — fast */
-    100%  { transform: translateX(0)     rotate(0deg)    scaleX(1);    }
-  }
-
-  .enemy-eyes { animation: enemyRage 18s ease-in-out infinite; }
-  @keyframes enemyRage {
-    0%,46%   { filter: none; }
-    52%,72%  { filter: drop-shadow(0 0 8px #ff2020); }
-    82%,100% { filter: none; }
-  }
-
-  /* ENEMY ORB THROW ARM — raises to cast during attack phase */
-  .enemy-weapon-arm {
-    transform-origin: 254px 128px;
-    animation: enemyArmRaise 18s cubic-bezier(0.1,0.9,0.2,1) infinite;
-  }
-  @keyframes enemyArmRaise {
-    0%    { transform: rotate(0deg);   }
-    50%   { transform: rotate(0deg);   }
-    54%   { transform: rotate(-50deg); }   /* raise arm to cast */
-    60%   { transform: rotate(-55deg); }   /* hold raised — charging */
-    63%   { transform: rotate(-30deg); }   /* HURL — snap forward */
-    67%   { transform: rotate(-30deg); }   /* hold */
-    76%   { transform: rotate(0deg);   }   /* return */
-    100%  { transform: rotate(0deg);   }
-  }
-
-  /* ORB HELD — pulses while charging, disappears when thrown */
-  .orb-held {
-    animation: orbHeld 18s ease-in-out infinite;
-    transform-origin: 264px 166px;
-  }
-  @keyframes orbHeld {
-    0%,48%   { opacity: 1;   transform: scale(1);    }
-    50%      { opacity: 0.6; transform: scale(0.9);  }
-    54%      { opacity: 1;   transform: scale(1.2);  }   /* charging glow */
-    58%      { opacity: 1;   transform: scale(1.5);  }   /* max charge */
-    62%      { opacity: 0;   transform: scale(0.2);  }   /* thrown — vanish */
-    76%      { opacity: 0;   }                             /* gone */
-    78%      { opacity: 1;   transform: scale(1);    }   /* reappear */
-    100%     { opacity: 1;   transform: scale(1);    }
-  }
-
-  /* ORB PROJECTILE — travels from enemy hand across to knight */
-  .orb-projectile {
-    animation: orbTravel 18s cubic-bezier(0.4,0,0.6,1) infinite;
-    opacity: 0;
-  }
-  @keyframes orbTravel {
-    0%,60%    { opacity: 0;   transform: translate(264px, 166px) scale(0);   }
-    62%       { opacity: 1;   transform: translate(264px, 166px) scale(1.2); } /* launch */
-    65%       { opacity: 1;   transform: translate(160px, 155px) scale(1);   } /* mid-flight */
-    67%       { opacity: 1;   transform: translate(100px, 152px) scale(0.9); } /* impact zone */
-    68%       { opacity: 0;   transform: translate(90px,  152px) scale(1.6); } /* burst on knight */
-    76%,100%  { opacity: 0;   transform: translate(264px, 166px) scale(0);   }
-  }
-
-  /* ── IMPACT FLASH — fires at knight's strike (~22%) ── */
-  .impact-flash {
-    animation: impactFight 18s ease-out infinite;
-    transform-origin: 183px 152px;
-  }
-  @keyframes impactFight {
-    0%,18%   { opacity: 0; transform: scale(0.3) rotate(0deg); }
-    22%      { opacity: 1; transform: scale(1.7) rotate(-20deg); }
-    27%      { opacity: 0.5; transform: scale(1.3) rotate(5deg); }
-    32%      { opacity: 0; transform: scale(0.4) rotate(0deg); }
-    100%     { opacity: 0; }
-  }
-
-  /* ── CRIT STARBURST ── */
-  .crit-burst {
-    animation: critFight 18s ease-out infinite;
-    transform-origin: 192px 142px;
-  }
-  @keyframes critFight {
-    0%,20%   { opacity: 0; transform: scale(0)   rotate(0deg);   }
-    24%      { opacity: 1; transform: scale(1.5) rotate(45deg);  }
-    30%      { opacity: 0; transform: scale(2.4) rotate(130deg); }
-    100%     { opacity: 0; }
-  }
-
-  /* ── SPARKS ── */
-  .spark1 { animation: spark1Fight 18s ease-out infinite; }
-  .spark2 { animation: spark2Fight 18s ease-out infinite; }
-  .spark3 { animation: spark3Fight 18s ease-out infinite; }
-  .spark4 { animation: spark4Fight 18s ease-out infinite; }
-  @keyframes spark1Fight { 0%,19%{opacity:0;transform:translate(0,0)} 23%{opacity:1;transform:translate(-24px,-28px)} 30%{opacity:0;transform:translate(-40px,-8px)} 100%{opacity:0} }
-  @keyframes spark2Fight { 0%,19%{opacity:0;transform:translate(0,0)} 23%{opacity:1;transform:translate(26px,-22px)} 30%{opacity:0;transform:translate(42px,6px)}  100%{opacity:0} }
-  @keyframes spark3Fight { 0%,19%{opacity:0;transform:translate(0,0)} 24%{opacity:1;transform:translate(-18px,-32px)} 31%{opacity:0;transform:translate(-30px,-14px)} 100%{opacity:0} }
-  @keyframes spark4Fight { 0%,19%{opacity:0;transform:translate(0,0)} 24%{opacity:1;transform:translate(20px,-30px)} 31%{opacity:0;transform:translate(34px,-12px)} 100%{opacity:0} }
-
-  /* ── COUNTER FLASH — enemy hits knight (~63%) ── */
-  .counter-flash {
-    animation: counterFight 18s ease-out infinite;
-    transform-origin: 115px 152px;
-  }
-  @keyframes counterFight {
-    0%,60%   { opacity: 0; transform: scale(0.3); }
-    64%      { opacity: 1; transform: scale(1.6); }
-    70%      { opacity: 0.4; transform: scale(1.2); }
-    74%      { opacity: 0; transform: scale(0.3); }
-    100%     { opacity: 0; }
-  }
-
-  /* ── HP BARS ── */
-  .enemy-hp-fill { animation: enemyHpFight 18s ease-in-out infinite; }
-  @keyframes enemyHpFight {
-    0%,22%  { width: 46px; }
-    30%     { width: 12px; }   /* hit */
-    97%     { width: 12px; }
-    100%    { width: 46px; }   /* reset */
-  }
-
-  .knight-hp-fill { animation: knightHpFight 18s ease-in-out infinite; }
-  @keyframes knightHpFight {
-    0%    { width: 46px; fill: #7faaff; }
-    63%   { width: 46px; fill: #7faaff; }
-    70%   { width: 24px; fill: #ff9944; }  /* hit — turns orange */
-    97%   { width: 24px; fill: #ff9944; }
-    100%  { width: 46px; fill: #7faaff; }  /* reset */
-  }
-
-  /* ── DAMAGE NUMBERS — one per side ── */
-  .dmg-1 { animation: dmg1Fight 18s ease-out infinite; }
-  .dmg-enemy { animation: dmgEnemyFight 18s ease-out infinite; }
-  @keyframes dmg1Fight {
-    0%,20%  { opacity:0; transform:translateY(0)   scale(0.8); }
-    25%     { opacity:1; transform:translateY(-18px) scale(1.25); }
-    34%     { opacity:0; transform:translateY(-38px) scale(0.9); }
-    100%    { opacity:0; }
-  }
-  @keyframes dmgEnemyFight {
-    0%,62%  { opacity:0; transform:translateY(0)   scale(0.8); }
-    67%     { opacity:1; transform:translateY(-18px) scale(1.2); }
-    76%     { opacity:0; transform:translateY(-38px) scale(0.9); }
-    100%    { opacity:0; }
-  }
-
-  .dmg-2, .dmg-3 { opacity: 0; }
-
-  /* ── TURN INDICATORS ── */
-  .turn-knight { animation: turnKnight 18s step-end infinite; }
-  .turn-enemy  { animation: turnEnemy  18s step-end infinite; }
-  @keyframes turnKnight { 0%,48%{opacity:1} 49%,100%{opacity:0} }
-  @keyframes turnEnemy  { 0%,48%{opacity:0} 49%,88%{opacity:1} 89%,100%{opacity:0} }
-
-  /* ── RAGE LABEL ── */
-  .rage-label { animation: rageFight 18s ease-in-out infinite; }
-  @keyframes rageFight {
-    0%,47%  { opacity:0; transform:scale(0.8); }
-    52%     { opacity:1; transform:scale(1.2);  }
-    55%     { opacity:0.85; transform:scale(1); }
-    70%     { opacity:0.6;  }
-    76%     { opacity:0;    }
-    100%    { opacity:0;    }
-  }
-
-  /* ── XP PULSE ── */
-  .xp-label { animation: xpPulse 18s ease-out infinite; }
-  @keyframes xpPulse {
-    0%,88%  { opacity:0.4; transform:scale(1);    }
-    92%     { opacity:1;   transform:scale(1.15); }
-    97%     { opacity:0.4; transform:scale(1);    }
-    100%    { opacity:0.4; }
-  }
-
-  /* ── SCENE 2: TRADING ── */
-  /* Monitor glow */
-  .monitor-screen { animation: screenFlicker 4.5s ease-in-out infinite; }
-  @keyframes screenFlicker {
-    0%,100%{ opacity:.9 } 50%{ opacity:1 }
-  }
-
-  /* Chart line drawing */
-  .chart-line { stroke-dasharray: 120; stroke-dashoffset: 120; animation: drawChart 3s ease forwards infinite; }
-  @keyframes drawChart {
-    0%  { stroke-dashoffset: 120; }
-    60% { stroke-dashoffset: 0; }
-    100%{ stroke-dashoffset: 0; }
-  }
-
-  /* Knight typing hands */
-  .typing-hand { animation: typeHand 0.45s ease-in-out infinite alternate; }
-  .typing-hand2 { animation: typeHand 0.45s 0.15s ease-in-out infinite alternate; }
-  @keyframes typeHand {
-    from { transform: translateY(0); }
-    to   { transform: translateY(-3px); }
-  }
-
-  /* Floating profit text */
-  .profit-float { animation: profitRise 3s ease-in-out infinite; }
-  @keyframes profitRise {
-    0%   { transform: translateY(0); opacity: 0; }
-    20%  { opacity: 1; }
-    100% { transform: translateY(-30px); opacity: 0; }
-  }
-
-  /* cursor blink */
-  .cursor-blink { animation: cursorBlink 1.5s step-end infinite; }
-  @keyframes cursorBlink { 0%,100%{opacity:1} 50%{opacity:0} }
-
-  /* ── SCENE 3: $PvE FUNNEL RAIN ── */
-
-  /* Funnel glow pulse — gold */
-  .funnel-glow { animation: funnelPulse 1.68s ease-in-out infinite alternate; }
-  /* Funnel glow pulse — blue */
-  .funnel-glow-blue { animation: funnelPulseBlue 1.68s ease-in-out infinite alternate; }
-  @keyframes funnelPulse     { from{opacity:0.5} to{opacity:1} }
-  @keyframes funnelPulseBlue { from{opacity:0.4} to{opacity:0.9} }
-
-  /* Funnel shake — left ($PvE) */
-  .funnel-body-left  { animation: funnelShake 0.504s ease-in-out infinite alternate; transform-origin:105px 18px; }
-  /* Funnel shake — right ($ETH) */
-  .funnel-body-right { animation: funnelShake 0.504s 0.25s ease-in-out infinite alternate; transform-origin:230px 18px; }
-  @keyframes funnelShake { from{transform:rotate(-2deg)} to{transform:rotate(2deg)} }
-
-  /* Ground glow blue */
-  .give-ground-blue { animation: giveGroundPulse 1.68s 0.4s ease-in-out infinite alternate; }
-
-  /* ETH token rain — 7 blue drops from right funnel neck (230, 86), fanning to same 5 x positions */
-  .te1 { animation: eRain1 1.44s 0.07s ease-in infinite; }
-  .te2 { animation: eRain2 1.44s 0.26s ease-in infinite; }
-  .te3 { animation: eRain3 1.44s 0.45s ease-in infinite; }
-  .te4 { animation: eRain4 1.44s 0.14s ease-in infinite; }
-  .te5 { animation: eRain5 1.44s 0.62s ease-in infinite; }
-  .te6 { animation: eRain1 1.44s 0.82s ease-in infinite; }
-  .te7 { animation: eRain3 1.44s 1.01s ease-in infinite; }
-
-  /* ETH origins at 230,86 — fan to persons at ~138(-92), 168(-62), 200(-30), 228(-2), 262(+32) */
-  @keyframes eRain1 { 0%{transform:translate(0,0) scale(1);opacity:0} 8%{opacity:1} 100%{transform:translate(-92px,145px) scale(0.7);opacity:0.9} }
-  @keyframes eRain2 { 0%{transform:translate(0,0) scale(1);opacity:0} 8%{opacity:1} 100%{transform:translate(-62px,145px) scale(0.7);opacity:0.9} }
-  @keyframes eRain3 { 0%{transform:translate(0,0) scale(1);opacity:0} 8%{opacity:1} 100%{transform:translate(-30px,145px) scale(0.7);opacity:0.9} }
-  @keyframes eRain4 { 0%{transform:translate(0,0) scale(1);opacity:0} 8%{opacity:1} 100%{transform:translate(-2px,145px)  scale(0.7);opacity:0.9} }
-  @keyframes eRain5 { 0%{transform:translate(0,0) scale(1);opacity:0} 8%{opacity:1} 100%{transform:translate(32px,145px)  scale(0.7);opacity:0.9} }
-
-  /* Stream of tokens falling straight down through funnel neck, fanning out */
-  /* Each token: starts at funnel neck (160,80), falls down and fans toward one of 5 people */
-
-  /* Crowd cheer bob */
-  .crowd-person { animation: cheerBob 0.96s ease-in-out infinite alternate; }
-  .crowd-person:nth-child(2){animation-delay:.12s}
-  .crowd-person:nth-child(3){animation-delay:.24s}
-  .crowd-person:nth-child(4){animation-delay:.36s}
-  .crowd-person:nth-child(5){animation-delay:.48s}
-  @keyframes cheerBob {
-    from { transform: translateY(0); }
-    to   { transform: translateY(-6px); }
-  }
-
-  /* Caught token bounce on head */
-  .catch-bob { animation: catchBob 0.96s ease-in-out infinite alternate; }
-  @keyframes catchBob {
-    from { transform: translateY(0) scale(1); }
-    to   { transform: translateY(-8px) scale(1.1); }
-  }
-
-  /* 15 rain tokens, each with unique path and delay — falling from funnel neck to crowd */
-  /* Token rain: starts mid-screen top, fans to 5 x positions */
-  .tr1  { animation: tRain1  1.44s 0s    ease-in infinite; }
-  .tr2  { animation: tRain2  1.44s 0.19s ease-in infinite; }
-  .tr3  { animation: tRain3  1.44s 0.38s ease-in infinite; }
-  .tr4  { animation: tRain4  1.44s 0.10s ease-in infinite; }
-  .tr5  { animation: tRain5  1.44s 0.29s ease-in infinite; }
-  .tr6  { animation: tRain1  1.44s 0.48s ease-in infinite; }
-  .tr7  { animation: tRain2  1.44s 0.58s ease-in infinite; }
-  .tr8  { animation: tRain3  1.44s 0.67s ease-in infinite; }
-  .tr9  { animation: tRain4  1.44s 0.77s ease-in infinite; }
-  .tr10 { animation: tRain5  1.44s 0.86s ease-in infinite; }
-  .tr11 { animation: tRain1  1.44s 1.05s ease-in infinite; }
-  .tr12 { animation: tRain3  1.44s 1.15s ease-in infinite; }
-  .tr13 { animation: tRain2  1.44s 1.25s ease-in infinite; }
-  .tr14 { animation: tRain4  1.44s 0.96s ease-in infinite; }
-  .tr15 { animation: tRain5  1.44s 1.34s ease-in infinite; }
-
-  /* 5 landing zones matching person x positions: ~138, 168, 200, 228, 262 */
-  @keyframes tRain1 {
-    0%   { transform: translate(0px, 0px)   scale(1);   opacity: 0; }
-    8%   { opacity: 1; }
-    100% { transform: translate(-22px, 145px) scale(0.7); opacity: 0.9; }
-  }
-  @keyframes tRain2 {
-    0%   { transform: translate(0px, 0px)   scale(1);   opacity: 0; }
-    8%   { opacity: 1; }
-    100% { transform: translate(8px, 145px) scale(0.7); opacity: 0.9; }
-  }
-  @keyframes tRain3 {
-    0%   { transform: translate(0px, 0px)   scale(1);   opacity: 0; }
-    8%   { opacity: 1; }
-    100% { transform: translate(40px, 145px) scale(0.7); opacity: 0.9; }
-  }
-  @keyframes tRain4 {
-    0%   { transform: translate(0px, 0px)   scale(1);   opacity: 0; }
-    8%   { opacity: 1; }
-    100% { transform: translate(68px, 145px) scale(0.7); opacity: 0.9; }
-  }
-  @keyframes tRain5 {
-    0%   { transform: translate(0px, 0px)   scale(1);   opacity: 0; }
-    8%   { opacity: 1; }
-    100% { transform: translate(102px, 145px) scale(0.7); opacity: 0.9; }
-  }
-
-  /* Floating +$PvE labels rising from each person */
-  .pve-label { animation: pveLabelRise 2.16s ease-out infinite; }
-  .pve-label:nth-child(2){animation-delay:0.43s}
-  .pve-label:nth-child(3){animation-delay:0.86s}
-  .pve-label:nth-child(4){animation-delay:1.30s}
-  .pve-label:nth-child(5){animation-delay:1.73s}
-  @keyframes pveLabelRise {
-    0%   { transform: translateY(0); opacity: 0; }
-    12%  { opacity: 1; }
-    80%  { opacity: 0.8; }
-    100% { transform: translateY(-32px); opacity: 0; }
-  }
-
-  /* Ground glow pulse */
-  .give-ground { animation: giveGroundPulse 1.68s ease-in-out infinite alternate; }
-  @keyframes giveGroundPulse {
-    from { opacity: 0.1; }
-    to   { opacity: 0.25; }
-  }
-
-  /* Scene transition cross-fade overlay — smooth ease, no hard jumps */
-  .scene-fade {
-    position: absolute;
-    inset: 0;
-    background: var(--bg);
-    pointer-events: none;
-    animation: sceneFade 54s ease-in-out infinite;
-    z-index: 5;
-  }
-  @keyframes sceneFade {
-    0%          { opacity: 0; }
-    31%         { opacity: 0; }
-    33%         { opacity: 1; }
-    35%         { opacity: 0; }
-    64%         { opacity: 0; }
-    66%         { opacity: 1; }
-    68%         { opacity: 0; }
-    98%         { opacity: 0; }
-    99.5%       { opacity: 1; }
-    100%        { opacity: 0; }
-  }
-
-  /* ── MANIFESTO SECTION ── */
-  .manifesto {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 16px 20px;
-  }
-  .manifesto-inner {
-    border: 1px solid rgba(200,169,110,0.15);
-    border-radius: 18px;
-    background: linear-gradient(135deg, rgba(200,169,110,0.04) 0%, rgba(10,10,15,0) 60%);
-    padding: 32px 22px;
-    position: relative;
-    overflow: hidden;
-  }
-  .manifesto-inner::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(to right, transparent, var(--accent1) 30%, var(--accent2) 70%, transparent);
-    opacity: 0.5;
-  }
-  .manifesto-eyebrow {
-    font-size: 0.78rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--accent1);
-    margin-bottom: 20px;
-    opacity: 0.8;
-  }
-  .manifesto-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 4vw, 3.2rem);
-    font-weight: 900;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    margin-bottom: 36px;
-    color: var(--text);
-  }
-  .manifesto-title em {
-    font-style: italic;
-    color: var(--accent1);
-  }
-  .manifesto-body {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    max-width: 780px;
-    margin-bottom: 48px;
-  }
-  .manifesto-body p {
-    font-size: 1rem;
-    line-height: 1.9;
-    color: var(--muted);
-  }
-  .manifesto-cta {
-    margin-top: 8px;
-    font-size: 1.05rem;
-    line-height: 1.7;
-    color: var(--text);
-    border-left: 3px solid var(--accent1);
-    padding-left: 20px;
-  }
-  .manifesto-cta strong {
-    color: var(--accent3);
-  }
-  .manifesto-stats {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-    border-top: 1px solid var(--border);
-    padding-top: 40px;
-  }
-  .manifesto-stat {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .ms-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.4rem;
-    font-weight: 900;
-    color: var(--accent1);
-    line-height: 1;
-  }
-  .ms-label {
-    font-size: 0.82rem;
-    color: var(--muted);
-    line-height: 1.5;
-  }
-
-
-
-  @media(min-width: 600px) {
-    header { padding: 70px 32px 56px; }
-    .subtitle { max-width: 480px; }
-    main { padding: 0 24px 120px; }
-    .card-visual { min-height: 280px; }
-    .card-content { padding: 32px 28px; }
-    .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .manifesto-inner { padding: 44px 40px; }
-    .ai-banner { margin: 0 24px; }
-    .manifesto { padding: 0 24px 20px; }
-  }
-  /* ── RESPONSIVE UPGRADES — desktop ── */
-  @media(min-width: 900px) {
-    header { padding: 90px 40px 70px; }
-    .subtitle { max-width: 540px; font-size: 1rem; }
-    main { padding: 0 32px 140px; }
-    .card-featured { display: grid; grid-template-columns: 1fr 1fr; }
-    .card-visual { min-height: 400px; }
-    .card-content { padding: 44px; }
-    .card-small .card-visual { min-height: 220px; }
-    .card-small .card-content { padding: 30px; }
-    .manifesto-inner { padding: 56px 64px; }
-    .manifesto { padding: 0 32px 20px; }
-    .ai-banner { margin: 0 32px; }
-    .knight-stage { height: 352px; }
-  }
+:root{
+  --bg:#0a0a06;--s1:#111108;--s2:#1a1a10;
+  --gold:#d4a843;--goldb:#f0c84a;--goldd:#8a6c25;
+  --green:#4caf6e;--red:#c0392b;--purple:#c084fc;
+  --text:#e8e0c8;--dim:#8a8068;--bdr:#2a2818;--bdr2:#3d3820;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{-webkit-text-size-adjust:100%;}
+body{background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;font-size:14px;min-height:100vh;overflow-x:hidden;}
+::-webkit-scrollbar{width:4px;height:4px;}
+::-webkit-scrollbar-track{background:var(--s1);}
+::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:2px;}
+input,select,button,textarea{font-family:'Space Mono',monospace;-webkit-appearance:none;appearance:none;}
+input[type=number]::-webkit-inner-spin-button{opacity:0;}
+button{touch-action:manipulation;cursor:pointer;}
+.hidden{display:none!important;}
+
+/* ── LAYOUT ── */
+.container{width:100%;padding:0 14px;}
+.page-header{border-bottom:1px solid var(--bdr);padding:12px 14px;}
+.hdr-row{display:flex;flex-direction:column;gap:10px;}
+.hdr-title{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--gold);letter-spacing:.04em;line-height:.9;text-shadow:0 0 30px rgba(212,168,67,.3);}
+.hdr-sub{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-top:4px;}
+.hdr-actions{display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
+.session-badge{background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.2);padding:7px 12px;border-radius:2px;font-size:11px;color:var(--gold);letter-spacing:.06em;}
+.supply-chip{text-align:right;}
+.supply-chip .sc-lbl{font-size:8px;color:var(--dim);text-transform:uppercase;letter-spacing:.12em;}
+.supply-chip .sc-val{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--goldb);line-height:1;}
+.supply-chip .sc-unit{font-size:8px;color:var(--goldd);}
+
+/* ── BUTTONS ── */
+.btn-gold{width:100%;background:var(--gold);color:#0a0a06;border:none;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.13em;padding:14px;border-radius:2px;transition:background .15s;}
+.btn-gold:hover,.btn-gold:active{background:var(--goldb);}
+.btn-gold:disabled{background:var(--goldd);opacity:.5;}
+.btn-outline{background:transparent;border:1px solid var(--bdr2);color:var(--dim);font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:.1em;padding:8px 12px;border-radius:2px;}
+.btn-sm{background:transparent;border:1px solid var(--bdr);color:var(--dim);font-size:10px;padding:5px 9px;border-radius:2px;}
+.btn-pause{font-size:10px;padding:4px 8px;border-radius:2px;border:none;min-width:36px;min-height:30px;}
+.btn-wd{width:100%;background:transparent;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.1em;padding:10px;border-radius:2px;margin-top:10px;border:1px solid var(--bdr);color:var(--dim);opacity:.5;}
+.btn-wd.ready{border-color:var(--green);color:var(--green);opacity:1;box-shadow:0 0 10px rgba(76,175,110,.2);}
+
+/* ── INPUTS ── */
+.field{margin-bottom:14px;}
+.field label{display:block;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-bottom:5px;}
+.inp{width:100%;background:var(--s2);border:1px solid var(--bdr2);color:var(--text);font-size:14px;padding:12px 14px;border-radius:2px;outline:none;min-height:44px;}
+.inp:focus{border-color:var(--goldd);}
+.inp-sm{background:var(--s2);border:1px solid var(--bdr2);color:var(--text);font-size:13px;padding:10px 12px;border-radius:2px;outline:none;width:100%;min-height:44px;}
+
+/* ── PANELS ── */
+.panel{background:var(--s1);border:1px solid var(--bdr);border-radius:2px;overflow:hidden;margin-bottom:12px;}
+.panel-hdr{padding:11px 14px;border-bottom:1px solid var(--bdr);background:var(--s2);display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.phdr-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.phdr-title{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);}
+.phdr-extra{margin-left:auto;font-size:9px;}
+.panel-body{padding:14px;}
+
+/* ── STATS ── */
+.stats-bar{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--bdr);border:1px solid var(--bdr);margin:10px 0;border-radius:2px;overflow:hidden;}
+.stat{background:var(--s1);padding:10px 12px;}
+.s-lbl{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:2px;}
+.s-val{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--text);letter-spacing:.04em;line-height:1;}
+
+/* ── HUD ── */
+.hud{background:#0d0d09;border:1px solid var(--gold);border-radius:2px;margin-bottom:10px;overflow:hidden;}
+.hud-hdr{background:linear-gradient(90deg,rgba(212,168,67,.18),rgba(212,168,67,.06));border-bottom:1px solid rgba(212,168,67,.25);padding:10px 14px;}
+.hud-hdr-top{display:flex;align-items:center;gap:8px;margin-bottom:3px;}
+.hud-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold);flex-shrink:0;}
+.hud-hdr-title{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);}
+.hud-hdr-note{font-size:9px;color:var(--dim);font-style:italic;}
+.hud-body{padding:14px;}
+.hud-balances{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+.hud-bal-item .hbl{font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:3px;}
+.hud-num{font-family:'Bebas Neue',sans-serif;font-size:32px;line-height:1;letter-spacing:.02em;}
+.hud-sub{font-size:9px;color:var(--goldd);margin-top:1px;}
+.hud-wallet-info{margin-bottom:12px;}
+.hud-name{font-family:'DM Serif Display',serif;font-size:17px;color:var(--goldb);margin-bottom:2px;}
+.hud-addr{font-size:9px;color:var(--dim);word-break:break-all;}
+.eth-bar-section .eth-lbl{font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:5px;}
+.eth-bar{height:6px;background:#1a1a10;border-radius:3px;overflow:hidden;margin-bottom:4px;}
+.eth-fill{height:100%;border-radius:3px;transition:width .5s;}
+.eth-status{font-size:10px;}
+
+/* ── COUNTDOWN ── */
+.cdown{background:linear-gradient(135deg,#0e0d08,#1a180a,#0e0d08);border:1px solid var(--goldd);border-left:3px solid var(--goldb);border-radius:2px;padding:14px;margin-bottom:10px;}
+.cdown-label{font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--goldd);margin-bottom:2px;}
+.cdown-title{font-family:'DM Serif Display',serif;font-size:16px;color:var(--goldb);margin-bottom:1px;}
+.cdown-sub{font-size:9px;color:var(--dim);margin-bottom:12px;}
+.cd-digits{display:flex;gap:4px;align-items:flex-end;margin-bottom:10px;}
+.cd-unit{text-align:center;}
+.cd-val{font-family:'Bebas Neue',sans-serif;font-size:30px;color:var(--text);letter-spacing:.04em;line-height:1;min-width:36px;display:block;}
+.cd-lbl{font-size:7px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:2px;}
+.cd-sep{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--goldd);padding-bottom:12px;opacity:.5;}
+.drip-live{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--green);letter-spacing:.1em;animation:pulse 1s infinite;margin:8px 0;}
+.cdown-info{font-size:10px;color:var(--dim);line-height:1.9;}
+
+/* ── TABS ── */
+.tabs{display:flex;border-bottom:1px solid var(--bdr);overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:10px;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab{background:transparent;border:none;color:var(--dim);font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:12px 14px;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap;min-height:44px;}
+.tab.on{color:var(--gold);border-bottom-color:var(--gold);}
+
+/* ── WALLET CARDS ── */
+.wgrid{display:grid;grid-template-columns:1fr;gap:10px;}
+.wcard{background:var(--s2);border:1px solid var(--bdr);border-radius:2px;padding:14px;position:relative;overflow:hidden;}
+.wcard.mine{background:#1e1d10;border-color:var(--gold);}
+.wcard.mine::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--goldd),transparent);}
+.wcard.paused{opacity:.75;border-color:rgba(192,57,43,.3);}
+.wcard-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;gap:8px;}
+.wcard-name{font-family:'DM Serif Display',serif;font-size:16px;color:var(--goldb);line-height:1.2;flex:1;}
+.wcard-addr{font-size:9px;color:var(--dim);margin-bottom:8px;word-break:break-all;}
+.wcard-balrow{display:flex;gap:16px;align-items:flex-end;margin-bottom:6px;}
+.wcard-bal{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--text);}
+.wcard-eth{font-size:10px;color:var(--purple);}
+.wtags{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap;align-items:center;}
+.tag{font-size:8px;padding:3px 6px;border:1px solid var(--bdr2);color:var(--dim);}
+.tag.user{color:#7fb3f5;border-color:rgba(127,179,245,.3);}
+.tag.you{color:var(--gold);border-color:rgba(212,168,67,.3);}
+.tag.paused-t{color:var(--red);border-color:rgba(192,57,43,.3);}
+
+/* ── LEDGER ── */
+.ltbl{width:100%;border-collapse:collapse;font-size:11px;min-width:520px;}
+.ltbl th{padding:0 10px 10px;text-align:left;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--dim);font-weight:400;white-space:nowrap;}
+.ltbl th.fee-col{color:var(--purple);}
+.ltbl td{padding:10px;border-bottom:1px solid var(--bdr);vertical-align:middle;}
+.tx-badge{font-size:9px;letter-spacing:.08em;padding:3px 6px;border-radius:2px;white-space:nowrap;}
+.bnum{font-family:'Bebas Neue',sans-serif;font-size:14px;color:var(--dim);}
+.thash{font-size:9px;color:var(--goldd);font-family:monospace;}
+.ledger-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;max-height:55vh;overflow-y:auto;}
+
+/* ── AUTOMATION ── */
+.auto-form{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+.auto-form-full{grid-column:1/-1;}
+.rule-row{background:var(--s2);border:1px solid var(--bdr);border-radius:2px;padding:12px;margin-bottom:8px;}
+.rule-info{margin-bottom:8px;}
+.rule-name{font-family:'DM Serif Display',serif;font-size:14px;margin-bottom:3px;}
+.rule-detail{font-size:10px;color:var(--dim);line-height:1.6;}
+.rule-actions{display:flex;gap:6px;}
+
+/* ── LOGIN ── */
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px;}
+.login-card{width:100%;max-width:420px;}
+.login-logo{text-align:center;margin-bottom:24px;}
+.login-logo-title{font-family:'Bebas Neue',sans-serif;font-size:44px;color:var(--gold);letter-spacing:.04em;line-height:.9;text-shadow:0 0 30px rgba(212,168,67,.3);}
+.ltabs{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--bdr);}
+.ltab{background:transparent;border:none;border-bottom:2px solid transparent;color:var(--dim);font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:14px;transition:all .15s;min-height:44px;}
+.ltab.on{background:var(--s2);border-bottom-color:var(--gold);color:var(--gold);}
+.login-form{padding:20px;}
+
+/* ── MODAL ── */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:flex-end;justify-content:center;z-index:500;padding:0;}
+.modal{background:var(--s1);border:1px solid var(--bdr2);border-radius:2px 2px 0 0;padding:20px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;}
+.modal-title{font-family:'DM Serif Display',serif;font-size:20px;color:var(--gold);margin-bottom:6px;}
+.modal-btns{display:flex;gap:8px;margin-top:4px;}
+.modal-btns .btn-add{flex:1;background:var(--gold);color:#0a0a06;border:none;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.12em;padding:13px;border-radius:2px;}
+.modal-btns .btn-cancel{background:transparent;border:1px solid var(--bdr2);color:var(--dim);font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.12em;padding:13px 16px;border-radius:2px;}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:16px;left:12px;right:12px;background:var(--s2);border:1px solid var(--goldd);border-radius:2px;padding:12px 16px;font-size:12px;color:var(--text);z-index:999;max-width:500px;margin:0 auto;box-shadow:0 8px 28px rgba(0,0,0,.5);line-height:1.5;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none;}
+.toast.show{opacity:1;transform:translateY(0);pointer-events:auto;}
+.toast-title{font-family:'DM Serif Display',serif;font-size:14px;color:var(--gold);margin-bottom:2px;}
+
+/* ── MISC ── */
+.err-msg{font-size:11px;color:var(--red);background:rgba(192,57,43,.08);border:1px solid rgba(192,57,43,.2);border-radius:2px;padding:10px 12px;margin-bottom:14px;}
+.info-box{background:rgba(212,168,67,.06);border:1px solid rgba(212,168,67,.15);border-radius:2px;padding:10px 14px;margin-bottom:16px;font-size:11px;color:var(--dim);line-height:1.7;}
+.ldot{width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);display:inline-block;animation:pulse 1.5s infinite;}
+.sup-bar{height:3px;background:var(--bdr);border-radius:2px;margin-bottom:10px;overflow:hidden;}
+.sup-fill{height:100%;background:linear-gradient(90deg,var(--goldd),var(--goldb));border-radius:2px;transition:width .4s;}
+footer{border-top:1px solid var(--bdr);padding:12px 0;margin-top:6px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px;}
+footer span{font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);}
+
+@keyframes flash{0%{background:rgba(212,168,67,.15);}100%{background:transparent;}}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+.nr{animation:flash .8s ease-out;}
+
+/* ── TABLET+ ── */
+@media(min-width:600px){
+  .container{padding:0 20px;}
+  .hdr-title{font-size:52px;}
+  .hdr-row{flex-direction:row;align-items:flex-end;justify-content:space-between;}
+  .stats-bar{grid-template-columns:repeat(5,1fr);}
+  .wgrid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));}
+  .auto-form{grid-template-columns:repeat(4,1fr) auto;}
+  .auto-form-full{grid-column:auto;}
+  .modal-bg{align-items:center;padding:16px;}
+  .modal{border-radius:2px;max-width:420px;}
+  .toast{left:auto;right:16px;max-width:300px;}
+  .hud-balances{grid-template-columns:1fr 1fr 1fr;}
+  .hud-num{font-size:38px;}
+  .rule-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;}
+  .rule-info{margin-bottom:0;}
+}
 </style>
 </head>
 <body>
 
-<header>
-  <p class="eyebrow">App Showcase · Three Experiences</p>
-  <h1>Fight. Trade.<br><em>Give Back.</em></h1>
-  <p class="subtitle">Three browser apps — a wave-based RPG, a token economy simulator, and a fantasy trading game. Generate live reviews and ask questions about any app.</p>
-  <div class="tag-line"><span></span> Live AI · Interactive Showcase</div>
-</header>
-
-<!-- KNIGHT CINEMATIC -->
-<div style="max-width:1100px;margin:32px auto 48px;padding:0 16px;position:relative;">
-  <div class="knight-stage">
-
-    <!-- SCENE TRACK -->
-    <div class="scene-track">
-
-      <!-- ═══ SCENE 1: BATTLE ═══ -->
-      <div class="scene scene-battle">
-        <svg class="knight-svg" width="320" height="240" viewBox="0 0 320 240">
-
-          <!-- Ground glow -->
-          <ellipse class="battle-ground" cx="160" cy="215" rx="115" ry="16" fill="rgba(200,40,40,0.22)"/>
-
-          <!-- ══ TURN INDICATOR ══ -->
-          <g class="turn-knight">
-            <rect x="100" y="6" width="120" height="17" rx="4" fill="rgba(200,169,110,0.15)" stroke="rgba(200,169,110,0.4)" stroke-width="1"/>
-            <text x="160" y="18" fill="#c8a96e" font-size="7.5" text-anchor="middle" font-family="monospace" letter-spacing="1.5">⚔ KNIGHT'S TURN</text>
-          </g>
-          <g class="turn-enemy">
-            <rect x="100" y="6" width="120" height="17" rx="4" fill="rgba(224,60,60,0.18)" stroke="rgba(224,60,60,0.5)" stroke-width="1"/>
-            <text x="160" y="18" fill="#ff6060" font-size="7.5" text-anchor="middle" font-family="monospace" letter-spacing="1.5">💀 ENEMY RAGE</text>
-          </g>
-
-          <!-- ══ ENEMY (right) ══ -->
-          <g class="enemy-body" style="transform-origin:232px 155px">
-            <!-- Enemy HP bar -->
-            <rect x="204" y="56" width="56" height="8" rx="3" fill="#1a0808"/>
-            <rect x="205" y="57" width="54" height="6" rx="2" fill="#2a0a0a"/>
-            <rect class="enemy-hp-fill" x="205" y="57" width="46" height="6" rx="2" fill="#e06c6c"/>
-            <text x="232" y="50" fill="rgba(255,80,80,0.6)" font-size="6.5" text-anchor="middle" font-family="monospace" letter-spacing="1">DARK KNIGHT</text>
-
-            <!-- Enemy glow aura on rage -->
-            <g class="enemy-eyes">
-              <ellipse cx="232" cy="140" rx="22" ry="38" fill="rgba(200,20,20,0.08)"/>
-              <!-- Enemy body -->
-              <rect x="217" y="128" width="30" height="58" rx="5" fill="#4a1a2a"/>
-              <!-- Enemy head -->
-              <circle cx="232" cy="116" r="16" fill="#3a1520"/>
-              <!-- Enemy horns -->
-              <polygon points="222,106 217,90 227,104" fill="#7b2535"/>
-              <polygon points="242,106 247,90 237,104" fill="#7b2535"/>
-              <!-- Enemy eyes -->
-              <circle cx="226" cy="114" r="4" fill="#ff2020" opacity="0.95"/>
-              <circle cx="238" cy="114" r="4" fill="#ff2020" opacity="0.95"/>
-              <!-- Eye inner glow -->
-              <circle cx="226" cy="114" r="2" fill="#ffaaaa"/>
-              <circle cx="238" cy="114" r="2" fill="#ffaaaa"/>
-              <!-- Enemy shoulder armor -->
-              <ellipse cx="217" cy="134" rx="10" ry="7" fill="#6a1a2a"/>
-              <ellipse cx="247" cy="134" rx="10" ry="7" fill="#6a1a2a"/>
-              <!-- Enemy chest plate -->
-              <rect x="220" y="132" width="24" height="28" rx="3" fill="#5a1a2a"/>
-              <!-- Spine detail -->
-              <line x1="232" y1="132" x2="232" y2="160" stroke="#3a0a1a" stroke-width="2.5"/>
-              <!-- Enemy weapon arm -->
-              <rect x="247" y="128" width="13" height="46" rx="3" fill="#4a1a2a"/>
-            </g>
-            <!-- ORB THROW ARM — raises and hurls during attack phase -->
-            <g class="enemy-weapon-arm">
-              <!-- Forearm -->
-              <rect x="247" y="128" width="13" height="46" rx="3" fill="#4a1a2a"/>
-              <!-- Extended lower arm (angled out) -->
-              <rect x="254" y="148" width="12" height="30" rx="3" fill="#4a1a2a" transform="rotate(-15,260,163)"/>
-              <!-- Gauntlet fist -->
-              <ellipse cx="264" cy="175" rx="9" ry="7" fill="#5a1a2a" stroke="#8a2a3a" stroke-width="1"/>
-              <!-- Orb held in hand — glows on idle, vanishes when thrown -->
-              <g class="orb-held">
-                <circle cx="264" cy="166" r="8" fill="rgba(180,20,20,0.15)"/>
-                <circle cx="264" cy="166" r="6" fill="#cc1a1a" opacity="0.9"/>
-                <circle cx="264" cy="166" r="4" fill="#ff4444"/>
-                <circle cx="261" cy="163" r="1.5" fill="rgba(255,180,180,0.8)"/>
-                <circle cx="264" cy="166" r="6" fill="none" stroke="#ff6666" stroke-width="1.5" opacity="0.6"/>
-              </g>
-            </g>
-
-            <!-- ORB PROJECTILE — flies from enemy hand to knight on attack -->
-            <g class="orb-projectile" style="transform-origin:264px 166px">
-              <circle r="7" fill="#cc1a1a" opacity="0.95"/>
-              <circle r="5" fill="#ff4444"/>
-              <circle r="2.5" fill="#ffaaaa"/>
-              <circle r="7" fill="none" stroke="#ff6666" stroke-width="2" opacity="0.7"/>
-              <!-- Trail -->
-              <ellipse rx="12" ry="5" fill="rgba(200,20,20,0.3)" transform="translate(8,0)"/>
-            </g>
-          </g>
-
-          <!-- IMPACT FLASH — triple burst -->
-          <g class="impact-flash" style="transform-origin:183px 152px">
-            <polygon points="183,133 196,152 183,171 170,152" fill="#fff6a0" opacity="0.95"/>
-            <polygon points="166,144 200,140 194,164 162,160" fill="#ffee44" opacity="0.75"/>
-            <polygon points="174,138 192,136 196,158 174,162" fill="white" opacity="0.5"/>
-            <circle cx="183" cy="152" r="11" fill="white" opacity="0.4"/>
-          </g>
-
-          <!-- CRIT STARBURST -->
-          <g class="crit-burst" style="transform-origin:192px 142px">
-            <polygon points="192,126 196,138 208,135 198,145 206,156 194,150 192,162 190,150 178,156 186,145 176,135 188,138" fill="#ffee00" opacity="0.9"/>
-            <polygon points="192,131 195,140 204,138 197,145 203,153 193,148 192,158 191,148 181,153 187,145 180,138 189,140" fill="white" opacity="0.6"/>
-            <text x="218" y="128" fill="#ffee00" font-size="10" font-family="monospace" font-weight="bold">CRIT!</text>
-          </g>
-
-          <!-- SPARK PARTICLES -->
-          <g class="spark1" style="transform-origin:183px 152px">
-            <line x1="183" y1="152" x2="185" y2="154" stroke="#ffee44" stroke-width="2.5" stroke-linecap="round"/>
-          </g>
-          <g class="spark2" style="transform-origin:183px 152px">
-            <line x1="183" y1="152" x2="185" y2="154" stroke="#ff9944" stroke-width="2" stroke-linecap="round"/>
-          </g>
-          <g class="spark3" style="transform-origin:183px 152px">
-            <line x1="183" y1="152" x2="185" y2="154" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-          </g>
-          <g class="spark4" style="transform-origin:183px 152px">
-            <line x1="183" y1="152" x2="185" y2="154" stroke="#ffcc44" stroke-width="2" stroke-linecap="round"/>
-          </g>
-
-          <!-- COUNTER FLASH — enemy hits knight -->
-          <g class="counter-flash" style="transform-origin:115px 152px">
-            <polygon points="115,134 126,152 115,170 104,152" fill="#ff8888" opacity="0.9"/>
-            <polygon points="100,144 130,140 126,164 96,160" fill="#ff5555" opacity="0.65"/>
-            <circle cx="115" cy="152" r="10" fill="#ffaaaa" opacity="0.35"/>
-          </g>
-
-          <!-- RAGE LABEL -->
-          <g class="rage-label" style="transform-origin:232px 82px">
-            <rect x="208" y="74" width="48" height="14" rx="3" fill="rgba(200,20,20,0.25)" stroke="rgba(255,60,60,0.6)" stroke-width="1"/>
-            <text x="232" y="84" fill="#ff4444" font-size="7" text-anchor="middle" font-family="monospace" font-weight="bold" letter-spacing="1">⚡ ENRAGED</text>
-          </g>
-
-          <!-- ══ KNIGHT (left) ══ -->
-          <g class="knight-body" style="transform-origin:104px 158px">
-
-            <!-- Knight HP bar above head -->
-            <rect x="70" y="56" width="56" height="8" rx="3" fill="#080818"/>
-            <rect x="71" y="57" width="54" height="6" rx="2" fill="#101030"/>
-            <rect class="knight-hp-fill" x="71" y="57" width="46" height="6" rx="2" fill="#7faaff"/>
-            <text x="98"  y="50" fill="rgba(127,170,255,0.6)" font-size="6.5" text-anchor="middle" font-family="monospace" letter-spacing="1">IRON KNIGHT</text>
-
-            <!-- Knight legs -->
-            <rect x="89" y="168" width="15" height="40" rx="4" fill="#3a3a5a"/>
-            <rect x="105" y="168" width="15" height="40" rx="4" fill="#3a3a5a"/>
-            <!-- Boot cuffs -->
-            <rect x="87" y="200" width="19" height="9" rx="3" fill="#2a2a4a"/>
-            <rect x="103" y="200" width="19" height="9" rx="3" fill="#2a2a4a"/>
-
-            <!-- Knight body/armor -->
-            <rect x="82" y="114" width="46" height="57" rx="7" fill="#4a4a6a"/>
-            <!-- Chest plate -->
-            <rect x="88" y="119" width="34" height="24" rx="4" fill="#5a5a7a"/>
-            <line x1="105" y1="119" x2="105" y2="143" stroke="#3a3a5a" stroke-width="2.5"/>
-            <line x1="88"  y1="131" x2="122" y2="131" stroke="#3a3a5a" stroke-width="1.5"/>
-            <!-- Chest gem -->
-            <circle cx="105" cy="125" r="4" fill="#c8a96e" opacity="0.6"/>
-            <!-- Belt -->
-            <rect x="82" y="165" width="46" height="6" rx="2" fill="#3a3a5a"/>
-            <rect x="102" y="163" width="10" height="9" rx="2" fill="#c8a96e" opacity="0.7"/>
-
-            <!-- Knight shoulder pads -->
-            <ellipse cx="82"  cy="121" rx="12" ry="8" fill="#5a5a7a"/>
-            <ellipse cx="128" cy="121" rx="12" ry="8" fill="#5a5a7a"/>
-            <ellipse cx="82"  cy="121" rx="8"  ry="5" fill="#6a6a8a"/>
-            <ellipse cx="128" cy="121" rx="8"  ry="5" fill="#6a6a8a"/>
-
-            <!-- Knight helmet -->
-            <rect x="87" y="84" width="36" height="34" rx="9" fill="#5a5a7a"/>
-            <rect x="91" y="89" width="28" height="18" rx="4" fill="#3a3a5a"/>
-            <!-- Visor slit glow -->
-            <rect x="93" y="95" width="24" height="5" rx="2.5" fill="#c8a96e" opacity="0.9"/>
-            <rect x="93" y="95" width="24" height="5" rx="2.5" fill="rgba(200,169,110,0.4)"/>
-            <!-- Helmet plume -->
-            <path d="M105 84 Q105 65 97 53 Q105 59 113 53 Q105 65 105 84" fill="#e06c6c" opacity="0.85"/>
-            <path d="M105 84 Q109 68 118 58 Q112 66 110 84" fill="#ff9944" opacity="0.4"/>
-
-            <!-- Shield arm (left) -->
-            <rect x="65" y="116" width="15" height="52" rx="3" fill="#4a4a6a"/>
-            <ellipse cx="64" cy="142" rx="14" ry="26" fill="#5a5a7a" stroke="#c8a96e" stroke-width="2"/>
-            <!-- Shield cross -->
-            <line x1="64" y1="126" x2="64" y2="158" stroke="#c8a96e" stroke-width="2" opacity="0.7"/>
-            <line x1="50" y1="142" x2="78" y2="142" stroke="#c8a96e" stroke-width="2" opacity="0.7"/>
-
-            <!-- SWORD ARM -->
-            <g class="knight-sword-arm">
-              <rect x="124" y="106" width="15" height="48" rx="4" fill="#4a4a6a"/>
-              <!-- Sword blade -->
-              <rect x="137" y="74" width="6" height="68" rx="2" fill="#d0d0e0"/>
-              <!-- Blade shine -->
-              <rect x="138" y="74" width="2" height="68" rx="1" fill="rgba(255,255,255,0.5)"/>
-              <!-- Crossguard -->
-              <rect x="127" y="103" width="26" height="6" rx="3" fill="#c8a96e"/>
-              <!-- Pommel -->
-              <rect x="138" y="60" width="4" height="16" rx="2" fill="#d4d4e4"/>
-              <circle cx="140" cy="60" r="4" fill="#c8a96e"/>
-              <!-- Sword glow -->
-              <rect class="sword-glow" x="137" y="74" width="6" height="68" rx="2" fill="rgba(180,200,255,0.35)"/>
-            </g>
-          </g>
-
-          <!-- ONE damage number per side -->
-          <g class="dmg-1" style="transform-origin:244px 90px">
-            <text x="244" y="90" fill="#ffee00" font-size="13" font-family="monospace" font-weight="bold" text-anchor="middle">-47!</text>
-          </g>
-          <g class="dmg-enemy" style="transform-origin:88px 92px">
-            <text x="88" y="92" fill="#ff8888" font-size="11" font-family="monospace" font-weight="bold" text-anchor="middle">-31</text>
-          </g>
-
-          <!-- Status -->
-          <text class="xp-label" x="26" y="228" fill="rgba(200,169,110,0.5)" font-size="8" font-family="monospace">WAVE 15 · XP +4,280</text>
-
-          <text class="scene-label">IRON ARENA — TURN-BASED COMBAT</text>
-        </svg>
-      </div>
-
-      <!-- ═══ SCENE 2: TRADING ═══ -->
-      <div class="scene scene-trade">
-        <svg class="knight-svg" width="320" height="240" viewBox="0 0 320 240">
-          <!-- Desk -->
-          <rect x="60" y="175" width="200" height="14" rx="4" fill="#1a1a2a"/>
-          <rect x="75" y="189" width="10" height="30" rx="3" fill="#141420"/>
-          <rect x="235" y="189" width="10" height="30" rx="3" fill="#141420"/>
-
-          <!-- Monitor stand -->
-          <rect x="148" y="155" width="12" height="22" rx="2" fill="#1a1a2a"/>
-          <rect x="135" y="170" width="38" height="6" rx="3" fill="#1a1a2a"/>
-
-          <!-- Monitor frame -->
-          <rect x="90" y="80" width="140" height="80" rx="8" fill="#0d0d1a" stroke="#2a2a4a" stroke-width="2"/>
-
-          <!-- Monitor screen -->
-          <rect class="monitor-screen" x="95" y="85" width="130" height="70" rx="5" fill="#050518"/>
-
-          <!-- Chart grid lines -->
-          <line x1="100" y1="110" x2="220" y2="110" stroke="rgba(127,170,255,0.08)" stroke-width="1"/>
-          <line x1="100" y1="125" x2="220" y2="125" stroke="rgba(127,170,255,0.08)" stroke-width="1"/>
-          <line x1="100" y1="140" x2="220" y2="140" stroke="rgba(127,170,255,0.08)" stroke-width="1"/>
-
-          <!-- Chart candles -->
-          <rect x="105" y="115" width="6" height="20" rx="1" fill="#e06c6c" opacity="0.8"/>
-          <line x1="108" y1="110" x2="108" y2="138" stroke="#e06c6c" stroke-width="1" opacity="0.6"/>
-          <rect x="116" y="108" width="6" height="25" rx="1" fill="#5cb85c" opacity="0.8"/>
-          <line x1="119" y1="103" x2="119" y2="136" stroke="#5cb85c" stroke-width="1" opacity="0.6"/>
-          <rect x="127" y="112" width="6" height="18" rx="1" fill="#e06c6c" opacity="0.8"/>
-          <rect x="138" y="105" width="6" height="28" rx="1" fill="#5cb85c" opacity="0.8"/>
-          <rect x="149" y="100" width="6" height="30" rx="1" fill="#5cb85c" opacity="0.8"/>
-          <rect x="160" y="107" width="6" height="22" rx="1" fill="#e06c6c" opacity="0.8"/>
-          <rect x="171" y="98" width="6" height="32" rx="1" fill="#5cb85c" opacity="0.8"/>
-
-          <!-- Animated chart line overlay -->
-          <polyline class="chart-line" points="105,132 116,122 127,128 138,115 149,108 160,118 171,100 190,95 210,88" fill="none" stroke="#7faaff" stroke-width="2" stroke-linecap="round"/>
-
-          <!-- Screen text -->
-          <text x="100" y="96" fill="rgba(127,170,255,0.5)" font-size="6" font-family="monospace">DRAGON LONGSWORD</text>
-          <text x="190" y="96" fill="#5cb85c" font-size="7" font-family="monospace">+12.4%</text>
-          <rect class="cursor-blink" x="212" y="88" width="2" height="8" fill="#7faaff"/>
-
-          <!-- Floating profit -->
-          <text class="profit-float" x="183" y="130" fill="#5cb85c" font-size="9" font-family="monospace" font-weight="bold">+220 $PvE</text>
-
-          <!-- KEYBOARD -->
-          <rect x="110" y="178" width="100" height="18" rx="3" fill="#111128" stroke="#1e1e38" stroke-width="1"/>
-          <rect x="115" y="181" width="8" height="5" rx="1" fill="#1e1e38"/>
-          <rect x="126" y="181" width="8" height="5" rx="1" fill="#1e1e38"/>
-          <rect x="137" y="181" width="8" height="5" rx="1" fill="#1e1e38"/>
-          <rect x="148" y="181" width="8" height="5" rx="1" fill="#1e1e38"/>
-          <rect x="159" y="181" width="8" height="5" rx="1" fill="#1e1e38"/>
-          <rect x="170" y="181" width="8" height="5" rx="1" fill="#1e1e38"/>
-          <rect x="181" y="181" width="8" height="5" rx="1" fill="#1e1e38"/>
-          <rect x="120" y="188" width="70" height="5" rx="1" fill="#1e1e38"/>
-
-          <!-- KNIGHT sitting (full armored, legs visible in chair) -->
-          <!-- Chair back -->
-          <rect x="58" y="118" width="8" height="60" rx="3" fill="#111128"/>
-          <!-- Chair seat -->
-          <rect x="58" y="160" width="55" height="10" rx="3" fill="#1a1a30"/>
-          <!-- Chair legs -->
-          <rect x="62" y="170" width="6" height="28" rx="2" fill="#111128"/>
-          <rect x="100" y="170" width="6" height="28" rx="2" fill="#111128"/>
-          <!-- Armrests -->
-          <rect x="58" y="148" width="6" height="22" rx="2" fill="#111128"/>
-
-          <!-- Knight thighs (horizontal, sitting) -->
-          <rect x="66" y="158" width="26" height="13" rx="4" fill="#4a4a6a"/>
-          <rect x="88" y="158" width="26" height="13" rx="4" fill="#5a5a7a"/>
-          <!-- Knee pads -->
-          <ellipse cx="92" cy="164" rx="7" ry="5" fill="#6a6a8a"/>
-          <ellipse cx="114" cy="164" rx="7" ry="5" fill="#5a5a7a"/>
-          <!-- Lower legs hanging down -->
-          <rect x="68" y="171" width="12" height="26" rx="4" fill="#4a4a6a"/>
-          <rect x="90" y="171" width="12" height="26" rx="4" fill="#4a4a6a"/>
-          <!-- Armored boots -->
-          <rect x="65" y="194" width="18" height="10" rx="4" fill="#3a3a5a"/>
-          <rect x="87" y="194" width="18" height="10" rx="4" fill="#3a3a5a"/>
-
-          <!-- Knight torso sitting upright -->
-          <rect x="66" y="120" width="42" height="42" rx="6" fill="#4a4a6a"/>
-          <rect x="72" y="126" width="30" height="20" rx="3" fill="#5a5a7a"/>
-          <!-- Chest cross detail -->
-          <line x1="87" y1="126" x2="87" y2="146" stroke="#3a3a5a" stroke-width="2"/>
-          <line x1="72" y1="136" x2="102" y2="136" stroke="#3a3a5a" stroke-width="1.5"/>
-          <!-- Shoulder pads -->
-          <ellipse cx="66" cy="126" rx="9" ry="6" fill="#5a5a7a"/>
-          <ellipse cx="108" cy="126" rx="9" ry="6" fill="#5a5a7a"/>
-
-          <!-- Knight helmet -->
-          <rect x="72" y="90" width="34" height="32" rx="8" fill="#5a5a7a"/>
-          <rect x="76" y="95" width="26" height="14" rx="3" fill="#3a3a5a"/>
-          <!-- Visor glow -->
-          <rect x="78" y="99" width="22" height="5" rx="2" fill="#c8a96e" opacity="0.85"/>
-          <!-- Plume blue (trader vibe) -->
-          <path d="M89 90 Q89 72 82 62 Q89 67 96 62 Q89 72 89 90" fill="#7faaff" opacity="0.75"/>
-
-          <!-- Left arm resting on armrest -->
-          <rect x="60" y="138" width="12" height="22" rx="4" fill="#4a4a6a"/>
-          <!-- Left gauntlet on armrest -->
-          <rect x="58" y="156" width="16" height="10" rx="4" fill="#5a5a7a"/>
-
-          <!-- Typing hands (right arm reaches forward to keyboard) -->
-          <g class="typing-hand">
-            <rect x="108" y="154" width="22" height="10" rx="4" fill="#4a4a6a"/>
-            <rect x="110" y="162" width="4" height="8" rx="2" fill="#3a3a5a"/>
-            <rect x="116" y="163" width="4" height="7" rx="2" fill="#3a3a5a"/>
-            <rect x="122" y="162" width="4" height="8" rx="2" fill="#3a3a5a"/>
-          </g>
-          <g class="typing-hand2">
-            <rect x="108" y="168" width="22" height="10" rx="4" fill="#4a4a6a"/>
-            <rect x="110" y="176" width="4" height="7" rx="2" fill="#3a3a5a"/>
-            <rect x="116" y="177" width="4" height="6" rx="2" fill="#3a3a5a"/>
-            <rect x="122" y="176" width="4" height="7" rx="2" fill="#3a3a5a"/>
-          </g>
-
-          <!-- Status text -->
-          <text x="30" y="30" fill="rgba(127,170,255,0.5)" font-size="9" font-family="monospace" letter-spacing="2">TRADE TOGETHER</text>
-          <text x="30" y="44" fill="rgba(127,170,255,0.3)" font-size="8" font-family="monospace">LONG POSITION OPEN</text>
-
-          <text class="scene-label">TRADE TOGETHER — TRADING</text>
-        </svg>
-      </div>
-
-      <!-- ═══ SCENE 3: $PvE + $ETH FUNNEL RAIN ═══ -->
-      <div class="scene scene-give">
-        <svg class="knight-svg" width="320" height="260" viewBox="0 0 320 260">
-          <defs>
-            <!-- Gold funnel gradient -->
-            <linearGradient id="funnelMetalGold" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%"   stop-color="#2a2a1a"/>
-              <stop offset="45%"  stop-color="#c8a96e"/>
-              <stop offset="100%" stop-color="#3a3020"/>
-            </linearGradient>
-            <!-- Blue funnel gradient -->
-            <linearGradient id="funnelMetalBlue" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%"   stop-color="#0a0a1a"/>
-              <stop offset="45%"  stop-color="#7faaff"/>
-              <stop offset="100%" stop-color="#0f0f28"/>
-            </linearGradient>
-            <!-- Gold stream -->
-            <linearGradient id="streamGold" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%"   stop-color="#c8a96e" stop-opacity="0.9"/>
-              <stop offset="100%" stop-color="#c8a96e" stop-opacity="0.05"/>
-            </linearGradient>
-            <!-- Blue stream -->
-            <linearGradient id="streamBlue" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%"   stop-color="#7faaff" stop-opacity="0.9"/>
-              <stop offset="100%" stop-color="#7faaff" stop-opacity="0.05"/>
-            </linearGradient>
-          </defs>
-
-          <!-- GROUND GLOW — dual color -->
-          <ellipse class="give-ground" cx="200" cy="240" rx="135" ry="9" fill="rgba(200,169,110,0.15)"/>
-          <ellipse class="give-ground-blue" cx="200" cy="240" rx="110" ry="7" fill="rgba(127,170,255,0.1)"/>
-
-          <!-- ══ LEFT FUNNEL — $PvE (GOLD) ══ -->
-          <g class="funnel-body-left">
-            <!-- Glow behind -->
-            <ellipse cx="105" cy="40" rx="55" ry="22" fill="rgba(200,169,110,0.18)"/>
-            <!-- Top rim -->
-            <ellipse cx="105" cy="18" rx="50" ry="8" fill="#2a2010" stroke="#c8a96e" stroke-width="1.2"/>
-            <!-- Walls -->
-            <path d="M55,18 L90,68" stroke="url(#funnelMetalGold)" stroke-width="4" stroke-linecap="round"/>
-            <path d="M155,18 L120,68" stroke="url(#funnelMetalGold)" stroke-width="4" stroke-linecap="round"/>
-            <!-- Inner fill -->
-            <path d="M58,18 Q105,14 152,18 L119,66 Q105,70 91,66 Z" fill="#14120a" opacity="0.9"/>
-            <!-- Neck tube -->
-            <rect x="97" y="66" width="16" height="20" rx="3" fill="url(#funnelMetalGold)" stroke="#c8a96e" stroke-width="0.8"/>
-            <rect x="100" y="68" width="10" height="16" rx="2" fill="#080804"/>
-            <!-- Neck opening glow -->
-            <ellipse cx="105" cy="86" rx="8" ry="3.5" fill="#c8a96e" opacity="0.7"/>
-            <ellipse class="funnel-glow" cx="105" cy="86" rx="14" ry="5" fill="rgba(200,169,110,0.3)"/>
-            <!-- Label -->
-            <text x="105" y="11" font-size="7" font-family="monospace" text-anchor="middle" fill="#c8a96e" font-weight="bold" letter-spacing="1">$PvE</text>
-          </g>
-          <!-- Gold stream -->
-          <rect x="102" y="86" width="6" height="28" rx="3" fill="url(#streamGold)" opacity="0.6"/>
-
-          <!-- ══ RIGHT FUNNEL — $ETH (BLUE) ══ -->
-          <g class="funnel-body-right">
-            <!-- Glow behind -->
-            <ellipse cx="230" cy="40" rx="55" ry="22" fill="rgba(127,170,255,0.15)"/>
-            <!-- Top rim -->
-            <ellipse cx="230" cy="18" rx="50" ry="8" fill="#0a0a1e" stroke="#7faaff" stroke-width="1.2"/>
-            <!-- Walls -->
-            <path d="M180,18 L215,68" stroke="url(#funnelMetalBlue)" stroke-width="4" stroke-linecap="round"/>
-            <path d="M280,18 L245,68" stroke="url(#funnelMetalBlue)" stroke-width="4" stroke-linecap="round"/>
-            <!-- Inner fill -->
-            <path d="M183,18 Q230,14 277,18 L244,66 Q230,70 216,66 Z" fill="#060612" opacity="0.9"/>
-            <!-- Neck tube -->
-            <rect x="222" y="66" width="16" height="20" rx="3" fill="url(#funnelMetalBlue)" stroke="#7faaff" stroke-width="0.8"/>
-            <rect x="225" y="68" width="10" height="16" rx="2" fill="#02020a"/>
-            <!-- Neck opening glow -->
-            <ellipse cx="230" cy="86" rx="8" ry="3.5" fill="#7faaff" opacity="0.7"/>
-            <ellipse class="funnel-glow-blue" cx="230" cy="86" rx="14" ry="5" fill="rgba(127,170,255,0.3)"/>
-            <!-- Label -->
-            <text x="230" y="11" font-size="7" font-family="monospace" text-anchor="middle" fill="#7faaff" font-weight="bold" letter-spacing="1">$ETH</text>
-          </g>
-          <!-- Blue stream -->
-          <rect x="227" y="86" width="6" height="28" rx="3" fill="url(#streamBlue)" opacity="0.6"/>
-
-          <!-- ══ GOLD $PvE TOKENS falling from left funnel ══ -->
-          <!-- origin: 105, 86 — fan to persons at ~138, 168, 200, 228, 262 -->
-          <g class="tr1"  style="transform-origin:105px 86px"><circle cx="105" cy="86" r="6" fill="#c8a96e" stroke="#f0d060" stroke-width="1.2"/><text x="105" y="90" font-size="6" text-anchor="middle" fill="#0a0a04" font-weight="bold">P</text></g>
-          <g class="tr2"  style="transform-origin:105px 86px"><circle cx="105" cy="86" r="5" fill="#d4a843" stroke="#e8c96a" stroke-width="1"/><text x="105" y="90" font-size="5" text-anchor="middle" fill="#0a0a04" font-weight="bold">$</text></g>
-          <g class="tr3"  style="transform-origin:105px 86px"><circle cx="105" cy="86" r="5" fill="#c8a96e" stroke="#f0d060" stroke-width="1"/></g>
-          <g class="tr6"  style="transform-origin:105px 86px"><circle cx="105" cy="86" r="6" fill="#e8c96a" stroke="#c8a96e" stroke-width="1.2"/><text x="105" y="90" font-size="6" text-anchor="middle" fill="#0a0a04" font-weight="bold">P</text></g>
-          <g class="tr7"  style="transform-origin:105px 86px"><circle cx="105" cy="86" r="5" fill="#c8a96e"/></g>
-          <g class="tr11" style="transform-origin:105px 86px"><circle cx="105" cy="86" r="4" fill="#d4a843"/></g>
-          <g class="tr12" style="transform-origin:105px 86px"><circle cx="105" cy="86" r="5" fill="#c8a96e" stroke="#f0d060" stroke-width="1"/><text x="105" y="90" font-size="5" text-anchor="middle" fill="#0a0a04" font-weight="bold">$</text></g>
-          <g class="tr13" style="transform-origin:105px 86px"><circle cx="105" cy="86" r="4" fill="#e8c070"/></g>
-
-          <!-- ══ BLUE $ETH DROPS falling from right funnel ══ -->
-          <!-- origin: 230, 86 — fan to same 5 persons -->
-          <g class="te1"  style="transform-origin:230px 86px"><circle cx="230" cy="86" r="6" fill="#7faaff" stroke="#aaccff" stroke-width="1.2"/><text x="230" y="90" font-size="6" text-anchor="middle" fill="#04040a" font-weight="bold">E</text></g>
-          <g class="te2"  style="transform-origin:230px 86px"><circle cx="230" cy="86" r="5" fill="#5588ee" stroke="#7faaff" stroke-width="1"/></g>
-          <g class="te3"  style="transform-origin:230px 86px"><circle cx="230" cy="86" r="5" fill="#7faaff" stroke="#aaccff" stroke-width="1"/><text x="230" y="90" font-size="5" text-anchor="middle" fill="#04040a" font-weight="bold">Ξ</text></g>
-          <g class="te4"  style="transform-origin:230px 86px"><circle cx="230" cy="86" r="6" fill="#6699ff" stroke="#99bbff" stroke-width="1.2"/><text x="230" y="90" font-size="6" text-anchor="middle" fill="#04040a" font-weight="bold">E</text></g>
-          <g class="te5"  style="transform-origin:230px 86px"><circle cx="230" cy="86" r="5" fill="#7faaff"/></g>
-          <g class="te6"  style="transform-origin:230px 86px"><circle cx="230" cy="86" r="4" fill="#5588ee"/></g>
-          <g class="te7"  style="transform-origin:230px 86px"><circle cx="230" cy="86" r="5" fill="#7faaff" stroke="#aaccff" stroke-width="1"/><text x="230" y="90" font-size="5" text-anchor="middle" fill="#04040a" font-weight="bold">Ξ</text></g>
-
-          <!-- ══ 5 CROWD PEOPLE with arms up ══ -->
-          <!-- Person 1 — x≈138 -->
-          <g class="crowd-person" style="transform-origin:138px 195px">
-            <circle cx="138" cy="175" r="11" fill="#2a3a2a"/><circle cx="138" cy="175" r="9" fill="#344a34"/>
-            <circle cx="135" cy="173" r="1.5" fill="#e8c96a"/><circle cx="141" cy="173" r="1.5" fill="#e8c96a"/>
-            <path d="M135 178 Q138 181 141 178" stroke="#e8c96a" stroke-width="1.5" fill="none"/>
-            <rect x="129" y="186" width="18" height="34" rx="4" fill="#2a3a2a"/>
-            <line x1="129" y1="190" x2="119" y2="175" stroke="#2a3a2a" stroke-width="7" stroke-linecap="round"/>
-            <line x1="147" y1="190" x2="155" y2="175" stroke="#2a3a2a" stroke-width="7" stroke-linecap="round"/>
-            <circle cx="119" cy="174" r="5" fill="#344a34"/><circle cx="155" cy="174" r="5" fill="#344a34"/>
-            <g class="catch-bob" style="transform-origin:138px 163px">
-              <circle cx="138" cy="163" r="5" fill="#c8a96e" stroke="#f0d060" stroke-width="1"/>
-              <text x="138" y="167" font-size="5" text-anchor="middle" fill="#0a0a04" font-weight="bold">$</text>
-            </g>
-          </g>
-
-          <!-- Person 2 — x≈168 -->
-          <g class="crowd-person" style="transform-origin:168px 198px">
-            <circle cx="168" cy="178" r="10" fill="#1a2a3a"/><circle cx="168" cy="178" r="8" fill="#253545"/>
-            <circle cx="165" cy="176" r="1.5" fill="#c8a96e"/><circle cx="171" cy="176" r="1.5" fill="#c8a96e"/>
-            <path d="M165 181 Q168 184 171 181" stroke="#c8a96e" stroke-width="1.5" fill="none"/>
-            <rect x="159" y="188" width="18" height="32" rx="4" fill="#1a2a3a"/>
-            <line x1="159" y1="192" x2="150" y2="178" stroke="#1a2a3a" stroke-width="6" stroke-linecap="round"/>
-            <line x1="177" y1="192" x2="184" y2="177" stroke="#1a2a3a" stroke-width="6" stroke-linecap="round"/>
-            <circle cx="150" cy="177" r="4" fill="#253545"/><circle cx="184" cy="176" r="4" fill="#253545"/>
-            <g class="catch-bob" style="transform-origin:168px 167px">
-              <circle cx="168" cy="167" r="5" fill="#7faaff" stroke="#aaccff" stroke-width="1"/>
-              <text x="168" y="171" font-size="5" text-anchor="middle" fill="#04040a" font-weight="bold">Ξ</text>
-            </g>
-          </g>
-
-          <!-- Person 3 — x≈200 -->
-          <g class="crowd-person" style="transform-origin:200px 200px">
-            <circle cx="200" cy="180" r="11" fill="#3a1a2a"/><circle cx="200" cy="180" r="9" fill="#4a2a3a"/>
-            <circle cx="197" cy="178" r="1.5" fill="#c8a96e"/><circle cx="203" cy="178" r="1.5" fill="#c8a96e"/>
-            <path d="M197 183 Q200 186 203 183" stroke="#c8a96e" stroke-width="1.5" fill="none"/>
-            <rect x="191" y="191" width="18" height="30" rx="4" fill="#3a1a2a"/>
-            <line x1="191" y1="195" x2="181" y2="180" stroke="#3a1a2a" stroke-width="6" stroke-linecap="round"/>
-            <line x1="209" y1="195" x2="217" y2="179" stroke="#3a1a2a" stroke-width="6" stroke-linecap="round"/>
-            <circle cx="181" cy="179" r="4" fill="#4a2a3a"/><circle cx="217" cy="178" r="4" fill="#4a2a3a"/>
-            <g class="catch-bob" style="transform-origin:200px 168px">
-              <circle cx="200" cy="168" r="5" fill="#c8a96e" stroke="#f0d060" stroke-width="1"/>
-              <text x="200" y="172" font-size="5" text-anchor="middle" fill="#0a0a04" font-weight="bold">P</text>
-            </g>
-          </g>
-
-          <!-- Person 4 — x≈228 (child) -->
-          <g class="crowd-person" style="transform-origin:228px 206px">
-            <circle cx="228" cy="192" r="8" fill="#2a2a1a"/><circle cx="228" cy="192" r="6" fill="#3a3a22"/>
-            <circle cx="225" cy="190" r="1.2" fill="#c8a96e"/><circle cx="231" cy="190" r="1.2" fill="#c8a96e"/>
-            <path d="M225 194 Q228 197 231 194" stroke="#c8a96e" stroke-width="1.2" fill="none"/>
-            <rect x="221" y="200" width="14" height="22" rx="4" fill="#2a2a1a"/>
-            <line x1="221" y1="203" x2="213" y2="192" stroke="#2a2a1a" stroke-width="5" stroke-linecap="round"/>
-            <line x1="235" y1="203" x2="241" y2="192" stroke="#2a2a1a" stroke-width="5" stroke-linecap="round"/>
-            <circle cx="213" cy="191" r="4" fill="#3a3a22"/><circle cx="241" cy="191" r="4" fill="#3a3a22"/>
-            <g class="catch-bob" style="transform-origin:228px 181px">
-              <circle cx="228" cy="181" r="4" fill="#7faaff"/>
-            </g>
-          </g>
-
-          <!-- Person 5 — x≈262 -->
-          <g class="crowd-person" style="transform-origin:262px 197px">
-            <circle cx="262" cy="177" r="10" fill="#1a3a1a"/><circle cx="262" cy="177" r="8" fill="#254025"/>
-            <circle cx="259" cy="175" r="1.5" fill="#5cb85c"/><circle cx="265" cy="175" r="1.5" fill="#5cb85c"/>
-            <path d="M259 180 Q262 183 265 180" stroke="#5cb85c" stroke-width="1.5" fill="none"/>
-            <rect x="253" y="187" width="18" height="34" rx="4" fill="#1a3a1a"/>
-            <line x1="253" y1="191" x2="243" y2="177" stroke="#1a3a1a" stroke-width="6" stroke-linecap="round"/>
-            <line x1="271" y1="191" x2="279" y2="177" stroke="#1a3a1a" stroke-width="6" stroke-linecap="round"/>
-            <circle cx="243" cy="176" r="4" fill="#254025"/><circle cx="279" cy="176" r="4" fill="#254025"/>
-            <g class="catch-bob" style="transform-origin:262px 166px">
-              <circle cx="262" cy="166" r="5" fill="#c8a96e" stroke="#f0d060" stroke-width="1"/>
-              <text x="262" y="170" font-size="5" text-anchor="middle" fill="#0a0a04" font-weight="bold">$</text>
-            </g>
-          </g>
-
-          <!-- ══ RISING LABELS — alternating $PvE gold and $ETH blue ══ -->
-          <g class="pve-label" style="transform-origin:138px 168px">
-            <text x="126" y="168" font-size="8" font-family="monospace" fill="#c8a96e" font-weight="bold">+$PvE</text>
-          </g>
-          <g class="pve-label" style="transform-origin:168px 170px">
-            <text x="156" y="170" font-size="7" font-family="monospace" fill="#7faaff" font-weight="bold">+$ETH</text>
-          </g>
-          <g class="pve-label" style="transform-origin:200px 165px">
-            <text x="188" y="165" font-size="8" font-family="monospace" fill="#c8a96e" font-weight="bold">+$PvE</text>
-          </g>
-          <g class="pve-label" style="transform-origin:228px 174px">
-            <text x="216" y="174" font-size="7" font-family="monospace" fill="#7faaff" font-weight="bold">+$ETH</text>
-          </g>
-          <g class="pve-label" style="transform-origin:262px 168px">
-            <text x="250" y="168" font-size="8" font-family="monospace" fill="#c8a96e" font-weight="bold">+$PvE</text>
-          </g>
-
-          <!-- Status text -->
-          <text x="16" y="108" fill="rgba(92,184,92,0.55)"  font-size="9" font-family="monospace" letter-spacing="2">REAP WHAT YOU SOW</text>
-          <text x="16" y="121" fill="rgba(200,169,110,0.5)"  font-size="8" font-family="monospace">$PvE DRIP DISTRIBUTED</text>
-          <text x="16" y="133" fill="rgba(127,170,255,0.45)" font-size="7" font-family="monospace">+$0.01 $ETH / WALLET / TUESDAY</text>
-
-          <text class="scene-label">REAP WHAT YOU SOW — $PvE &amp; $ETH RAIN</text>
-        </svg>
-      </div>
-
-    </div><!-- end scene-track -->
-
-    <!-- Fade transition overlay -->
-    <div class="scene-fade"></div>
-
-    <!-- Scene indicator dots -->
-    <div class="scene-dots">
-      <div class="scene-dot"></div>
-      <div class="scene-dot"></div>
-      <div class="scene-dot"></div>
+<!-- LOGIN -->
+<div id="screen-login" class="login-wrap">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="login-logo-title">REAP WHAT<br><span style="color:var(--text);opacity:.2;">//</span> YOU SOW</div>
+      <div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-top:8px;">$PvE Token · Internal Shared Ledger</div>
     </div>
-
-  </div><!-- end knight-stage -->
+    <div class="panel">
+      <div class="ltabs">
+        <button class="ltab on" id="ltab-login" onclick="setMode('login')">Sign In</button>
+        <button class="ltab" id="ltab-register" onclick="setMode('register')">Register</button>
+      </div>
+      <div class="login-form">
+        <div class="info-box hidden" id="reg-info">New accounts start with <span style="color:var(--gold);">1000 $PvE locked 🔒</span>. Unstake anytime with a 25% fee to the Team Treasury.</div>
+        <div class="field"><label>Username</label><input class="inp" id="l-user" placeholder="e.g. alice" onkeydown="if(event.key==='Enter')doLogin()"></div>
+        <div class="field"><label>Password</label><input class="inp" type="password" id="l-pass" placeholder="min 4 characters" onkeydown="if(event.key==='Enter')doLogin()"></div>
+        <div id="reg-fields" class="hidden">
+          <div class="field"><label>Display Name (optional)</label><input class="inp" id="l-name" placeholder="e.g. Alice's Vault"></div>
+          <div class="field">
+            <label>Wallet Address (optional)</label>
+            <input class="inp" id="l-addr" placeholder="0x..." oninput="checkAddrDupe(this.value)">
+            <div id="addr-dupe-msg" style="display:none;font-size:9px;color:var(--red);margin-top:4px;">⚠ This address is already registered to another account.</div>
+          </div>
+        </div>
+        <div class="err-msg hidden" id="l-err"></div>
+        <button class="btn-gold" id="l-btn" onclick="doLogin()">SIGN IN</button>
+        <div style="text-align:center;margin-top:14px;font-size:9px;color:var(--dim);">All users share the same live ledger · Prototype</div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="divider"></div>
-
-<!-- WHY PVE MANIFESTO -->
-<section class="manifesto">
-  <div class="manifesto-inner">
-    <div class="manifesto-eyebrow">From the Builder · fibtechnician</div>
-    <h2 class="manifesto-title">Why <em>Player vs. Environment?</em></h2>
-    <div class="manifesto-body">
-      <p>The tail end of the last NFT bull run made one thing painfully clear — memecoin culture is not a friendly environment for teamwork. Over 90% of memecoins never graduate from their launchpads. Countless NFT collections trend downward from the moment they mint. The incentive structure rewards the early, the loud, and the connected — not the builders, not the community.</p>
-      <p>Player vs. Environment is fibtechnician's answer to that. A deliberate counter-culture built on a team-first foundation. You can see it directly in the design of these apps — co-op end-game tactics in Iron Arena, and a shared ledger that distributes rewards collectively in Reap What You Sow. Nobody farms alone. Nobody wins by stepping on the next person.</p>
-      <p>This is a live project. Fluid enough to pivot when the moment calls for it, grounded enough to hold its direction when it doesn't. The philosophy doesn't change with the market.</p>
-      <div class="manifesto-cta">Enjoy this time to shine — <strong>because we will be turning up the heat when Iron Arena goes PVP.</strong></div>
-    </div>
-    <div class="manifesto-stats">
-      <div class="manifesto-stat">
-        <span class="ms-num">∞</span>
-        <span class="ms-label">Room at the table for your team</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<main>
-  <p class="section-label">01 — Featured App</p>
-
-  <!-- IRON ARENA -->
-  <div class="card-featured">
-    <div class="card-visual vis-arena">
-      <div class="arena-icon">
-        <div class="arena-glyph">⚔️</div>
-        <div class="enemy-row">
-          <div class="enemy-chip">🐺</div><div class="enemy-chip">👹</div>
-          <div class="enemy-chip">🐉</div><div class="enemy-chip">👁️</div>
+<!-- APP -->
+<div id="screen-app" class="hidden">
+  <div class="page-header">
+    <div class="container">
+      <div class="hdr-row">
+        <div>
+          <div class="hdr-title">REAP WHAT <span style="color:var(--text);opacity:.2;">//</span> YOU SOW</div>
+          <div class="hdr-sub">$PvE Token · Internal Shared Ledger</div>
         </div>
-        <div style="position:relative;width:80px;height:80px;">
-          <div class="arena-ring"><div class="arena-ring2"></div></div>
+        <div class="hdr-actions">
+          <div id="session-badge" class="session-badge"></div>
+          <button class="btn-outline" id="add-wallet-btn" onclick="openAddWallet()">+ ADD WALLET</button>
+          <button class="btn-outline" onclick="doSignOut()">SIGN OUT</button>
+          <div class="supply-chip">
+            <div class="sc-lbl">Supply</div>
+            <div class="sc-val" id="hdr-supply"></div>
+            <div class="sc-unit">$PvE</div>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="card-content">
-      <p class="card-number">APP 001 · TURN-BASED RPG</p>
-      <h2 class="card-title">Iron<br>Arena</h2>
-      <p class="card-desc">A wave-based browser RPG where you fight an escalating roster of enemies — from Common-tier Wild Wolves and Goblin Scouts up through Rare, Epic, Legendary, Mythic, and Titan-class bosses. Level up four combat stats, customize your fighter with unlockable titles, and climb a live Firebase leaderboard.</p>
-      <div class="tags">
-        <span class="tag red">Turn-Based RPG</span>
-        <span class="tag">Wave Combat</span>
-        <span class="tag">Firebase</span>
-        <span class="tag">Leaderboard</span>
-        <span class="tag">Guild System</span>
-      </div>
-      <ul class="features red" id="arena-features">
-        <li>20+ enemies across 7 tiers — Common through Titan — including the Void Emperor and The First Evil</li>
-        <li>Four upgradeable stats: Stamina, Attack, Defense, and Crit with XP bars and level gates</li>
-        <li>12 cosmetic title unlocks from Wanderer (free) to The Undying One (150,000 XP)</li>
-        <li>Firebase Realtime Database powering a live global leaderboard and guild system</li>
-        <li>Block mechanic, critical hits, floating damage numbers, and shockwave animations</li>
-      </ul>
-      <a class="launch-btn red" href="https://nftfriendly333.github.io/mobileskillgame2/" target="_blank" rel="noopener">▶ Play Iron Arena</a>
-      <div class="user-review-form">
-        <span class="user-review-label">★ Leave a Review</span>
-        <div class="star-picker" id="arena-stars" onclick="setRating('arena', event)">
-          <span data-val="1">★</span>
-          <span data-val="2">★</span>
-          <span data-val="3">★</span>
-          <span data-val="4">★</span>
-          <span data-val="5">★</span>
-          <span class="star-rating-label" id="arena-rating-label">tap to rate</span>
-        </div>
-        <textarea class="review-textarea" id="arena-review-text" rows="3" placeholder="Share your experience with Iron Arena…" maxlength="300" oninput="updateCharCount('arena')"></textarea>
-        <div class="review-submit-row">
-          <span class="review-char-count" id="arena-char-count">0 / 300</span>
-          <button class="review-submit-btn" id="arena-submit-btn" onclick="submitReview('arena')">Submit Review</button>
-        </div>
-        <div class="reviews-list" id="arena-reviews"></div>
       </div>
     </div>
   </div>
 
-  <p class="section-label" style="margin-top:60px;opacity:1;">02 & 03 — More Apps</p>
+  <div class="container">
+    <!-- STATS -->
+    <div class="stats-bar">
+      <div class="stat"><div class="s-lbl">Transactions</div><div class="s-val" id="st-tx">0</div></div>
+      <div class="stat"><div class="s-lbl">Volume</div><div class="s-val" id="st-vol">0</div></div>
+      <div class="stat"><div class="s-lbl">Rewards</div><div class="s-val" id="st-rew">0</div></div>
+      <div class="stat"><div class="s-lbl">Wallets</div><div class="s-val" id="st-wals">0</div></div>
+      <div class="stat"><div class="s-lbl">Block</div><div class="s-val" id="st-blk">0</div></div>
+    </div>
 
-  <div class="cards-grid">
-
-    <!-- REAP WHAT YOU SOW -->
-    <div class="card-small">
-      <div class="card-visual vis-sow">
-        <div class="sow-icon">
-          <div class="sow-glyph">🌾</div>
-          <div class="sow-hud">
-            <div class="sow-row"><span class="sow-label">$PvE</span><div class="sow-bar-bg"><div class="sow-bar-fill" style="width:72%"></div></div></div>
-            <div class="sow-row"><span class="sow-label" style="color:#c084fc;">$ETH</span><div class="sow-bar-bg"><div class="sow-bar-fill purple" style="width:38%"></div></div></div>
-            <div class="sow-row" style="color:var(--muted);font-size:0.55rem;letter-spacing:.1em;">NEXT DRIP · TUESDAY 8AM ET</div>
-          </div>
+    <!-- HUD -->
+    <div class="hud">
+      <div class="hud-hdr">
+        <div class="hud-hdr-top">
+          <div class="hud-dot"></div>
+          <span class="hud-hdr-title">Your In-App Wallet — <span id="hud-uname"></span></span>
         </div>
+        <div class="hud-hdr-note">balances are internal · not connected to mainnet</div>
       </div>
-      <div class="card-content">
-        <p class="card-number">APP 002 · TOKEN SIMULATOR</p>
-        <h2 class="card-title">Reap What<br>You Sow</h2>
-        <p class="card-desc">A $PvE token economy simulator with a shared internal ledger. Register wallets, automate distributions, and track a rolling transaction history timed to a weekly $ETH drip cycle.</p>
-        <div class="tags">
-          <span class="tag gold">$PvE Token</span>
-          <span class="tag">Wallet Registry</span>
-          <span class="tag">Shared Ledger</span>
-        </div>
-        <ul class="features gold">
-          <li>Wallet Registry: named wallets start with 1000 $PvE, balances visible to all</li>
-          <li>Weekly +$0.01 $ETH drip per wallet every Tuesday — enough to take part in hundreds of transactions per week</li>
-          <li>Batch distribution automation — up to 333 separate transactions</li>
-          <li>Shared ledger synced every 3 seconds across all sessions</li>
-        </ul>
-        <a class="launch-btn gold" href="https://nftfriendly333.github.io/reapwhatyousow/" target="_blank" rel="noopener">▶ Open Reap What You Sow</a>
-        <div class="user-review-form">
-          <span class="user-review-label">★ Leave a Review</span>
-          <div class="star-picker" id="sow-stars" onclick="setRating('sow', event)">
-            <span data-val="1">★</span>
-            <span data-val="2">★</span>
-            <span data-val="3">★</span>
-            <span data-val="4">★</span>
-            <span data-val="5">★</span>
-            <span class="star-rating-label" id="sow-rating-label">tap to rate</span>
-          </div>
-          <textarea class="review-textarea" id="sow-review-text" rows="3" placeholder="Share your experience with Reap What You Sow…" maxlength="300" oninput="updateCharCount('sow')"></textarea>
-          <div class="review-submit-row">
-            <span class="review-char-count" id="sow-char-count">0 / 300</span>
-            <button class="review-submit-btn" id="sow-submit-btn" onclick="submitReview('sow')">Submit Review</button>
-          </div>
-          <div class="reviews-list" id="sow-reviews"></div>
+      <div id="hud-body" class="hud-body">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--gold);animation:pulse 1s infinite;flex-shrink:0;"></div>
+          <span style="font-size:12px;color:var(--dim);">Loading your in-app balances...</span>
         </div>
       </div>
     </div>
 
-    <!-- TRADE TOGETHER -->
-    <div class="card-small">
-      <div class="card-visual vis-trade">
-        <div class="trade-icon">
-          <div class="trade-glyph">📊</div>
-          <div class="trade-items">
-            <div class="trade-chip">⚔️</div><div class="trade-chip">🔥</div>
-            <div class="trade-chip">🧪</div><div class="trade-chip">💎</div><div class="trade-chip">🏹</div>
-          </div>
-          <div class="trade-bars">
-            <div class="trade-bar"></div><div class="trade-bar"></div><div class="trade-bar"></div>
-            <div class="trade-bar"></div><div class="trade-bar"></div>
-          </div>
-        </div>
+    <!-- COUNTDOWN -->
+    <div class="cdown">
+      <div class="cdown-label">Next $ETH Drip</div>
+      <div class="cdown-title">Tuesday Drop</div>
+      <div class="cdown-sub">Every Tuesday · 8:00 AM Eastern</div>
+      <div class="cd-digits" id="cd-digits">
+        <div class="cd-unit"><span class="cd-val" id="cd-d">--</span><div class="cd-lbl">Days</div></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit"><span class="cd-val" id="cd-h">--</span><div class="cd-lbl">Hrs</div></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit"><span class="cd-val" id="cd-m">--</span><div class="cd-lbl">Mins</div></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit"><span class="cd-val" id="cd-s">--</span><div class="cd-lbl">Secs</div></div>
       </div>
-      <div class="card-content">
-        <p class="card-number">APP 003 · FANTASY TRADING</p>
-        <h2 class="card-title">Trade<br>Together</h2>
-        <p class="card-desc">A fantasy commodity trading game. Go long or short on six medieval goods — Dragon Longswords, Onyx Gems, Fire Runes, and more — with live OHLC candle charts and a full portfolio tracker.</p>
-        <div class="tags">
-          <span class="tag blue">Long / Short</span>
-          <span class="tag">Candlestick Charts</span>
-          <span class="tag">Portfolio</span>
+      <div class="cdown-info">
+        <span style="color:var(--gold);">+0.000005 $ETH</span> drip per wallet<br><span style="color:var(--gold);">0.000000015 $ETH</span> burned / tx<br><span style="color:var(--goldb);">1000 $PvE locked · unstake with 25% fee</span>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab on" data-tab="automation" onclick="switchTab('automation')">⏱ Automate</button>
+      <button class="tab" data-tab="registry" onclick="switchTab('registry')">⊞ Wallets</button>
+      <button class="tab" data-tab="ledger" onclick="switchTab('ledger')">≡ Ledger</button>
+    </div>
+
+    <!-- AUTOMATION TAB -->
+    <div id="tab-automation" class="hidden">
+      <div class="panel">
+        <div class="panel-hdr">
+          <div class="phdr-dot" style="background:var(--purple);box-shadow:0 0 8px var(--purple);"></div>
+          <span class="phdr-title">Automation — Auto-Sends</span>
+          <span class="phdr-extra" style="color:var(--purple);">0.002 $ETH / tx</span>
         </div>
-        <ul class="features blue">
-          <li>Six tradeable fantasy commodities with live price ticks</li>
-          <li>OHLC candlestick charts with moving average overlay per asset</li>
-          <li>Long/short positions with stop-loss and take-profit orders</li>
-          <li>History tab: win rate bar, P&L breakdown, and per-trade log</li>
-        </ul>
-        <a class="launch-btn blue" href="https://nftfriendly333.github.io/tradingtogether/" target="_blank" rel="noopener">▶ Open Trade Together</a>
-        <div class="user-review-form">
-          <span class="user-review-label">★ Leave a Review</span>
-          <div class="star-picker" id="trade-stars" onclick="setRating('trade', event)">
-            <span data-val="1">★</span>
-            <span data-val="2">★</span>
-            <span data-val="3">★</span>
-            <span data-val="4">★</span>
-            <span data-val="5">★</span>
-            <span class="star-rating-label" id="trade-rating-label">tap to rate</span>
+        <div class="panel-body">
+          <div class="auto-form">
+            <div><label style="display:block;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:5px;">From Wallet</label><select class="inp-sm" id="auto-wallet"></select></div>
+            <div><label style="display:block;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:5px;">Every (sec)</label><input type="number" class="inp-sm" id="auto-sec" min="5" value="10"></div>
+            <div><label style="display:block;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:5px;">Amount / Wallet</label><input type="number" class="inp-sm" id="auto-amt" min="0.01" step="0.01" value="1"></div>
+            <div><label style="display:block;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:5px;">Max Recipients</label><input type="number" class="inp-sm" id="auto-max" min="1" max="5" value="1"></div>
+            <div class="auto-form-full"><button onclick="createRule()" style="width:100%;background:var(--purple);color:#0a0a06;border:none;font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:.1em;padding:13px;border-radius:2px;">+ ADD RULE</button></div>
           </div>
-          <textarea class="review-textarea" id="trade-review-text" rows="3" placeholder="Share your experience with Trade Together…" maxlength="300" oninput="updateCharCount('trade')"></textarea>
-          <div class="review-submit-row">
-            <span class="review-char-count" id="trade-char-count">0 / 300</span>
-            <button class="review-submit-btn" id="trade-submit-btn" onclick="submitReview('trade')">Submit Review</button>
-          </div>
-          <div class="reviews-list" id="trade-reviews"></div>
+          <div id="rules-list"><div style="text-align:center;padding:20px;font-size:11px;color:var(--dim);font-style:italic;">No rules yet.</div></div>
         </div>
       </div>
     </div>
 
+    <!-- REGISTRY TAB -->
+    <div id="tab-registry" class="hidden">
+      <div class="panel">
+        <div class="panel-hdr">
+          <div class="phdr-dot" style="background:var(--gold);box-shadow:0 0 8px var(--gold);"></div>
+          <span class="phdr-title">Wallet Registry</span>
+          <span class="phdr-extra" style="display:flex;align-items:center;gap:5px;color:var(--green);"><span class="ldot"></span>LIVE</span>
+        </div>
+        <div class="panel-body"><div class="wgrid" id="registry-grid"></div></div>
+      </div>
+    </div>
+
+    <!-- LEDGER TAB -->
+    <div id="tab-ledger" class="hidden">
+      <div class="panel">
+        <div class="panel-hdr">
+          <div class="phdr-dot" style="background:var(--goldb);box-shadow:0 0 8px var(--goldb);"></div>
+          <span class="phdr-title">Global Ledger</span>
+          <span class="phdr-extra" style="color:var(--dim);">Internal · Real-time</span>
+        </div>
+        <div class="ledger-wrap">
+          <table class="ltbl">
+            <thead><tr style="border-bottom:1px solid var(--bdr);">
+              <th>Block</th><th>Type</th><th>From → To</th><th>Amount</th><th class="fee-col">Fee</th><th>Time</th>
+            </tr></thead>
+            <tbody id="ledger-body"><tr><td colspan="6" style="text-align:center;padding:36px;color:var(--dim);font-size:11px;font-style:italic;">No transactions yet.</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <span>$PvE · Reap What You Sow · <span id="ft-wals">0</span> Wallets</span>
+      <span id="ft-time"></span>
+    </footer>
   </div>
-</main>
+</div>
 
-<footer>
-  <div class="footer-inner">
-    <div class="footer-badge">
-      <span style="width:6px;height:6px;border-radius:50%;background:var(--accent2);animation:pulse 2s infinite;display:inline-block;"></span>
-      <span>Three Apps · Live AI Features · No Install Required</span>
+<!-- ADD WALLET MODAL -->
+<div class="modal-bg hidden" id="modal-add">
+  <div class="modal">
+    <div class="modal-title">Add New Wallet</div>
+    <div style="font-size:11px;color:var(--dim);margin-bottom:14px;line-height:1.7;">Register a wallet as recipient. They start with <span style="color:var(--gold);">1000 $PvE locked 🔒</span>. Unstake anytime with a 25% fee.</div>
+    <div style="background:var(--s2);border:1px solid var(--bdr2);border-radius:2px;padding:12px;margin-bottom:16px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <span style="font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);">Wallet Slots</span>
+        <span id="slot-label" style="font-size:11px;color:var(--green);">3 slots remaining</span>
+      </div>
+      <div style="height:6px;background:var(--bdr);border-radius:3px;overflow:hidden;">
+        <div id="slot-bar-fill" style="height:100%;width:0%;background:var(--green);border-radius:3px;transition:width .4s,background .3s;"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-top:5px;font-size:9px;color:var(--dim);">
+        <span id="slot-used-label">0 used</span><span>3 max</span>
+      </div>
     </div>
-    <p>Each app ships as a fully self-contained HTML file. AI features on this page run live — no backend required.</p>
+    <div class="field">
+      <label>Wallet Address</label>
+      <input class="inp" id="add-addr" placeholder="0x..." onkeydown="if(event.key==='Enter')submitAdd()" oninput="checkAddAddrDupe(this.value)">
+      <div id="add-addr-dupe-msg" style="display:none;font-size:10px;color:var(--red);margin-top:4px;">⚠ This address is already in the registry.</div>
+    </div>
+    <div class="field"><label>Display Name <span style="color:var(--gold);">*</span></label><input class="inp" id="add-name" placeholder="e.g. Alice's Vault" onkeydown="if(event.key==='Enter')submitAdd()"></div>
+    <div class="modal-btns">
+      <button class="btn-add" onclick="submitAdd()">ADD TO REGISTRY</button>
+      <button class="btn-cancel" onclick="closeAdd()">CANCEL</button>
+    </div>
   </div>
-</footer>
+</div>
 
+<!-- LIMIT MODAL -->
+<div class="modal-bg hidden" id="modal-limit">
+  <div class="modal" style="text-align:center;">
+    <div style="font-size:40px;margin-bottom:12px;">⛔</div>
+    <div style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--red);margin-bottom:8px;">Wallet Limit Reached</div>
+    <div style="font-size:12px;color:var(--dim);line-height:1.8;margin-bottom:20px;">You have used all <span style="color:var(--gold);">3 wallet slots</span>.<br>No additional wallets can be added.</div>
+    <div style="height:6px;background:var(--bdr);border-radius:3px;overflow:hidden;margin-bottom:20px;"><div style="height:100%;width:100%;background:var(--red);border-radius:3px;"></div></div>
+    <button onclick="hide('modal-limit')" style="background:var(--red);color:#fff;border:none;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.14em;padding:13px 32px;border-radius:2px;">CLOSE</button>
+  </div>
+</div>
 
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <div class="toast-title" id="toast-t"></div>
+  <div id="toast-m"></div>
+</div>
 
 <script>
-// ─────────────────────────────────────────────
-// APP KNOWLEDGE BASE
-// ─────────────────────────────────────────────
-const APP_DATA = {
-  arena: {
-    name: 'Iron Arena',
-    type: 'Turn-Based Browser RPG',
-    description: `Iron Arena is a wave-based browser RPG with turn-based combat. Players fight escalating enemies across 7 tiers: Common (Wild Wolf, Goblin Scout), Uncommon (Orc Warrior), Rare (Dark Knight, Stone Golem), Epic (Shadow Dragon, Arcane Lich), Legendary (Demon Lord, Chaos Titan, Soul Reaper, Abyssal Kraken, Inferno Phoenix, Storm Colossus), Mythic (Void Emperor, Eclipse Wraith, Blood Leviathan, Eternal Devourer), and Titan (World Breaker, Astral Executioner, Undying Behemoth, Void Architect, The First Evil). Players upgrade 4 stats: Stamina, Attack, Defense, and Crit — each requiring 25 clicks per level. The shop sells 12 cosmetic titles from Wanderer (free) to The Undying One (150,000 XP). Combat includes a Block mechanic (costs 5 stamina), critical hits, floating damage numbers, and shockwave animations. Firebase powers a live global leaderboard and guild system.`
-  },
-  sow: {
-    name: 'Reap What You Sow',
-    type: '$PvE Token Economy Simulator',
-    description: `Reap What You Sow is a browser-based $PvE token economy simulator. Users register wallets — each starting with 1000 $PvE — which are visible on a shared public ledger. A weekly $ETH drip of +$0.01 $ETH per wallet fires every Tuesday, with a live countdown timer — enough to participate in hundreds of transactions per week. Sending tokens costs 0.002 $ETH per transaction (burned). The Automation tab lets users set batch distribution rules to send $PvE across multiple wallets in one action. The Ledger tab logs every Send and Auto transaction with timestamps and block numbers, synced every 3 seconds across all sessions via polling.`
-  },
-  trade: {
-    name: 'Trade Together',
-    type: 'Fantasy Commodity Trading Game',
-    description: `Trade Together is a single-player fantasy commodity trading game. There are 6 tradeable assets: Dragon Longsword (base 220gp), Fire Rune Bundle (85gp), Super Restore Potion (150gp), Onyx Gem (310gp), Dragon Leather Hide (175gp), and Rune Arrow Bundle (55gp). Each has a live OHLC candlestick chart with a toggleable moving average overlay. Players can open LONG or SHORT positions with optional stop-loss and take-profit orders. Positions are tracked in a portfolio tab showing total value and unrealized P&L. A History tab shows win rate, total trades, and a scrollable per-trade log.`
-  }
+// ════════════════════════════════════
+// CONSTANTS & STATE
+// ════════════════════════════════════
+const FEE=0.000000015,ETH_DRIP=0.000005,UNSTAKE_FEE=0.25,BLOCK_START=1;
+const TEAM_WALLET_ID='team-treasury';
+const TEAM_WALLET={id:TEAM_WALLET_ID,name:'Team Treasury',addr:'0xTEAM...VAULT',balance:0,locked:0,eth:0.1,paused:false,pending:0,tag:'Team Wallet',color:'#e879f9',isUser:false};
+const PALETTE=['#d4a843','#e07b7b','#7bade0','#7be09a','#c07be0','#e0c37b','#e08c7b','#7be0d4','#b07be0','#e0d47b'];
+const TX_STYLE={
+  send:{bg:'rgba(192,57,43,0.12)',c:'#c0392b',b:'rgba(192,57,43,0.2)',l:'SEND'},
+  reward:{bg:'rgba(212,168,67,0.1)',c:'#d4a843',b:'rgba(212,168,67,0.2)',l:'REWARD'},
+  mint:{bg:'rgba(100,149,237,0.1)',c:'#7fb3f5',b:'rgba(100,149,237,0.2)',l:'MINT'},
+  auto:{bg:'rgba(192,132,252,0.1)',c:'#c084fc',b:'rgba(192,132,252,0.2)',l:'AUTO'},
+  withdraw:{bg:'rgba(76,175,110,0.1)',c:'#4caf6e',b:'rgba(76,175,110,0.25)',l:'WITHDRAW'},
+  register:{bg:'rgba(127,179,245,0.08)',c:'#7fb3f5',b:'rgba(127,179,245,0.2)',l:'JOINED'},
+  unlock:{bg:'rgba(76,175,110,0.1)',c:'#4caf6e',b:'rgba(76,175,110,0.25)',l:'UNLOCK'},
+  unstake:{bg:'rgba(192,57,43,0.12)',c:'#c0392b',b:'rgba(192,57,43,0.2)',l:'UNSTAKE'},
 };
+const SEEDS=[];
 
+let ST={wallets:[JSON.parse(JSON.stringify(TEAM_WALLET)),...JSON.parse(JSON.stringify(SEEDS))],ledger:[],blockNum:BLOCK_START,totalVol:0,totalRewards:0,totalWithdrawn:0};
+let session=null,dripReady=false,saveTimer=null,pollTimer=null,cdTimer=null;
+let rules=[],ruleId=1,currentTab='automation',loginMode='login';
 
-// ─────────────────────────────────────────────
-// CLAUDE API CALL
-// ─────────────────────────────────────────────
-let _apiKey = '__env__';
+// ════════════════════════════════════
+// UTILS
+// ════════════════════════════════════
+const r4=n=>parseFloat(parseFloat(n).toFixed(4));
+const fmt=(n,d=2)=>parseFloat(n).toLocaleString(undefined,{maximumFractionDigits:d});
+const $=id=>document.getElementById(id);
+const show=id=>$(id).classList.remove('hidden');
+const hide=id=>$(id).classList.add('hidden');
+function genHash(){const h='0123456789abcdef';let r='0x';for(let i=0;i<8;i++)r+=h[~~(Math.random()*16)];r+='...';for(let i=0;i<4;i++)r+=h[~~(Math.random()*16)];return r;}
+function hashPw(p){let h=0;for(let i=0;i<p.length;i++){h=((h<<5)-h)+p.charCodeAt(i);h|=0;}return h.toString(36);}
+function msTillDrip(){const now=new Date(),et=new Date(now.toLocaleString('en-US',{timeZone:'America/New_York'}));const day=et.getDay(),ms=(et.getHours()*3600+et.getMinutes()*60+et.getSeconds())*1000+et.getMilliseconds(),target=8*3600*1000;let days=(2-day+7)%7;if(days===0&&ms>=target)days=7;return Math.max(0,days*86400000+target-ms);}
+function toast(t,m,d=4000){$('toast-t').textContent=t;$('toast-m').textContent=m;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),d);}
 
-async function callClaude(messages, system) {
-  const headers = { 'Content-Type': 'application/json', 'anthropic-version': '2023-06-01' };
+// ════════════════════════════════════
+// STORAGE
+// ════════════════════════════════════
+async function loadS(k){if(!window.storage)return null;try{const r=await window.storage.get(k,true);return r?JSON.parse(r.value):null;}catch{return null;}}
+async function saveS(k,v){if(!window.storage)return;try{await window.storage.set(k,JSON.stringify(v),true);}catch{/* storage unavailable */}}
+function scheduleSave(){if(saveTimer)clearTimeout(saveTimer);saveTimer=setTimeout(async()=>{await saveS('rwys-state',{wallets:ST.wallets,blockNum:ST.blockNum,totalVol:ST.totalVol,totalRewards:ST.totalRewards,totalWithdrawn:ST.totalWithdrawn});await saveS('rwys-ledger',ST.ledger.slice(0,200));},800);}
+async function loadAll(){const st=await loadS('rwys-state'),ld=await loadS('rwys-ledger');if(st&&!st.wallets?.find(w=>w.id===TEAM_WALLET_ID)){if(st.wallets)st.wallets.unshift(JSON.parse(JSON.stringify(TEAM_WALLET)));}if(st?.wallets?.length){ST.wallets=st.wallets;ST.blockNum=st.blockNum||BLOCK_START;ST.totalVol=st.totalVol||0;ST.totalRewards=st.totalRewards||0;ST.totalWithdrawn=st.totalWithdrawn||0;}if(ld?.length)ST.ledger=ld;}
+function startPoll(){pollTimer=setInterval(async()=>{const st=await loadS('rwys-state'),ld=await loadS('rwys-ledger');if(st?.wallets){ST.wallets=st.wallets;ST.blockNum=st.blockNum||BLOCK_START;ST.totalVol=st.totalVol||0;ST.totalRewards=st.totalRewards||0;ST.totalWithdrawn=st.totalWithdrawn||0;}if(ld)ST.ledger=ld;renderAll();},3000);}
 
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers,
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 1000,
-      system: system || '',
-      messages
-    })
-  });
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    throw new Error(err.error?.message || `API error ${res.status}`);
+// ════════════════════════════════════
+// LOGIN
+// ════════════════════════════════════
+function setMode(m){
+  loginMode=m;
+  $('ltab-login').classList.toggle('on',m==='login');
+  $('ltab-register').classList.toggle('on',m==='register');
+  $('reg-info').classList.toggle('hidden',m==='login');
+  $('reg-fields').classList.toggle('hidden',m==='login');
+  $('l-btn').textContent=m==='login'?'SIGN IN':'CREATE ACCOUNT';
+  hide('l-err');
+}
+async function doLogin(){
+  const u=$('l-user').value.trim().toLowerCase(),p=$('l-pass').value.trim();
+  hide('l-err');
+  if(!u||!p){showErr('Username and password required.');return;}
+  if(p.length<4){showErr('Password must be 4+ characters.');return;}
+  $('l-btn').textContent='PLEASE WAIT...';$('l-btn').disabled=true;
+  const users=(await loadS('rwys-users'))||{};
+  if(loginMode==='login'){
+    if(!users[u]){showErr('Account not found — register first.');return;}
+    if(users[u].ph!==hashPw(p)){showErr('Incorrect password.');return;}
+    session={username:u,walletId:users[u].wid};
+    await loadAll();startApp();
+  }else{
+    if(users[u]){showErr('Username taken — choose another.');return;}
+    const dn=$('l-name').value.trim()||u;
+    const wa=$('l-addr').value.trim()||`0x${u.padEnd(6,'0').slice(0,6)}...${hashPw(p).slice(0,4)}`;
+    await loadAll();
+    // Check for duplicate wallet address (only if user provided a real one)
+    const addrEntered = $('l-addr').value.trim();
+    if(addrEntered && ST.wallets.find(w=>w.addr.toLowerCase()===addrEntered.toLowerCase())){
+      showErr('Wallet address already registered to another account.');return;
+    }
+    const wid='wu'+Date.now();
+    const nw={id:wid,name:dn,addr:wa,balance:0,locked:1000,eth:0.1,paused:false,pending:0,tag:'Registered User',color:PALETTE[ST.wallets.length%PALETTE.length],isUser:true};
+    ST.blockNum++;ST.wallets.push(nw);
+    ST.ledger.unshift({block:ST.blockNum,hash:genHash(),type:'mint',from:'PROTOCOL',to:dn,amount:100,time:new Date().toISOString()});
+    if(ST.ledger.length>200)ST.ledger.length=200;
+    users[u]={ph:hashPw(p),wid,walletsAdded:0};
+    await saveS('rwys-users',users);
+    await saveS('rwys-state',{wallets:ST.wallets,blockNum:ST.blockNum,totalVol:ST.totalVol,totalRewards:ST.totalRewards,totalWithdrawn:ST.totalWithdrawn});
+    await saveS('rwys-ledger',ST.ledger.slice(0,200));
+    session={username:u,walletId:wid};startApp();
   }
-  const data = await res.json();
-  return data.content?.map(b => b.text || '').join('') || '';
+}
+function checkAddAddrDupe(val){
+  const v=val.trim();
+  const msg=$('add-addr-dupe-msg');
+  if(!msg) return;
+  if(v && ST.wallets.find(w=>w.addr.toLowerCase()===v.toLowerCase())){
+    msg.style.display='block';
+  } else {
+    msg.style.display='none';
+  }
+}
+function checkAddrDupe(val){
+  const v=val.trim();
+  const msg=$('addr-dupe-msg');
+  if(!msg) return;
+  if(v && ST.wallets.find(w=>w.addr.toLowerCase()===v.toLowerCase())){
+    msg.style.display='block';
+  } else {
+    msg.style.display='none';
+  }
+}
+function showErr(msg){$('l-err').textContent=msg;show('l-err');$('l-btn').textContent=loginMode==='login'?'SIGN IN':'CREATE ACCOUNT';$('l-btn').disabled=false;}
+function doSignOut(){session=null;if(pollTimer)clearInterval(pollTimer);if(cdTimer)clearInterval(cdTimer);rules.forEach(r=>{if(r.tid)clearInterval(r.tid);});rules=[];hide('screen-app');show('screen-login');$('l-user').value='';$('l-pass').value='';$('l-name').value='';$('l-addr').value='';hide('l-err');$('l-btn').textContent='SIGN IN';$('l-btn').disabled=false;}
+
+// ════════════════════════════════════
+// APP INIT
+// ════════════════════════════════════
+function startApp(){
+  hide('screen-login');show('screen-app');
+  $('hud-uname').textContent=session.username;
+  startPoll();startCountdown();renderAll();
+  setInterval(()=>{$('ft-time').textContent=new Date().toUTCString();},1000);
+  // Refresh slot counter in header
+  walletsAdded().then(n=>updateSlotCounter(n));
+}
+const myW=()=>ST.wallets.find(w=>w.id===session?.walletId)||null;
+
+// ════════════════════════════════════
+// TUESDAY DRIP
+// ════════════════════════════════════
+let lastDripDate = null;
+function fireTuesdayDrip(){
+  const today = new Date().toDateString();
+  if(lastDripDate === today) return; // only fire once per day
+  lastDripDate = today;
+  let anyChange = false;
+  ST.wallets.forEach((w,i)=>{
+    // ETH drip only — locked $PvE stays locked until unstake
+    const newEth = Math.min(0.1, r4((ST.wallets[i].eth||0) + ETH_DRIP));
+    if(newEth !== ST.wallets[i].eth){ ST.wallets[i] = {...ST.wallets[i], eth: newEth}; anyChange = true; }
+  });
+  if(ST.ledger.length>200) ST.ledger.length=200;
+  if(anyChange){ scheduleSave(); renderAll(); toast('Tuesday Drip','+0.000005 $ETH dripped to all wallets'); }
 }
 
-// ─────────────────────────────────────────────
-// REVIEW GENERATOR
-// ─────────────────────────────────────────────
-async function generateReview(appKey) {
-  const app = APP_DATA[appKey];
-  const outputEl = document.getElementById(`${appKey}-output`);
-  const textEl   = document.getElementById(`${appKey}-output-text`);
-  const labelEl  = document.getElementById(`${appKey}-output-label`);
-  const btn      = event.target;
+// ════════════════════════════════════
+// COUNTDOWN
+// ════════════════════════════════════
+function startCountdown(){
+  const tick=()=>{
+    const ms=msTillDrip();
+    if(ms<1000){if(!dripReady)fireTuesdayDrip();dripReady=true;$('cd-digits').innerHTML='<div class="drip-live">DRIP LIVE — WITHDRAW NOW</div>';renderHUD();renderRegistry();return;}
+    const s=~~(ms/1000);
+    $('cd-d').textContent=String(~~(s/86400)).padStart(2,'0');
+    $('cd-h').textContent=String(~~((s%86400)/3600)).padStart(2,'0');
+    $('cd-m').textContent=String(~~((s%3600)/60)).padStart(2,'0');
+    $('cd-s').textContent=String(s%60).padStart(2,'0');
+  };
+  tick();cdTimer=setInterval(tick,1000);
+}
 
-  if (!_apiKey) {
-    alert('AI features unavailable.');
+// ════════════════════════════════════
+// TABS
+// ════════════════════════════════════
+function switchTab(t){
+  currentTab=t;
+  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));
+  ['automation','registry','ledger'].forEach(id=>{
+    const el=$('tab-'+id);if(el)el.classList.toggle('hidden',id!==t);
+  });
+  if(t==='automation')renderAutoDropdown();
+  if(t==='registry')renderRegistry();
+  if(t==='ledger')renderLedger();
+}
+
+// ════════════════════════════════════
+// RENDER ALL
+// ════════════════════════════════════
+function renderAll(){
+  renderStats();renderHUD();
+  if(currentTab==='registry')renderRegistry();
+  if(currentTab==='ledger')renderLedger();
+  $('hdr-supply').textContent=fmt(ST.wallets.reduce((s,w)=>s+w.balance,0),0);
+  $('ft-wals').textContent=ST.wallets.length;
+  // Refresh slot counter if modal is open
+  walletsAdded().then(added=>updateSlotCounter(added));
+}
+
+// ════════════════════════════════════
+// STATS
+// ════════════════════════════════════
+function renderStats(){
+  $('st-tx').textContent=ST.ledger.filter(x=>x.type==='send'||x.type==='auto').length;
+  $('st-vol').textContent=fmt(ST.totalVol,0);
+  $('st-rew').textContent=ST.totalRewards;
+  $('st-wals').textContent=ST.wallets.length;
+  $('st-blk').textContent=ST.blockNum.toLocaleString();
+}
+
+// ════════════════════════════════════
+// HUD
+// ════════════════════════════════════
+function wdHTML(id,pending,small){
+  const rdy=dripReady&&pending>0;
+  const lbl=rdy?`⬆ WITHDRAW${small?'':' '+pending.toFixed(4)} $PvE`:'⏳ NO PENDING WITHDRAWAL';
+  return `<button class="btn-wd${rdy?' ready':''}" ${rdy?`onclick="event.stopPropagation();doWithdraw('${id}')"`:' disabled'}>${lbl}</button>`;
+}
+function renderHUD(){
+  const w=myW();
+  const sb=$('session-badge');
+  if(!w){sb.textContent='◈ '+(session?.username||'');return;}
+  sb.innerHTML=`◈ ${session.username}<span style="color:var(--dim);margin-left:6px;">${fmt(w.balance,2)} $PvE</span>`;
+  const pct=Math.min(100,w.eth/0.1*100);
+  const ec=w.eth<0.02?'#c0392b':w.eth<0.05?'#f59e0b':'var(--purple)';
+  const emsg=w.eth<0.02?'⚠ Critical — sends will fail':w.eth<0.05?'△ Low — drips back on Tuesday':'✓ Ready to send';
+  const locked = w.locked||0;
+  $('hud-body').innerHTML=`
+    <div class="hud-wallet-info">
+      <div class="hud-name">${w.name}</div>
+      <div class="hud-addr">${w.addr}</div>
+      <div class="wtags" style="margin-top:6px;">
+        <span class="tag">${w.tag}</span>${w.paused?'<span class="tag paused-t">TX PAUSED</span>':''}
+      </div>
+    </div>
+    <div class="hud-balances">
+      <div class="hud-bal-item">
+        <div class="hbl">$PvE Unlocked</div>
+        <div class="hud-num" style="color:var(--goldb);">${fmt(w.balance,4)}</div>
+        <div class="hud-sub">available</div>
+      </div>
+      <div class="hud-bal-item">
+        <div class="hbl">$PvE Locked 🔒</div>
+        <div class="hud-num" style="color:var(--dim);">${fmt(locked,4)}</div>
+        <div class="hud-sub">unlocks Tuesday</div>
+      </div>
+      <div class="hud-bal-item">
+        <div class="hbl">$ETH (gas)</div>
+        <div class="hud-num" style="color:var(--purple);">${w.eth.toFixed(6)}</div>
+        <div class="hud-sub">max 0.1</div>
+      </div>
+      ${w.pending>0?`<div class="hud-bal-item"><div class="hbl">Pending</div><div class="hud-num" style="color:var(--green);">${w.pending.toFixed(4)}</div><div class="hud-sub">$PvE queued</div></div>`:''}
+    </div>
+    <div class="eth-bar-section">
+      <div class="eth-lbl">$ETH Gas Level</div>
+      <div class="eth-bar"><div class="eth-fill" style="width:${pct}%;background:linear-gradient(90deg,${ec},#e879f9);"></div></div>
+      <div class="eth-status" style="color:${ec};">${emsg}</div>
+      ${wdHTML(w.id,w.pending,false)}
+    </div>
+    <div style="margin-top:10px;padding:10px 12px;background:rgba(192,57,43,.06);border:1px solid rgba(192,57,43,.2);border-radius:2px;">
+      <div style="font-size:9px;color:var(--red);letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px;">Early Unstake</div>
+      <div style="font-size:10px;color:var(--dim);margin-bottom:8px;line-height:1.6;">Withdraw all $PvE now — 25% fee goes to Team Treasury. You receive <b style="color:var(--text);">${fmt(r4((w.balance+locked)*0.75),4)} $PvE</b> and <b style="color:var(--red);">${fmt(r4((w.balance+locked)*0.25),4)} $PvE</b> → Team Treasury.</div>
+      <button onclick="confirmUnstake('${w.id}')" style="width:100%;background:transparent;border:1px solid rgba(192,57,43,.4);color:var(--red);font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.1em;padding:9px;border-radius:2px;"">⚠ UNSTAKE EARLY (−25%)</button>
+    </div>`;
+}
+
+// ════════════════════════════════════
+// SEND
+// ════════════════════════════════════
+
+// ════════════════════════════════════
+// INSPECTOR
+// ════════════════════════════════════
+
+// ════════════════════════════════════
+// REGISTRY
+// ════════════════════════════════════
+function renderRegistry(){
+  const g=$('registry-grid');if(!g)return;
+  g.innerHTML=ST.wallets.map(w=>{
+    const me=w.id===session?.walletId;
+    return `<div class="wcard${me?' mine':''}${w.paused?' paused':''}">
+      <div class="wcard-header">
+        <div class="wcard-name">${w.name}</div>
+        <button class="btn-pause" style="background:${w.paused?'rgba(76,175,110,.15)':'rgba(192,57,43,.12)'};color:${w.paused?'#4caf6e':'#c0392b'};border:1px solid ${w.paused?'rgba(76,175,110,.3)':'rgba(192,57,43,.25)'};" onclick="event.stopPropagation();togglePause('${w.id}')">${w.paused?'▶':'⏸'}</button>
+      </div>
+      <div class="wcard-addr">${w.addr}</div>
+      <div class="wcard-balrow">
+        <div>
+          <div style="font-size:9px;color:var(--dim);margin-bottom:2px;">$PvE</div>
+          <div class="wcard-bal" style="opacity:${w.paused?.45:1};">${fmt(w.balance,2)}</div>
+          ${(w.locked||0)>0?`<div style="font-size:9px;color:var(--dim);">🔒 ${fmt(w.locked,2)} locked</div>`:''}
+        </div>
+        <div>
+          <div style="font-size:9px;color:var(--dim);margin-bottom:2px;">$ETH</div>
+          <div class="wcard-eth" style="opacity:${w.paused?.45:1};font-size:18px;font-family:'Bebas Neue',sans-serif;">${w.eth.toFixed(6)}</div>
+        </div>
+      </div>
+      ${w.pending>0?`<div style="font-size:10px;color:var(--green);margin-top:4px;">⬆ ${w.pending.toFixed(4)} pending</div>`:''}
+      <div class="wtags">
+        <span class="tag">${w.tag}</span>
+        ${w.paused?'<span class="tag paused-t">PAUSED</span>':''}
+        ${w.isUser?'<span class="tag user">USER</span>':''}
+        ${me?'<span class="tag you">YOU</span>':''}
+      </div>
+      ${wdHTML(w.id,w.pending,true)}
+    </div>`;
+  }).join('');
+}
+
+// ════════════════════════════════════
+// UNSTAKE (early withdrawal with 25% fee)
+// ════════════════════════════════════
+function confirmUnstake(id){
+  const w = ST.wallets.find(x=>x.id===id);
+  if(!w) return;
+  const total = r4((w.balance||0)+(w.locked||0));
+  const fee = r4(total*0.25);
+  const gets = r4(total-fee);
+  if(confirm(`Unstake early?\n\nYou will receive: ${gets.toFixed(4)} $PvE\nBurned (25% fee): ${fee.toFixed(4)} $PvE\n\nThis cannot be undone.`)){
+    doUnstake(id);
+  }
+}
+function doUnstake(id){
+  const i = ST.wallets.findIndex(w=>w.id===id);
+  if(i<0) return;
+  const w = ST.wallets[i];
+  const total = r4((w.balance||0) + (w.locked||0));
+  if(total <= 0){ toast('Nothing to Unstake','No $PvE balance'); return; }
+  const fee = r4(total * UNSTAKE_FEE);
+  const received = r4(total - fee);
+  // Deduct from user
+  ST.wallets[i] = {...w, balance: 0, locked: 0, pending: 0};
+  // Send fee to team treasury
+  const ti = ST.wallets.findIndex(x=>x.id===TEAM_WALLET_ID);
+  if(ti>=0) ST.wallets[ti] = {...ST.wallets[ti], balance: r4((ST.wallets[ti].balance||0)+fee)};
+  ST.blockNum++;
+  ST.ledger.unshift({block:ST.blockNum,hash:genHash(),type:'unstake',from:w.name,to:'Team Treasury',amount:fee,time:new Date().toISOString()});
+  ST.blockNum++;
+  ST.ledger.unshift({block:ST.blockNum,hash:genHash(),type:'withdraw',from:w.name,to:'WITHDRAWN',amount:received,time:new Date().toISOString()});
+  if(ST.ledger.length>200) ST.ledger.length=200;
+  ST.totalWithdrawn = r4(ST.totalWithdrawn + received);
+  scheduleSave(); renderAll();
+  toast('Unstaked Early',`${received.toFixed(4)} $PvE withdrawn · ${fee.toFixed(4)} $PvE → Team Treasury`);
+}
+
+// ════════════════════════════════════
+// WITHDRAW
+// ════════════════════════════════════
+function doWithdraw(id){
+  if(!dripReady)return;
+  const i=ST.wallets.findIndex(w=>w.id===id);
+  if(i<0||ST.wallets[i].pending<=0){toast('Nothing to Withdraw','No pending balance');return;}
+  const amount=ST.wallets[i].pending;
+  ST.wallets[i]={...ST.wallets[i],pending:0};
+  ST.blockNum++;
+  ST.ledger.unshift({block:ST.blockNum,hash:genHash(),type:'withdraw',from:ST.wallets[i].name,to:'WITHDRAWN',amount,time:new Date().toISOString()});
+  if(ST.ledger.length>200)ST.ledger.length=200;
+  ST.totalWithdrawn=r4(ST.totalWithdrawn+amount);
+  scheduleSave();renderAll();
+  toast('Withdrawal Initiated',`${fmt(amount,4)} $PvE withdrawn`);
+}
+
+// ════════════════════════════════════
+// PAUSE
+// ════════════════════════════════════
+function togglePause(id){
+  const i=ST.wallets.findIndex(w=>w.id===id);if(i<0)return;
+  ST.wallets[i]={...ST.wallets[i],paused:!ST.wallets[i].paused};
+  const w=ST.wallets[i];scheduleSave();renderAll();
+  toast(w.paused?'Wallet Paused':'Wallet Resumed',`${w.name} ${w.paused?'paused':'active'}`);
+}
+
+// ════════════════════════════════════
+// LEDGER
+// ════════════════════════════════════
+function renderLedger(){
+  const tb=$('ledger-body');if(!tb)return;
+  if(!ST.ledger.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;padding:36px;color:var(--dim);font-size:11px;font-style:italic;">No transactions yet.</td></tr>';return;}
+  tb.innerHTML=ST.ledger.map((tx,i)=>{
+    const s=TX_STYLE[tx.type]||TX_STYLE.send;
+    const ac=tx.type==='reward'||tx.type==='withdraw'?'#4caf6e':tx.type==='send'||tx.type==='auto'?'#c0392b':'var(--text)';
+    const pf=tx.type==='send'||tx.type==='auto'?'−':'+';
+    const tm=tx.time?new Date(tx.time).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit'}):'—';
+    return `<tr${i===0?' class="nr"':''}>
+      <td><span class="bnum">#${tx.block}</span></td>
+      <td><span class="tx-badge" style="background:${s.bg};color:${s.c};border:1px solid ${s.b};">${s.l}</span></td>
+      <td><div style="font-size:11px;color:var(--text);white-space:nowrap;">${tx.from}</div><div style="font-size:10px;color:var(--dim);white-space:nowrap;">→ ${tx.to}</div></td>
+      <td style="white-space:nowrap;"><span style="color:${ac};">${pf}${fmt(tx.amount||0,4)} $PvE</span></td>
+      <td>${tx.fee?`<span style="font-size:10px;color:var(--purple);white-space:nowrap;">−${tx.fee}</span>`:'<span style="color:var(--dim);font-size:10px;">—</span>'}</td>
+      <td><span style="font-size:10px;color:var(--dim);white-space:nowrap;">${tm}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+// ════════════════════════════════════
+// ADD WALLET
+// ════════════════════════════════════
+const MAX_WALLETS = 3;
+
+async function walletsAdded() {
+  const users = (await loadS('rwys-users')) || {};
+  const u = session?.username;
+  if (!u || !users[u]) return 0;
+  return users[u].walletsAdded || 0;
+}
+
+async function openAddWallet() {
+  const added = await walletsAdded();
+  const remaining = MAX_WALLETS - added;
+  if (remaining <= 0) {
+    showLimitModal();
     return;
   }
+  // Update modal slot counter before showing
+  updateSlotCounter(added);
+  show('modal-add');
+  $('add-addr').focus();
+}
 
-
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spin">⟳</span> Generating…';
-  textEl.textContent = '';
-  labelEl.textContent = 'AI · Player Review';
-  outputEl.classList.add('visible');
-  textEl.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
-
-  try {
-    const names = ['xXSlayer99Xx','TacticalGnome','VoidWalker','CryptoKnight88','MidnightBroker','ShadowReaper','RuneHunter','ArenaLord','GoldFarmer','ThunderboltMage'];
-    const name  = names[Math.floor(Math.random() * names.length)];
-    const stars = '★'.repeat(Math.floor(Math.random() * 2) + 4);
-
-    const prompt = `Write a short, authentic-sounding player/user review for "${app.name}" (${app.type}). 
-App details: ${app.description}
-Write it as a real user named "${name}" who has been playing. Make it feel genuine — include a specific detail about the game, something they liked, maybe one small gripe. 2-4 sentences. Star rating: ${stars}.
-Format: Start with the star rating on its own line, then the review. Sign it with the username at the end.`;
-
-    const result = await callClaude([{ role: 'user', content: prompt }]);
-    textEl.innerHTML = result.replace(/\n/g, '<br>');
-  } catch(e) {
-    textEl.textContent = 'Failed to generate — try again.';
+function updateSlotCounter(added) {
+  const remaining = MAX_WALLETS - added;
+  const bar = $('slot-bar-fill');
+  const label = $('slot-label');
+  const usedLbl = $('slot-used-label');
+  const color = remaining === 0 ? 'var(--red)' : remaining === 1 ? '#f59e0b' : 'var(--green)';
+  const pct = (added / MAX_WALLETS) * 100;
+  if (bar) { bar.style.width = pct + '%'; bar.style.background = color; }
+  if (label) {
+    label.textContent = remaining === 0 ? 'No slots remaining' : remaining === 1 ? '1 slot remaining' : remaining + ' slots remaining';
+    label.style.color = color;
   }
-
-  btn.disabled = false;
-  btn.innerHTML = '⭐ Generate Player Review';
+  if (usedLbl) { usedLbl.textContent = added + ' used'; }
+  // Update header button
+  const btn = $('add-wallet-btn');
+  if (btn) {
+    btn.textContent = remaining === 0 ? '⛔ WALLET LIMIT REACHED' : `+ ADD WALLET (${remaining} left)`;
+    btn.style.color = remaining === 0 ? 'var(--red)' : 'var(--dim)';
+    btn.style.borderColor = remaining === 0 ? 'rgba(192,57,43,.4)' : 'var(--bdr2)';
+  }
 }
 
-
-// ─────────────────────────────────────────────
-// USER REVIEW SYSTEM — persistent shared storage
-// ─────────────────────────────────────────────
-const ratings = { arena: 0, sow: 0, trade: 0 };
-const ratingLabels = ['','1 — Terrible','2 — Poor','3 — Okay','4 — Great','5 — Amazing'];
-
-function setRating(appKey, e) {
-  const star = e.target.closest('[data-val]');
-  if (!star) return;
-  const val = parseInt(star.dataset.val);
-  ratings[appKey] = val;
-  highlightStars(appKey, val);
-  document.getElementById(`${appKey}-rating-label`).textContent = ratingLabels[val];
+function showLimitModal() {
+  show('modal-limit');
+}
+function closeAdd(){hide('modal-add');$('add-addr').value='';$('add-name').value='';const m=$('add-addr-dupe-msg');if(m)m.style.display='none';}
+async function submitAdd(){
+  const a=$('add-addr').value.trim(),n=$('add-name').value.trim();
+  if(!n){toast('Name Required','Enter a display name for this wallet');return;}
+  if(!a||a.length<4){toast('Invalid','Enter a valid address');return;}
+  if(ST.wallets.find(w=>w.addr.toLowerCase()===a.toLowerCase())){toast('Address Already Registered','This wallet address is already in the registry.');return;}
+  // Check limit
+  const users=(await loadS('rwys-users'))||{};
+  const u=session?.username;
+  const added=(users[u]?.walletsAdded||0);
+  if(added>=MAX_WALLETS){closeAdd();showLimitModal();return;}
+  // Add wallet
+  const id='wa'+Date.now();
+  ST.wallets.push({id,name:n,addr:a,balance:0,locked:1000,eth:0.1,paused:false,pending:0,tag:'Added Wallet',color:PALETTE[ST.wallets.length%PALETTE.length],isUser:true});
+  ST.blockNum++;
+  ST.ledger.unshift({block:ST.blockNum,hash:genHash(),type:'mint',from:'PROTOCOL',to:n,amount:100,time:new Date().toISOString()});
+  if(ST.ledger.length>200)ST.ledger.length=200;
+  // Persist incremented counter
+  users[u]={...users[u],walletsAdded:(added+1)};
+  await saveS('rwys-users',users);
+  closeAdd();scheduleSave();renderAll();
+  const newRemaining=MAX_WALLETS-(added+1);
+  toast('Wallet Added',`${n} · 100 $PvE · ${newRemaining} slot${newRemaining===1?'':'s'} remaining`);
 }
 
-function highlightStars(appKey, upTo) {
-  const picker = document.getElementById(`${appKey}-stars`);
-  picker.querySelectorAll('[data-val]').forEach(s => {
-    const sv = parseInt(s.dataset.val);
-    if (sv <= upTo) {
-      s.classList.add('active');
-      s.style.filter = 'grayscale(0) opacity(1)';
-      s.style.transform = 'scale(1.15)';
-    } else {
-      s.classList.remove('active');
-      s.style.filter = 'grayscale(1) opacity(0.35)';
-      s.style.transform = 'scale(1)';
-    }
+// ════════════════════════════════════
+// AUTOMATION
+// ════════════════════════════════════
+function renderAutoDropdown(){
+  const sel=$('auto-wallet');if(!sel)return;
+  const cur=sel.value;
+  sel.innerHTML=ST.wallets.map(w=>`<option value="${w.id}">${w.name}</option>`).join('');
+  if(cur)sel.value=cur;
+}
+function createRule(){
+  const wid=$('auto-wallet').value,sec=Math.max(5,parseFloat($('auto-sec').value)||10),amt=parseFloat($('auto-amt').value)||1,max=Math.min(5,Math.max(1,parseInt($('auto-max').value)||1));
+  const w=ST.wallets.find(x=>x.id===wid);if(!w){toast('Error','Pick a wallet');return;}
+  const rule={id:ruleId++,wid,sec,amt,max,on:true,tid:null};
+  rule.tid=setInterval(()=>fireRule(rule),rule.sec*1000);
+  rules.push(rule);renderRules();
+  toast('Rule Created',`${w.name} · every ${rule.sec}s`);
+}
+function fireRule(rule){
+  const si=ST.wallets.findIndex(x=>x.id===rule.wid);if(si<0||!rule.on||ST.wallets[si].paused)return;
+  const sender=ST.wallets[si],others=ST.wallets.filter(x=>x.id!==rule.wid&&!x.paused);
+  const targets=[...others].sort(()=>Math.random()-.5).slice(0,rule.max);
+  const fee=parseFloat((targets.length*FEE).toFixed(6));
+  if(sender.eth<fee){rule.on=false;renderRules();toast(sender.name+' out of $ETH','Automation paused');return;}
+  if(sender.balance<targets.length*rule.amt+0.01)return;
+  targets.forEach(rec=>{
+    const ri=ST.wallets.findIndex(x=>x.id===rec.id);if(ri<0)return;
+    ST.wallets[si]={...ST.wallets[si],balance:r4(ST.wallets[si].balance-rule.amt+1),eth:r4(ST.wallets[si].eth-FEE)};
+    ST.wallets[ri]={...ST.wallets[ri],balance:r4(ST.wallets[ri].balance+rule.amt)};
+    ST.blockNum++;
+    ST.ledger.unshift({block:ST.blockNum,hash:genHash(),type:'auto',from:sender.name,to:rec.name,amount:rule.amt,fee:FEE,time:new Date().toISOString()});
+    ST.blockNum++;
+    ST.ledger.unshift({block:ST.blockNum,hash:genHash(),type:'reward',from:'PROTOCOL',to:sender.name,amount:1,time:new Date().toISOString()});
+    ST.totalVol=r4(ST.totalVol+rule.amt);ST.totalRewards++;
   });
+  if(ST.ledger.length>200)ST.ledger.length=200;
+  scheduleSave();renderAll();
+}
+function toggleRule(id){
+  const r=rules.find(x=>x.id===id);if(!r)return;r.on=!r.on;
+  if(r.on&&!r.tid)r.tid=setInterval(()=>fireRule(r),r.sec*1000);
+  if(!r.on&&r.tid){clearInterval(r.tid);r.tid=null;}
+  renderRules();
+}
+function deleteRule(id){
+  const r=rules.find(x=>x.id===id);if(r?.tid)clearInterval(r.tid);
+  rules=rules.filter(x=>x.id!==id);renderRules();
+}
+function renderRules(){
+  const c=$('rules-list');if(!c)return;
+  if(!rules.length){c.innerHTML='<div style="text-align:center;padding:18px;font-size:10px;color:var(--dim);font-style:italic;">No rules yet.</div>';return;}
+  c.innerHTML=rules.map(r=>{
+    const w=ST.wallets.find(x=>x.id===r.wid),low=w&&w.eth<0.05,sc=r.on?(low?'#f59e0b':'var(--purple)'):'var(--red)';
+    return `<div class="rule-row" style="border-color:${r.on?'rgba(192,132,252,.25)':'var(--bdr)'};">
+      <div class="rule-info">
+        <div class="rule-name" style="color:${sc};">
+          ${w?.name||'?'}
+          <span style="font-size:9px;letter-spacing:.1em;padding:2px 6px;border:1px solid ${sc};border-radius:2px;margin-left:6px;">${r.on?(low?'LOW $ETH':'ACTIVE'):'PAUSED'}</span>
+        </div>
+        <div class="rule-detail">Every <b style="color:var(--text);">${r.sec}s</b> · <b style="color:var(--text);">${r.amt} $PvE</b> × <b style="color:var(--text);">${r.max}</b> wallets · <span style="color:var(--purple);">${(r.max*FEE).toFixed(3)} $ETH/fire</span> · $ETH left: <span style="color:${low?'#f59e0b':'var(--purple)'};">${w?w.eth.toFixed(3):'?'}</span></div>
+      </div>
+      <div class="rule-actions">
+        <button onclick="toggleRule(${r.id})" style="background:${r.on?'rgba(192,57,43,.15)':'rgba(76,175,110,.15)'};color:${r.on?'var(--red)':'var(--green)'};border:1px solid ${r.on?'rgba(192,57,43,.3)':'rgba(76,175,110,.3)'};font-family:'Space Mono',monospace;font-size:10px;padding:8px 14px;border-radius:2px;white-space:nowrap;">${r.on?'PAUSE':'RESUME'}</button>
+        <button class="btn-sm" onclick="deleteRule(${r.id})">✕</button>
+      </div>
+    </div>`;
+  }).join('');
 }
 
-function initStarHover(appKey) {
-  const picker = document.getElementById(`${appKey}-stars`);
-  picker.querySelectorAll('[data-val]').forEach(star => {
-    star.addEventListener('mouseover', () => {
-      const hval = parseInt(star.dataset.val);
-      picker.querySelectorAll('[data-val]').forEach(s => {
-        const sv = parseInt(s.dataset.val);
-        s.style.filter   = sv <= hval ? 'grayscale(0) opacity(1)' : 'grayscale(1) opacity(0.25)';
-        s.style.transform = sv <= hval ? 'scale(1.2)' : 'scale(1)';
-      });
-    });
-    star.addEventListener('mouseleave', () => {
-      highlightStars(appKey, ratings[appKey]);
-    });
-  });
-}
-
-['arena','sow','trade'].forEach(initStarHover);
-
-function updateCharCount(appKey) {
-  const ta  = document.getElementById(`${appKey}-review-text`);
-  const cnt = document.getElementById(`${appKey}-char-count`);
-  cnt.textContent = `${ta.value.length} / 300`;
-}
-
-// ── Render a single review item into the list ──
-function renderReviewItem(list, review, isNew = false) {
-  const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
-  const when  = isNew ? 'just now' : new Date(review.ts).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-  const item  = document.createElement('div');
-  item.className = 'review-item';
-  item.innerHTML = `
-    <div class="review-item-header">
-      <span class="review-item-stars" style="color:var(--accent1)">${stars}</span>
-      <span class="review-item-name">— ${review.author} · ${when}</span>
-    </div>
-    <div class="review-item-text">${review.text.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>`;
-  list.prepend(item);
-}
-
-// ── Load all stored reviews for an app on page load ──
-async function loadReviews(appKey) {
-  const list = document.getElementById(`${appKey}-reviews`);
-  try {
-    const result = await window.storage.list(`review:${appKey}:`);
-    if (!result || !result.keys.length) return;
-    // fetch each review and sort by timestamp descending
-    const reviews = [];
-    for (const key of result.keys) {
-      try {
-        const r = await window.storage.get(key, true);
-        if (r) reviews.push(JSON.parse(r.value));
-      } catch(e) {}
-    }
-    reviews.sort((a,b) => b.ts - a.ts);
-    // render oldest first so prepend gives newest-on-top
-    reviews.reverse().forEach(rev => renderReviewItem(list, rev, false));
-  } catch(e) {
-    // storage not available — silently skip
-  }
-}
-
-// Load all on page start
-['arena','sow','trade'].forEach(loadReviews);
-
-// ── Submit a new review ──
-async function submitReview(appKey) {
-  const rating = ratings[appKey];
-  const text   = document.getElementById(`${appKey}-review-text`).value.trim();
-  const btn    = document.getElementById(`${appKey}-submit-btn`);
-  const list   = document.getElementById(`${appKey}-reviews`);
-
-  if (!rating) { alert('Please select a star rating first.'); return; }
-  if (!text)   { alert('Please write something before submitting.'); return; }
-
-  btn.disabled = true;
-  btn.textContent = '⟳ Posting…';
-
-  // Lightly polish via Claude
-  let finalText = text;
-  try {
-    const polished = await callClaude([{
-      role: 'user',
-      content: `A user left this ${rating}-star review for "${APP_DATA[appKey].name}": "${text}"
-Lightly clean up any typos or grammar while keeping their exact voice and tone. Do not add words or change meaning. Output only the cleaned review text, nothing else.`
-    }]);
-    if (polished && polished.length < 600) finalText = polished;
-  } catch(e) {}
-
-  const review = {
-    rating,
-    text:   finalText,
-    author: 'Community',
-    ts:     Date.now()
-  };
-
-  // Save to shared persistent storage
-  try {
-    const key = `review:${appKey}:${review.ts}`;
-    await window.storage.set(key, JSON.stringify(review), true);
-  } catch(e) {
-    // storage unavailable — still render locally
-  }
-
-  renderReviewItem(list, review, true);
-
-  // Reset form
-  document.getElementById(`${appKey}-review-text`).value = '';
-  document.getElementById(`${appKey}-char-count`).textContent = '0 / 300';
-  ratings[appKey] = 0;
-  highlightStars(appKey, 0);
-  document.getElementById(`${appKey}-rating-label`).textContent = 'tap to rate';
-
-  btn.disabled = false;
-  btn.textContent = 'Submit Review';
-}
+// ════════════════════════════════════
+// BOOT
+// ════════════════════════════════════
+setMode('login');
+setInterval(()=>{ const t=$('ft-time');if(t)t.textContent=new Date().toUTCString(); },1000);
 </script>
 </body>
 </html>
